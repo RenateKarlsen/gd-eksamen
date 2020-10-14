@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="desktop.css">
+    <link rel="stylesheet" type="text/css" href="mobile.css">
+    <title>Peasy Pay</title>
 </head>
+
 <body>
-    
+    <div id="main-wrapper">
+        <header id="user-account-header"></header>
+        <nav id="main-navigation-section">
+            <button type="button" class="button menu-button" id="drinks-menu-button" onclick="">DRIKKE</button>
+            <button type="button" class="button menu-button" id="desserts-menu-button" onclick="">DESSERT</button>
+            <button type="button" class="button orders-button" id="mobile-orders-button" onclick="">MOBILBESTILLINGER</button>
+            <button type="button" class="button orders-button" id="order-history-button" onclick="">TIDLIGERE BESTILLINGER</button>
+        </nav>
+        <main id=menu-section>
+            <section id="popular-items-menu"></section>
+            <section id="main-menu"></section>
+        </main>
+        <div id="payment-section">
+            <section id=order-section></section>
+            <section id=pay-section>
+                <button type="button" class="button pay-button" id="cash-pay-button" onclick="">KONTANTER</button>
+                <button type="button" class="button pay-button" id="card-pay-button" onclick="">KORT</button>
+            </section>
+        </div>
+    </div>
 </body>
+
 </html>
