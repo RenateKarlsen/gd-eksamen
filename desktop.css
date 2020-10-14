@@ -127,6 +127,12 @@ body {
     grid-gap: 1rem;
 
     /* THIS element's grid structure */
-    grid-template-columns: repeat(2, 1fr);
-    
+    grid-template-columns: repeat(2, 1fr);   
+}
+
+#drink-item-card {
+    background-color: grey;
+    text-align: center;
+    margin: 15px;
+    width: 7em;
 }
