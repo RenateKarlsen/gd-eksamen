@@ -16,31 +16,66 @@ body {
     height: 100%;
 
     /* THIS element's grid structure */
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(7, 1fr);
 }
 
 #name-header{
     font-size: 60px;
     align-self: end;
+    margin-bottom: 20px;
+
+    grid-row: 2 / 4;
 }
 
 #employee-view {
     display: grid;
     grid-gap: 1rem;
-    border-top: 3px solid gray;
-    border-bottom: 3px solid gray;
+    border-top: 5px solid gray;
+    border-bottom: 5px solid gray;
     overflow-x: auto;
+    padding-top: 0.7%;
 
-    grid-template-columns: repeat(auto-fill);
+    grid-auto-columns: repeat(auto-fill);
     grid-auto-flow: column;
-    grid-row: 2;
+    grid-row: 4 / 6;
+}
+
+.employee-slot{
+    width: 150px;
+    height: 150px;
+    margin-top: 10%;
+    border-radius: 50%;
+    border: 2px solid gray;
+    background-color: white;
 }
 
 .employee-button{
-    width: 250px;
-    margin: 5%;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    border: 2px solid gray;
+    border: 0px;
+    background-color: white;
+    margin: 0px;
+    padding: 0px;
+}
+
+.employee-button img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+#start-button-container{
+    grid-row: 6 / 8;
+}
+
+#start-button {
+    width: 100%;
+    height: 100%;
+    border: 0px;
+    background-color: rgb(88, 219, 118);
+    color: white;
+    font-size: 50px;
 }
 
 .button{
