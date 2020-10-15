@@ -131,7 +131,14 @@ body {
 }
 
 #drink-item-card {
-    background-color: grey;
+    background-color: lightblue;
+    text-align: center;
+    margin: 15px;
+    width: 7em;
+}
+
+#desert-item-card {
+    background-color: salmon;
     text-align: center;
     margin: 15px;
     width: 7em;
