@@ -6,7 +6,11 @@ const drinksMenuButton = document.getElementById("drinks-menu-button");
 const createDrinkItem = (drinkItem) => {
     const drinkItemCard = document.createElement("div");
     drinkItemCard.id = "drink-item-card";
-    drinkItemCard.innerHTML =  `<h4>${drinkItem.drinkName}</h4>`;
+    drinkItemCard.innerHTML =  `
+    <img src=${drinkItem.imagePath} alt=${drinkItem.drinkName} width="100" height="100"> 
+    <h4>${drinkItem.drinkName}</h4>
+    <p>${drinkItem.price.small}, ${drinkItem.price.medium}, ${drinkItem.price.big}</p>
+    `;
 
     return drinkItemCard;
 };

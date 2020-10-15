@@ -2,7 +2,7 @@ const drinkItems = [
     {
         drinkName: "FILTERKAFFE",
         isDrinkPopular: true,
-        imagePath: "",
+        imagePath: "Images/Stock/coffee.png",
         price: {
             small: 28,
             medium: 32,
@@ -13,7 +13,7 @@ const drinkItems = [
     {
         drinkName: "CAPPUCCINO",
         isDrinkPopular: true,
-        imagePath: "",
+        imagePath: "Images/Stock/cappuccino.png",
         price: {
             small: 38,
             medium: 42,
@@ -24,7 +24,7 @@ const drinkItems = [
     {
         drinkName: "AMERICANO",
         isDrinkPopular: false,
-        imagePath: "",
+        imagePath: "Images/Stock/americano.png",
         price: {
             small: 32,
             medium: 36,
@@ -35,7 +35,7 @@ const drinkItems = [
     {
         drinkName: "ISKAFFE",
         isDrinkPopular: true,
-        imagePath: "",
+        imagePath: "Images/Stock/islatte.png",
         price: {
             small: 36,
             medium: 42,
@@ -46,7 +46,7 @@ const drinkItems = [
     {
         drinkName: "CAFFE MOCHA",
         isDrinkPopular: false,
-        imagePath: "",
+        imagePath: "Images/Stock/mocca.png",
         price: {
             small: 38,
             medium: 42,
@@ -57,7 +57,7 @@ const drinkItems = [
     {
         drinkName: "CAFFE LATTE",
         isDrinkPopular: true,
-        imagePath: "",
+        imagePath: "Images/Stock/caffeelatte.png",
         price: {
             small: 38,
             medium: 44,
@@ -68,7 +68,7 @@ const drinkItems = [
     {
         drinkName: "CARAMEL MACCHIATO",
         isDrinkPopular: false,
-        imagePath: "",
+        imagePath: "Images/Stock/Caramel.png",
         price: {
             small: 45,
             medium: 48,
@@ -79,7 +79,7 @@ const drinkItems = [
     {
         drinkName: "ESPRESSO",
         isDrinkPopular: true,
-        imagePath: "",
+        imagePath: "Images/Stock/espresso.png",
         price: {
             small: 34,
             medium: 38,
@@ -90,7 +90,7 @@ const drinkItems = [
     {
         drinkName: "CORTADO",
         isDrinkPopular: false,
-        imagePath: "",
+        imagePath: "Images/Stock/cortado.png",
         price: {
             small: 36,
             medium: 40,
@@ -101,11 +101,62 @@ const drinkItems = [
     {
         drinkName: "ISTE",
         isDrinkPopular: false,
-        imagePath: "",
+        imagePath: "Images/Stock/iste.png",
         price: {
             small: 38,
             medium: 47,
             big: 55
         }
+    },
+];
+
+const desertItems = [
+    {
+        desertName: "BROWNIES",
+        isDesertPopular: true,
+        imagePath: "Images/Stock/brownie.png",
+        price: 44,
+    },
+
+    {
+        desertName: "OREOKAKE",
+        isDesertPopular: true,
+        imagePath: "Images/Stock/oreo.png",
+        price: 54,
+    },
+
+    {
+        desertName: "KANELBOLLE",
+        isDesertPopular: true,
+        imagePath: "Images/Stock/kanelbolle.png",
+        price: 46,
+    },
+
+    {
+        desertName: "CROISSANT",
+        isDesertPopular: true,
+        imagePath: "Images/Stock/croissant.png",
+        price: 38,
+    },
+
+    {
+        desertName: "CHIAPUDDING",
+        isDesertPopular: false,
+        imagePath: "Images/Stock/ciapudding.png",
+        price: 42,
+    },
+
+    {
+        desertName: "BRIOCHE",
+        isDesertPopular: false,
+        imagePath: "Images/Stock/Brioche.png",
+        price: 44,
+    },
+
+    {
+        desertName: "SCONES",
+        isDesertPopular: true,
+        imagePath: "Images/Stock/scone.png",
+        price: 37,
     },
 ];
