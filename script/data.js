@@ -147,7 +147,7 @@ const desertItems = [
 ];
 
 const employees = [
-    {
+    {   
         firstName: "Eirik",
         lastName: "Lundanes",
         image: "1.jpg"
