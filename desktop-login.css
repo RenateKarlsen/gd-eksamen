@@ -9,38 +9,93 @@ body {
     font-family: sans-serif;
 }
 
+form {
+    width: 100%;
+    height: 100%;
+}
+
+h2 {
+    margin: 0;
+    margin-left: 20px;
+}
+
 #main-wrapper {
     display: grid;
     grid-gap: 1rem;
     width: 100%;
     height: 100%;
-
-    /* THIS element's grid structure */
     grid-template-rows: repeat(7, 1fr);
 }
 
-#name-header{
+#name-header {
+    margin: 0;
     font-size: 60px;
     align-self: end;
-    margin-bottom: 20px;
+    grid-row: 1 / 4;
+}
 
-    grid-row: 2 / 4;
+#chosen-employee-card {
+    align-content: end;
+    display: grid;
+    margin-bottom: 0;
+    grid-template-columns: 290px 1fr;
+}
+
+#chosen-employee-card img {
+    margin-bottom: 10px;
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+    border: 4px solid gray;
+    align-self: end;
+}
+
+#chosen-employee-card h2{
+    align-self: end;
 }
 
 #employee-view {
     display: grid;
-    grid-gap: 1rem;
     border-top: 5px solid gray;
     border-bottom: 5px solid gray;
-    overflow-x: auto;
     padding-top: 0.7%;
-
-    grid-auto-columns: repeat(auto-fill);
-    grid-auto-flow: column;
+    grid-template-columns: 1fr 12fr 1fr;
     grid-row: 4 / 6;
 }
 
-.employee-slot{
+#employee-container {
+    display: grid;
+    margin-left: 0px;
+    overflow-x: auto;
+    grid-auto-columns: repeat(auto-fill);
+    grid-auto-flow: column;
+    grid-gap: 1rem;
+}
+
+.scroll-button {
+    align-self: center;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+#left-scroll-button {
+    justify-self: end;
+    margin-right: 20%;
+    border-width: 50px 80px 50px 0;
+    border-color: transparent gray transparent transparent;
+}
+
+#right-scroll-button {
+    justify-self: center;
+    margin-left: 20%;
+    border-width: 50px 0 50px 80px;
+    border-color: transparent transparent transparent gray;
+}
+
+.employee-slot {
     width: 150px;
     height: 150px;
     margin-top: 10%;
@@ -49,7 +104,7 @@ body {
     background-color: white;
 }
 
-.employee-button{
+.employee-button {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -65,7 +120,7 @@ body {
     height: 150px;
 }
 
-#start-button-container{
+#start-button-container {
     grid-row: 6 / 8;
 }
 
@@ -75,9 +130,9 @@ body {
     border: 0px;
     background-color: rgb(88, 219, 118);
     color: white;
-    font-size: 50px;
+    font-size: 80px;
 }
 
-.button{
+.button {
     cursor: pointer;
 }
