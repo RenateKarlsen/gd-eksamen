@@ -48,7 +48,7 @@ const renderStartButton = () => {
     const startButtonContainer = document.getElementById("start-button-container");
     startButtonContainer.innerHTML = "";
     const form = document.createElement("form");
-    form.action = "index.html";
+    form.action = "desktop.html";
     form.method = "get";
     const startButton = document.createElement("button");
     startButton.innerHTML = "START";
