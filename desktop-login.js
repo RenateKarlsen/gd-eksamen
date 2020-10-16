@@ -1,31 +1,3 @@
-const employees = [
-    {
-        firstName: "Eirik",
-        lastName: "Lundanes",
-        image: "paal-anders-byenstuen.jpeg"
-    },
-    {
-        firstName: "Karoline",
-        lastName: "Andersen",
-        image: "paal-anders-byenstuen.jpeg"
-    },
-    {
-        firstName: "Pål Anders",
-        lastName: "Byenstuen",
-        image: "paal-anders-byenstuen.jpeg"
-    },
-    {
-        firstName: "Renate",
-        lastName: "Karlsen",
-        image: "paal-anders-byenstuen.jpeg"
-    },
-    {
-        firstName: "Vibeke",
-        lastName: "Opgård",
-        image: "paal-anders-byenstuen.jpeg"
-    }
-];
-
 const createEmployeeButton = (employee) => {
     const employeeButton = document.createElement("button");
     employeeButton.type = "button";

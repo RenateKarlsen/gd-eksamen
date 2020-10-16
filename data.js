@@ -9,7 +9,6 @@ const drinkItems = [
             big: 36
         }
     },
-
     {
         drinkName: "CAPPUCCINO",
         isDrinkPopular: true,
@@ -20,7 +19,6 @@ const drinkItems = [
             big: 46
         }
     },
-
     {
         drinkName: "AMERICANO",
         isDrinkPopular: false,
@@ -31,7 +29,6 @@ const drinkItems = [
             big: 40
         }
     },
-
     {
         drinkName: "ISKAFFE",
         isDrinkPopular: true,
@@ -42,7 +39,6 @@ const drinkItems = [
             big: 50
         }
     },
-
     {
         drinkName: "CAFFE MOCHA",
         isDrinkPopular: false,
@@ -53,7 +49,6 @@ const drinkItems = [
             big: 46
         }
     },
-
     {
         drinkName: "CAFFE LATTE",
         isDrinkPopular: true,
@@ -64,7 +59,6 @@ const drinkItems = [
             big: 48
         }
     },
-
     {
         drinkName: "CARAMEL MACCHIATO",
         isDrinkPopular: false,
@@ -75,7 +69,6 @@ const drinkItems = [
             big: 51
         }
     },
-
     {
         drinkName: "ESPRESSO",
         isDrinkPopular: true,
@@ -86,7 +79,6 @@ const drinkItems = [
             big: 42
         }
     },
-
     {
         drinkName: "CORTADO",
         isDrinkPopular: false,
@@ -97,7 +89,6 @@ const drinkItems = [
             big: 44
         }
     },
-
     {
         drinkName: "ISTE",
         isDrinkPopular: false,
@@ -117,46 +108,68 @@ const desertItems = [
         imagePath: "Images/Stock/brownie.png",
         price: 44,
     },
-
     {
         desertName: "OREOKAKE",
         isDesertPopular: true,
         imagePath: "Images/Stock/oreo.png",
         price: 54,
     },
-
     {
         desertName: "KANELBOLLE",
         isDesertPopular: true,
         imagePath: "Images/Stock/kanelbolle.png",
         price: 46,
     },
-
     {
         desertName: "CROISSANT",
         isDesertPopular: true,
         imagePath: "Images/Stock/croissant.png",
         price: 38,
     },
-
     {
         desertName: "CHIAPUDDING",
         isDesertPopular: false,
         imagePath: "Images/Stock/ciapudding.png",
         price: 42,
     },
-
     {
         desertName: "BRIOCHE",
         isDesertPopular: false,
         imagePath: "Images/Stock/Brioche.png",
         price: 44,
     },
-
     {
         desertName: "SCONES",
         isDesertPopular: true,
         imagePath: "Images/Stock/scone.png",
         price: 37,
     },
+];
+
+const employees = [
+    {
+        firstName: "Eirik",
+        lastName: "Lundanes",
+        image: "paal-anders-byenstuen.jpeg"
+    },
+    {
+        firstName: "Karoline",
+        lastName: "Andersen",
+        image: "paal-anders-byenstuen.jpeg"
+    },
+    {
+        firstName: "Pål Anders",
+        lastName: "Byenstuen",
+        image: "paal-anders-byenstuen.jpeg"
+    },
+    {
+        firstName: "Renate",
+        lastName: "Karlsen",
+        image: "paal-anders-byenstuen.jpeg"
+    },
+    {
+        firstName: "Vibeke",
+        lastName: "Opgård",
+        image: "paal-anders-byenstuen.jpeg"
+    }
 ];
