@@ -4,6 +4,8 @@ const mainMenu = document.getElementById("main-menu");
 const drinksMenuButton = document.getElementById("drinks-menu-button");
 const desertsMenuButton = document.getElementById("deserts-menu-button")
 
+let counter = 0;
+
 // CREATES DRINK ITEMS
 const createDrinkItem = (drinkItem) => {
     const drinkItemCard = document.createElement("div");
@@ -19,6 +21,7 @@ const createDrinkItem = (drinkItem) => {
 
 // RENDERS DRINKITEMS IN DRINK MENU
 const renderDrinkMenu = () => {
+    counter++;
     drinkItems.map(drinkItem => {
         const drinkMenu = createDrinkItem(drinkItem);
         if (drinkItem.isDrinkPopular === true) {
@@ -27,6 +30,12 @@ const renderDrinkMenu = () => {
             mainMenu.appendChild(drinkMenu);
         }
     });
+
+// NØDLØSNING FOR Å FÅ VEKK DRANKSA (Tømmer menyen når antall klikk er partall)
+    if (counter%2 == 0) {
+        popularItemsMenu.innerHTML = "";
+        mainMenu.innerHTML = "";
+    }
 };
 
 // CREATES DESERT ITEMS
@@ -44,6 +53,7 @@ const createDesertItem = (desertItem) => {
 
 // RENDERS DESERT ITEMS IN DESERT MENU
 const renderDesertMenu = () => {
+    counter++;
     desertItems.map(desertItem => {
         const desertMenu = createDesertItem(desertItem);
         if (desertItem.isDesertPopular === true) {
@@ -52,4 +62,10 @@ const renderDesertMenu = () => {
             mainMenu.appendChild(desertMenu);
         }
     });
+
+// NØDLØSNING FOR Å FÅ VEKK DRANKSA (Tømmer menyen når antall klikk er partall)
+    if (counter%2 == 0) {
+        popularItemsMenu.innerHTML = "";
+        mainMenu.innerHTML = "";
+    }
 };
