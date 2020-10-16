@@ -19,11 +19,32 @@ body {
 }
 
 #user-account-header {
-    border: 2px solid black;
+    display: grid;
+    border-bottom: 1px solid gray;
 
     /* THIS element's placement in parent grid */
     grid-column: 1 / 10;
     grid-row: 1;
+}
+
+#active-user-account-display {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    align-items: center;
+}
+
+#active-user-account-display img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid gray;
+}
+
+#active-user-account-display h2{
+    color: gray;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    align-self: end;
 }
 
 #main-navigation-section {
@@ -71,7 +92,7 @@ body {
 
 #popular-items-menu {
     display: grid;
-    border: 1px solid black;
+    border: 1px solid gray;
 
     /* THIS element's grid structure */
     grid-template-columns: repeat(5, 1fr);
@@ -84,7 +105,7 @@ body {
 
 #main-menu {
     display: grid;
-    border: 1px solid black;
+    border: 1px solid gray;
     overflow: scroll;
 
     /* THIS element's grid structure */
@@ -111,7 +132,7 @@ body {
 #order-section {
     display: grid;
     margin-bottom: 1rem;
-    border: 1px solid black;
+    border: 1px solid gray;
     overflow: scroll;
 
     /* THIS element's grid structure */

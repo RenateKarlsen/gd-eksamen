@@ -5,7 +5,7 @@ const createEmployeeButton = (employee) => {
     employeeButton.innerHTML = `
     <img src="images/employees/${employee.image}" alt="${employee.firstName} ${employee.lastName} (ansatt)">`;
     employeeButton.addEventListener('click', () => {
-        chooseEmployee(employee.image, employee.firstName, employee.lastName)
+        chooseEmployee(employee)
     });
 
     return employeeButton;
@@ -30,17 +30,18 @@ const renderEmployeeList = () => {
     }
 }
 
-const chooseEmployee = (image, firstName, lastName) => {
+const chooseEmployee = (employee) => {
     const nameHeader = document.getElementById("name-header");
     const chosenEmployeeCard = document.createElement("div");
     chosenEmployeeCard.id = "chosen-employee-card";
     chosenEmployeeCard.innerHTML = `
-        <img src="images/employees/${image}" alt="${firstName} ${lastName} (ansatt)">
-        <h2>${firstName}<br>${lastName}</h2>
+        <img src="images/employees/${employee.image}" alt="${employee.firstName} ${employee.lastName} (ansatt)">
+        <h2>${employee.firstName}<br>${employee.lastName}</h2>
     `;
     nameHeader.innerHTML = "";
     nameHeader.appendChild(chosenEmployeeCard);
 
+    setActiveUserAccount(employee);
     renderStartButton();
 }
 
@@ -48,7 +49,7 @@ const renderStartButton = () => {
     const startButtonContainer = document.getElementById("start-button-container");
     startButtonContainer.innerHTML = "";
     const form = document.createElement("form");
-    form.action = "desktop.html";
+    form.action = "index.html";
     form.method = "get";
     const startButton = document.createElement("button");
     startButton.innerHTML = "START";
@@ -56,6 +57,13 @@ const renderStartButton = () => {
     startButton.className = "button";
     form.appendChild(startButton);
     startButtonContainer.appendChild(form);
+}
+
+const setActiveUserAccount = (userAccount) => {
+    localStorage.clear();
+    const activeUserAccount = JSON.parse(localStorage.getItem('activeUserAccount')) || [];
+    activeUserAccount.push(userAccount);
+    window.localStorage.setItem('activeUserAccount', JSON.stringify(activeUserAccount));
 }
 
 createEmployeeSlots();

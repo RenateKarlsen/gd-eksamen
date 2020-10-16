@@ -69,3 +69,22 @@ const renderDesertMenu = () => {
         mainMenu.innerHTML = "";
     }
 };
+
+const renderActiveUserAccount = () => {
+    const userAccountHeader = document.getElementById("user-account-header");
+    const activeUserAccount = JSON.parse(window.localStorage.getItem("activeUserAccount")) || [];
+    
+    for (const userAccount of activeUserAccount){
+        const {firstName, lastName, image} = userAccount;
+        const activeUserAccountDisplay = document.createElement("div");
+        activeUserAccountDisplay.id = "active-user-account-display";
+        activeUserAccountDisplay.innerHTML = `
+            <img src="images/employees/${userAccount.image}" alt="${userAccount.firstName} ${userAccount.lastName} (ansatt)">
+            <h2>${userAccount.firstName} ${userAccount.lastName}</h2>
+        `;
+    
+        userAccountHeader.appendChild(activeUserAccountDisplay);
+    }
+}
+
+renderActiveUserAccount();
