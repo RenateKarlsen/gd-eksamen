@@ -150,26 +150,26 @@ const employees = [
     {
         firstName: "Eirik",
         lastName: "Lundanes",
-        image: "paal-anders-byenstuen.jpeg"
+        image: "1.jpg"
     },
     {
         firstName: "Karoline",
         lastName: "Andersen",
-        image: "paal-anders-byenstuen.jpeg"
+        image: "2.jpg"
     },
     {
         firstName: "Pål Anders",
         lastName: "Byenstuen",
-        image: "paal-anders-byenstuen.jpeg"
+        image: "3.jpg"
     },
     {
         firstName: "Renate",
         lastName: "Karlsen",
-        image: "paal-anders-byenstuen.jpeg"
+        image: "4.jpg"
     },
     {
         firstName: "Vibeke",
         lastName: "Opgård",
-        image: "paal-anders-byenstuen.jpeg"
+        image: "5.png"
     }
 ];
