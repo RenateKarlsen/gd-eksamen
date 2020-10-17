@@ -148,26 +148,31 @@ const desertItems = [
 
 const employees = [
     {   
+        id: 0,
         firstName: "Eirik",
         lastName: "Lundanes",
         image: "1.jpg"
     },
     {
+        id: 1,
         firstName: "Karoline",
         lastName: "Andersen",
         image: "2.jpg"
     },
     {
+        id: 2,
         firstName: "Pål Anders",
         lastName: "Byenstuen",
         image: "3.jpg"
     },
     {
+        id: 3,
         firstName: "Renate",
         lastName: "Karlsen",
         image: "4.jpg"
     },
     {
+        id: 4,
         firstName: "Vibeke",
         lastName: "Opgård",
         image: "5.png"

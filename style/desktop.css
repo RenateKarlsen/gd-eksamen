@@ -29,8 +29,9 @@ body {
 
 #active-user-account-display {
     display: grid;
+    margin-bottom: 5px;
     grid-template-columns: 50px 1fr;
-    align-items: center;
+    align-items: end
 }
 
 #active-user-account-display img {
