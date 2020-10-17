@@ -1,3 +1,14 @@
+const rightScrollButton = document.getElementById("right-scroll-button");
+const leftScrollButton = document.getElementById("left-scroll-button");
+
+rightScrollButton.addEventListener('click', () => {
+    document.getElementById("employee-container").scrollLeft += 170;
+});
+
+leftScrollButton.addEventListener('click', () => {
+    document.getElementById("employee-container").scrollLeft -= 170;
+});
+
 const createEmployeeButton = (employee) => {
     const employeeButton = document.createElement("button");
     employeeButton.type = "button";
