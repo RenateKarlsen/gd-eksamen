@@ -25,7 +25,7 @@ const createEmployeeButton = (employee) => {
 
 const createEmployeeSlots = () => {
     const employeeContainer = document.getElementById("employee-container");
-    const maxEmployees = 12;
+    const maxEmployees = 18;
     for (let i = 0; i < maxEmployees; i++) {
         const employeeSlot = document.createElement("div");
         employeeSlot.className = "employee-slot";

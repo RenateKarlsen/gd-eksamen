@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="no">
 
 <head>
     <meta charset="UTF-8">
@@ -13,20 +13,27 @@
     <div id="main-wrapper">
         <header id="user-account-header"></header>
         <nav id="main-navigation-section">
-            <button type="button" class="button menu-button" id="drinks-menu-button" onclick="renderDrinkMenu()">DRIKKE</button>
-            <button type="button" class="button menu-button" id="desserts-menu-button" onclick="renderDesertMenu()">DESSERT</button>
-            <button type="button" class="button orders-button" id="mobile-orders-button" onclick="">MOBILBESTILLINGER</button>
-            <button type="button" class="button orders-button" id="order-history-button" onclick="">TIDLIGERE BESTILLINGER</button>
+            <button type="button" class="button menu-button" id="drinks-menu-button"
+                onclick="renderDrinkMenu()">DRIKKE</button>
+            <button type="button" class="button menu-button" id="desserts-menu-button"
+                onclick="renderDessertMenu()">DESSERT</button>
+            <button type="button" class="button orders-button" id="mobile-orders-button"
+                onclick="">MOBILBESTILLINGER</button>
+            <button type="button" class="button orders-button" id="order-history-button" onclick="">TIDLIGERE
+                BESTILLINGER</button>
         </nav>
         <main id=menu-section>
-            <section id="popular-items-menu"></section>
+            <section id="popular-items-menu">
+                <div id="popular-items-menu-header">
+                    <img src="images/icons/heart.png" alt="Hjerte" width="30px" height="30px">
+                    <h3>POPULÆRE</h3>
+                </div>
+                <div id="popular-items-menu-container"></div>
+            </section>
             <section id="main-menu"></section>
         </main>
         <div id="payment-section">
-            <section id=order-section></section>
-            <section id=pay-section>
-                <button type="button" class="button pay-button" id="cash-pay-button" onclick="">KONTANTER</button>
-                <button type="button" class="button pay-button" id="card-pay-button" onclick="">KORT</button>
+                <section id=order-section></section>
             </section>
         </div>
     </div>

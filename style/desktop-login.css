@@ -1,5 +1,6 @@
 :root {
-    --standard-gray-color: rgb(102, 102, 102);
+    --darker-gray-color: rgb(102, 102, 102);
+    --lighter-gray-color: rgb(179, 179, 179);
     --confirm-btn-color: rgb(36, 224, 133);
     --confirm-btn-active-color: rgb(61, 255, 161);
 }
@@ -7,7 +8,7 @@
 html, body {
     height: 98%;
     box-sizing: border-box;
-    color: var(--standard-gray-color);
+    color: var(--darker-gray-color);
 }
 
 body {
@@ -57,7 +58,7 @@ button {
     width: 270px;
     height: 270px;
     border-radius: 50%;
-    border: 4px solid var(--standard-gray-color);
+    border: 4px solid var(--darker-gray-color);
     align-self: end;
 }
 
@@ -67,8 +68,8 @@ button {
 
 #employee-view {
     display: grid;
-    border-top: 5px solid var(--standard-gray-color);
-    border-bottom: 5px solid var(--standard-gray-color);
+    border-top: 5px solid var(--darker-gray-color);
+    border-bottom: 5px solid var(--darker-gray-color);
     grid-template-columns: 1fr 12fr 1fr;
     grid-row: 4 / 6;
 }
