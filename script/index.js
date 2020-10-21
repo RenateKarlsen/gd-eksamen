@@ -103,9 +103,12 @@ const renderActiveUserAccount = () => {
         let len = results.rows.length, i;
 
         //if check if no users is selected in the DB redirect to the login page
-        if (len === 0) {
-            window.location.href = 'desktop-login.html';
+        if (screen.width >= 1000) {
+            if (len === 0) {
+                window.location.href = 'desktop-login.html';
+            }
         }
+
 
         for (i = 0; i < len; i++) {
            
