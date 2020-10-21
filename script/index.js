@@ -3,7 +3,8 @@ const popularItemsMenu = document.getElementById("popular-items-menu");
 const popularItemsMenuContainer = document.getElementById("popular-items-menu-container");
 const mainMenu = document.getElementById("main-menu");
 const drinksMenuButton = document.getElementById("drinks-menu-button");
-const dessertsMenuButton = document.getElementById("desserts-menu-button")
+const dessertsMenuButton = document.getElementById("desserts-menu-button");
+
 
 // CREATES DRINK ITEMS
 const createDrinkItem = (drinkItem) => {
@@ -95,9 +96,32 @@ const styleMenu = (menu) => {
 
 const renderActiveUserAccount = () => {
     const userAccountHeader = document.getElementById("user-account-header");
-    const activeUserAccount = JSON.parse(window.localStorage.getItem("activeUserAccount")) || [];
+   // const activeUserAccount = JSON.parse(window.localStorage.getItem("activeUserAccount")) || [];
 
-    for (const userAccount of activeUserAccount) {
+   db.transaction(function(tx) {
+    tx.executeSql('SELECT * FROM activeUserAccount LIMIT 1', [], function(tx, results) {
+        let len = results.rows.length, i;
+
+        //if check if no users is selected in the DB redirect to the login page
+        if (len === 0) {
+            window.location.href = 'desktop-login.html';
+        }
+
+        for (i = 0; i < len; i++) {
+           
+            const activeUserAccountDisplay = document.createElement("div");
+            activeUserAccountDisplay.id = "active-user-account-display";
+            activeUserAccountDisplay.innerHTML = `
+            <img src="images/employees/${results.rows.item(i).image}" alt="${results.rows.item(i).firstName} ${results.rows.item(i).lastName} (ansatt)">
+            <h2>${results.rows.item(i).firstName} ${results.rows.item(i).lastName}</h2>
+        `;
+
+        userAccountHeader.appendChild(activeUserAccountDisplay);
+        }
+    })
+});
+
+  /*  for (const userAccount of activeUserAccount) {
         const { firstName, lastName, image } = userAccount;
         const activeUserAccountDisplay = document.createElement("div");
         activeUserAccountDisplay.id = "active-user-account-display";
@@ -107,7 +131,7 @@ const renderActiveUserAccount = () => {
         `;
 
         userAccountHeader.appendChild(activeUserAccountDisplay);
-    }
+    }*/
 };
 
 renderActiveUserAccount();

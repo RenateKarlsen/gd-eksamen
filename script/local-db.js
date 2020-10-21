@@ -1,7 +1,5 @@
 //import dataArray from 'data.js';
 
-const db = openDatabase('mydb', '1.0', 'GD-eksamen', 2 * 1024 * 1024);
-
 const htmlDiv = document.getElementById("testDbSelector");
 const kasseDiv = document.getElementById("kasse-div");
 const totalSumDiv = document.getElementById("total-sum");
