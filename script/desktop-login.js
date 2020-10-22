@@ -1,6 +1,40 @@
 const rightScrollButton = document.getElementById("right-scroll-button");
 const leftScrollButton = document.getElementById("left-scroll-button");
 
+
+
+
+//Method to drop table if needed
+
+//dropping table on every load to ensure no data is duplicated
+db.transaction(function (tx) {
+    tx.executeSql('DROP TABLE employees');
+    console.log("table succesfully removed");
+})
+
+db.transaction(function (tx) {
+    tx.executeSql('DROP TABLE activeUserAccount');
+    console.log("table succesfully removed");
+})
+
+
+//creating tables for employees and selected employee
+db.transaction(function (tx) {
+    tx.executeSql('CREATE TABLE IF NOT EXISTS employees (id INTEGER PRIMARY KEY, firstName unique, lastName uniqie, image)');
+    console.log("table succesfully created");
+});
+
+db.transaction(function (tx) {
+    tx.executeSql('CREATE TABLE IF NOT EXISTS activeUserAccount (id INTEGER PRIMARY KEY, firstName unique, lastName uniqie, image)');
+    console.log("table succesfully created");
+});
+
+for (let i = 0; i < employees.length; i++) {
+    db.transaction(function (tx) {
+        tx.executeSql('INSERT INTO employees(firstName, lastName, image) VALUES(?,?,?)', [employees[i].firstName, employees[i].lastName, employees[i].image])
+    });
+}
+
 rightScrollButton.addEventListener('click', () => {
     document.getElementById("employee-container").scrollLeft += 170;
 });
@@ -36,10 +70,23 @@ const createEmployeeSlots = () => {
 
 const renderEmployeeList = () => {
     const employeeSlots = document.getElementsByClassName("employee-slot");
-    for (let i = 0; i < employees.length; i++) {
+
+    //TODO: REMEMBER TO DELETE COMMENTED CODE (NO LONGER IN USE)
+    /*for (let i = 0; i < employees.length; i++) {
         const employeeButton = createEmployeeButton(employees[i]);
         employeeSlots[i].appendChild(employeeButton);
-    }
+    }*/
+
+    db.transaction(function(tx) {
+        tx.executeSql('SELECT * FROM employees', [], function(tx, results) {
+            let len = results.rows.length, i;
+
+            for (i = 0; i < len; i++) {
+                const employeeButton = createEmployeeButton(results.rows.item(i));
+                employeeSlots[i].appendChild(employeeButton);
+            }
+        })
+    });
 };
 
 const chooseEmployee = (employee) => {
@@ -81,10 +128,18 @@ const renderStartButton = () => {
 };
 
 const setActiveUserAccount = (userAccount) => {
-    localStorage.clear();
+    //TODO: REMEMBER TO DELETE COMMENTED CODE (NO LONGER IN USE)
+   /* localStorage.clear();
     const activeUserAccount = JSON.parse(localStorage.getItem('activeUserAccount')) || [];
     activeUserAccount.push(userAccount);
-    window.localStorage.setItem('activeUserAccount', JSON.stringify(activeUserAccount));
+    window.localStorage.setItem('activeUserAccount', JSON.stringify(activeUserAccount));*/
+    
+    db.transaction(function(tx) {
+        db.transaction(function (tx) {
+            tx.executeSql('INSERT INTO activeUserAccount(firstName, lastName, image) VALUES(?,?,?)', [userAccount.firstName, userAccount.lastName, userAccount.image])
+        });
+    })
+
 };
 
 createEmployeeSlots();
