@@ -70,6 +70,8 @@ const createEmployeeSlots = () => {
 
 const renderEmployeeList = () => {
     const employeeSlots = document.getElementsByClassName("employee-slot");
+
+    //TODO: REMEMBER TO DELETE COMMENTED CODE (NO LONGER IN USE)
     /*for (let i = 0; i < employees.length; i++) {
         const employeeButton = createEmployeeButton(employees[i]);
         employeeSlots[i].appendChild(employeeButton);
@@ -126,6 +128,7 @@ const renderStartButton = () => {
 };
 
 const setActiveUserAccount = (userAccount) => {
+    //TODO: REMEMBER TO DELETE COMMENTED CODE (NO LONGER IN USE)
    /* localStorage.clear();
     const activeUserAccount = JSON.parse(localStorage.getItem('activeUserAccount')) || [];
     activeUserAccount.push(userAccount);

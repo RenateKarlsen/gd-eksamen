@@ -124,6 +124,8 @@ const renderActiveUserAccount = () => {
     })
 });
 
+//TODO: REMEMBER TO DELETE COMMENTED CODE
+
   /*  for (const userAccount of activeUserAccount) {
         const { firstName, lastName, image } = userAccount;
         const activeUserAccountDisplay = document.createElement("div");
