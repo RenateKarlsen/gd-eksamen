@@ -32,7 +32,7 @@ const renderDrinkMenu = () => {
 
     drinkItems.map(drinkItem => {
         const drinkMenu = createDrinkItem(drinkItem);
-            mainMenu.appendChild(drinkMenu);
+        mainMenu.appendChild(drinkMenu);
     });
 
     styleMenu("drink");
@@ -64,7 +64,7 @@ const renderDessertMenu = () => {
 
     dessertItems.map(dessertItem => {
         const dessertMenu = createDessertItem(dessertItem);
-            mainMenu.appendChild(dessertMenu);
+        mainMenu.appendChild(dessertMenu);
     });
 
     styleMenu("dessert");
@@ -96,68 +96,30 @@ const styleMenu = (menu) => {
 
 const renderActiveUserAccount = () => {
     const userAccountHeader = document.getElementById("user-account-header");
-   // const activeUserAccount = JSON.parse(window.localStorage.getItem("activeUserAccount")) || [];
 
-   db.transaction(function(tx) {
-    tx.executeSql('SELECT * FROM activeUserAccount LIMIT 1', [], function(tx, results) {
-        let len = results.rows.length, i;
+    db.transaction(function (tx) {
+        tx.executeSql('SELECT * FROM activeUserAccount LIMIT 1', [], function (tx, results) {
+            let len = results.rows.length, i;
 
-        //if check if no users is selected in the DB redirect to the login page
-        if (screen.width >= 1000) {
-            if (len === 0) {
-                window.location.href = 'desktop-login.html';
+            // Check if no users is selected in the DB redirect to the login page
+            if (screen.width >= 1000) {
+                if (len === 0) {
+                    window.location.href = 'desktop-login.html';
+                }
             }
-        }
 
+            for (i = 0; i < len; i++) {
+                const activeUserAccountDisplay = document.createElement("div");
+                activeUserAccountDisplay.id = "active-user-account-display";
+                activeUserAccountDisplay.innerHTML = `
+                    <img src="images/employees/${results.rows.item(i).image}" alt="${results.rows.item(i).firstName} ${results.rows.item(i).lastName} (ansatt)">
+                    <h2>${results.rows.item(i).firstName} ${results.rows.item(i).lastName}</h2>
+                `;
 
-        for (i = 0; i < len; i++) {
-           
-            const activeUserAccountDisplay = document.createElement("div");
-            activeUserAccountDisplay.id = "active-user-account-display";
-            activeUserAccountDisplay.innerHTML = `
-            <img src="images/employees/${results.rows.item(i).image}" alt="${results.rows.item(i).firstName} ${results.rows.item(i).lastName} (ansatt)">
-            <h2>${results.rows.item(i).firstName} ${results.rows.item(i).lastName}</h2>
-        `;
-
-        userAccountHeader.appendChild(activeUserAccountDisplay);
-        }
-    })
-});
-
-//TODO: REMEMBER TO DELETE COMMENTED CODE
-
-  /*  for (const userAccount of activeUserAccount) {
-        const { firstName, lastName, image } = userAccount;
-        const activeUserAccountDisplay = document.createElement("div");
-        activeUserAccountDisplay.id = "active-user-account-display";
-        activeUserAccountDisplay.innerHTML = `
-            <img src="images/employees/${userAccount.image}" alt="${userAccount.firstName} ${userAccount.lastName} (ansatt)">
-            <h2>${userAccount.firstName} ${userAccount.lastName}</h2>
-        `;
-
-        userAccountHeader.appendChild(activeUserAccountDisplay);
-    }*/
-};
-
-function menuSectionDisplay() {
-    var A = document.getElementById("menu-section");
-    A.style.display = "block";
-};
-
-function removeElement() {
-    var drinks = document.getElementById("drinks-menu-button");
-    var desserts = document.getElementById("desserts-menu-button");
-
-    document.getElementById("drinks-menu-button").addEventListener("click", function(evt) {
-        var target = evt.target;
-        if (target.id === "drinks-menu-button") {
-            drinks.parentNode.removeChild(drinks);
-            desserts.parentNode.removeChild(desserts);
-        } else if (target.id === "desserts-menu-button") {
-            desserts.parentNode.removeChild(desserts);
-            drinks.parentNode.removeChild(drinks);
-        }
-    }, false);
+                userAccountHeader.appendChild(activeUserAccountDisplay);
+            }
+        })
+    });
 }
 
 renderActiveUserAccount();

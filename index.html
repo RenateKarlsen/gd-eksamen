@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" media="screen and (min-device-width: 800px)"type="text/css" href="style/desktop.css">
-    <link rel="stylesheet" type="text/css" href="style/mobile.css">
+    <link rel="stylesheet" type="text/css" href="style/desktop.css">
     <title>Peasy Pay</title>
 </head>
 
@@ -14,19 +13,13 @@
         <header id="user-account-header"></header>
         <nav id="main-navigation-section">
             <button type="button" class="button menu-button" id="drinks-menu-button"
-                onclick="renderDrinkMenu(); menuSectionDisplay(); removeElement();">DRIKKE
-                <br>
-                <img src="/Images/Stock/coffee.png" id="button-photo-drink" alt="Drink" width="120px" height="120px">
-            </button>
+                onclick="renderDrinkMenu()">DRIKKE</button>
             <button type="button" class="button menu-button" id="desserts-menu-button"
-                onclick="renderDessertMenu(); menuSectionDisplay(); removeElement();">DESSERT
-                <br>
-                <img src="/Images/Stock/kanelbolle.png" id="button-photo-dessert" alt="Dessert" width="150px" height="150px">
-            </button>
+                onclick="renderDessertMenu()">DESSERT</button>
             <button type="button" class="button orders-button" id="mobile-orders-button"
                 onclick="">MOBILBESTILLINGER</button>
-            <button type="button" class="button orders-button" id="order-history-button" onclick="">TIDLIGERE
-                BESTILLINGER</button>
+            <button type="button" class="button orders-button" id="order-history-button"
+                onclick="">TIDLIGERE BESTILLINGER</button>
         </nav>
         <main id=menu-section>
             <section id="popular-items-menu">
@@ -39,8 +32,7 @@
             <section id="main-menu"></section>
         </main>
         <div id="payment-section">
-                <section id=order-section></section>
-            </section>
+            <section id=order-section></section>
         </div>
     </div>
 
