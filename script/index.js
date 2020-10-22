@@ -1,19 +1,54 @@
 // DOM
-const popularItemsMenu = document.getElementById("popular-items-menu");
 const popularItemsMenuContainer = document.getElementById("popular-items-menu-container");
-const mainMenu = document.getElementById("main-menu");
+const mainMenuContainer = document.getElementById("main-menu-container");
 const drinksMenuButton = document.getElementById("drinks-menu-button");
 const dessertsMenuButton = document.getElementById("desserts-menu-button");
 
+const createMenus = (menuButton) => {
+    if (!popularItemsMenuContainer.hasChildNodes()) {
+        const popularItemsMenuHeader = document.createElement("div");
+        popularItemsMenuHeader.id = "popular-items-menu-header";
+        popularItemsMenuHeader.innerHTML = `
+            <img src="images/icons/heart.png" alt="Hjerte" width="30px" height="30px">
+            <h3>POPULÆRE</h3>
+        `;
+        popularItemsMenuContainer.appendChild(popularItemsMenuHeader);
+
+        const popularItemsMenu = document.createElement("div");
+        popularItemsMenu.id = "popular-items-menu";
+        popularItemsMenuContainer.appendChild(popularItemsMenu);
+
+        const mainMenu = document.createElement("div");
+        mainMenu.id = "main-menu";
+        mainMenuContainer.appendChild(mainMenu);
+
+        if (menuButton === "drinks-menu-button") {
+            renderDrinkMenu()
+        } else {
+            renderDessertMenu()
+        }
+    } else {
+        while (popularItemsMenuContainer.firstChild) {
+            popularItemsMenuContainer.removeChild(popularItemsMenuContainer.lastChild);
+        }
+
+        while (mainMenuContainer.firstChild) {
+            mainMenuContainer.removeChild(mainMenuContainer.lastChild);
+        }
+
+        popularItemsMenuContainer.style.border = "1px solid var(--lighter-gray-color)";
+        mainMenuContainer.style.border = "1px solid var(--lighter-gray-color)";
+    }
+}
 
 // CREATES DRINK ITEMS
 const createDrinkItem = (drinkItem) => {
     const drinkItemCard = document.createElement("div");
     drinkItemCard.className = "item-card drink-item-card";
     drinkItemCard.innerHTML = `
-        <img src=${drinkItem.imagePath} alt=${drinkItem.drinkName} width="100" height="100"> 
-        <h4>${drinkItem.drinkName}</h4>
-        <p>${drinkItem.price.small}, ${drinkItem.price.medium}, ${drinkItem.price.big}</p>
+        <img src=${drinkItem.imagePath} alt=${drinkItem.drinkName} width="70" height="70"> 
+        <h4>${drinkItem.drinkName.toUpperCase()}</h4>
+        <p>${drinkItem.price.small}, ${drinkItem.price.medium}, ${drinkItem.price.large}</p>
     `;
 
     return drinkItemCard;
@@ -21,12 +56,14 @@ const createDrinkItem = (drinkItem) => {
 
 // RENDERS DRINKITEMS IN DRINK MENU
 const renderDrinkMenu = () => {
+    const popularItemsMenu = document.getElementById("popular-items-menu");
+    const mainMenu = document.getElementById("main-menu");
     emptyMenus();
 
     drinkItems.map(drinkItem => {
         const drinkMenu = createDrinkItem(drinkItem);
         if (drinkItem.isDrinkPopular === true) {
-            popularItemsMenuContainer.appendChild(drinkMenu);
+            popularItemsMenu.appendChild(drinkMenu);
         }
     });
 
@@ -43,8 +80,8 @@ const createDessertItem = (dessertItem) => {
     const dessertItemCard = document.createElement("div");
     dessertItemCard.className = "item-card dessert-item-card";
     dessertItemCard.innerHTML = `
-        <img src=${dessertItem.imagePath} alt=${dessertItem.drinkName} width="100" height="100"> 
-        <h4>${dessertItem.dessertName}</h4>
+        <img src=${dessertItem.imagePath} alt=${dessertItem.drinkName} width="80" height="80"> 
+        <h4>${dessertItem.dessertName.toUpperCase()}</h4>
         <p>${dessertItem.price}</p>
     `;
 
@@ -53,12 +90,14 @@ const createDessertItem = (dessertItem) => {
 
 // RENDERS DESERT ITEMS IN DESERT MENU
 const renderDessertMenu = () => {
+    const popularItemsMenu = document.getElementById("popular-items-menu");
+    const mainMenu = document.getElementById("main-menu");
     emptyMenus();
 
     dessertItems.map(dessertItem => {
         const dessertMenu = createDessertItem(dessertItem);
         if (dessertItem.isDessertPopular === true) {
-            popularItemsMenuContainer.appendChild(dessertMenu);
+            popularItemsMenu.appendChild(dessertMenu);
         }
     });
 
@@ -71,8 +110,11 @@ const renderDessertMenu = () => {
 };
 
 const emptyMenus = () => {
-    while (popularItemsMenuContainer.firstChild) {
-        popularItemsMenuContainer.removeChild(popularItemsMenuContainer.lastChild);
+    const popularItemsMenu = document.getElementById("popular-items-menu");
+    const mainMenu = document.getElementById("main-menu");
+
+    while (popularItemsMenu.firstChild) {
+        popularItemsMenu.removeChild(popularItemsMenu.lastChild);
     }
 
     while (mainMenu.firstChild) {
@@ -81,14 +123,18 @@ const emptyMenus = () => {
 };
 
 const styleMenu = (menu) => {
-    document.getElementById("popular-items-menu-header").style.visibility = "visible";
-    popularItemsMenu.style.border = "0px";
-    mainMenu.style.border = "0px";
+    const popularItemsMenuHeader = document.getElementById("popular-items-menu-header");
+    const popularItemsMenu = document.getElementById("popular-items-menu");
+    const mainMenu = document.getElementById("main-menu");
+    popularItemsMenuContainer.style.border = "0px";
+    mainMenuContainer.style.border = "0px";
 
     if (menu === "drink") {
+        popularItemsMenuHeader.style.backgroundColor = "var(--drinks-menu-color)";
         popularItemsMenu.style.backgroundColor = "var(--drinks-menu-color)";
         mainMenu.style.backgroundColor = "var(--drinks-menu-color)";
     } else if (menu === "dessert") {
+        popularItemsMenuHeader.style.backgroundColor = "var(--desserts-menu-color)";
         popularItemsMenu.style.backgroundColor = "var(--desserts-menu-color)";
         mainMenu.style.backgroundColor = "var(--desserts-menu-color)";
     }
