@@ -1,5 +1,5 @@
-### DS3801 GRENSESNITTDESIGN EKSAMEN
+# DS3801 GRENSESNITTDESIGN EKSAMEN
 ---------------------------------------------------
 
-# Vibeke Opgård, Renate Karlsen, Karoline Andersen, Eirik Lundanes og Pål Byenstuen
+#### Vibeke Opgård, Renate Karlsen, Karoline Andersen, Eirik Lundanes og Pål Byenstuen
 
