@@ -135,6 +135,7 @@ button {
 #popular-items-menu {
     display: grid;
     justify-items: center;
+    padding: 20px;
     /* THIS element's grid structure */
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 1fr;
@@ -157,6 +158,8 @@ button {
     display: grid;
     overflow: scroll;
     justify-items: center;
+    padding: 20px;
+    row-gap: 14px;
 
     /* THIS element's grid structure */
     grid-template-columns: repeat(5, 1fr);
@@ -189,10 +192,11 @@ button {
 }
 
 .item-card {
+    position: relative;
     border: 1px solid white;
     text-align: center;
-    margin: 10px;
     padding: 10px;
+    height: 10em;
     width: 7em;
     color: white;
 }

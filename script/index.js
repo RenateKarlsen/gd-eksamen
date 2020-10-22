@@ -46,9 +46,9 @@ const createDrinkItem = (drinkItem) => {
     const drinkItemCard = document.createElement("div");
     drinkItemCard.className = "item-card drink-item-card";
     drinkItemCard.innerHTML = `
-        <img src=${drinkItem.imagePath} alt=${drinkItem.drinkName} width="80" height="80"> 
-        <h4>${drinkItem.drinkName}</h4>
-        <p>${drinkItem.price.small}, ${drinkItem.price.medium}, ${drinkItem.price.big}</p>
+        <img src=${drinkItem.imagePath} alt=${drinkItem.drinkName} width="70" height="70"> 
+        <h4>${drinkItem.drinkName.toUpperCase()}</h4>
+        <p>${drinkItem.price.small}, ${drinkItem.price.medium}, ${drinkItem.price.large}</p>
     `;
 
     return drinkItemCard;
@@ -81,7 +81,7 @@ const createDessertItem = (dessertItem) => {
     dessertItemCard.className = "item-card dessert-item-card";
     dessertItemCard.innerHTML = `
         <img src=${dessertItem.imagePath} alt=${dessertItem.drinkName} width="80" height="80"> 
-        <h4>${dessertItem.dessertName}</h4>
+        <h4>${dessertItem.dessertName.toUpperCase()}</h4>
         <p>${dessertItem.price}</p>
     `;
 

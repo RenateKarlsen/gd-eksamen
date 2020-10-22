@@ -2,148 +2,148 @@ const db = openDatabase('mydb', '1.0', 'GD-eksamen', 2 * 1024 * 1024);
 
 const drinkItems = [
     {
-        drinkName: "FILTERKAFFE",
-        isDrinkPopular: true,
-        imagePath: "images/stock/coffee.png",
-        price: {
-            small: 28,
-            medium: 32,
-            big: 36
-        }
-    },
-    {
-        drinkName: "CAPPUCCINO",
-        isDrinkPopular: true,
-        imagePath: "images/stock/cappuccino.png",
-        price: {
-            small: 38,
-            medium: 42,
-            big: 46
-        }
-    },
-    {
-        drinkName: "AMERICANO",
+        drinkName: "Americano",
         isDrinkPopular: false,
         imagePath: "images/stock/americano.png",
         price: {
-            small: 32,
-            medium: 36,
-            big: 40
+            small: 28,
+            medium: 32,
+            large: 36
         }
     },
     {
-        drinkName: "ISKAFFE",
+        drinkName: "Caffè Latte",
         isDrinkPopular: true,
-        imagePath: "images/stock/islatte.png",
+        imagePath: "images/stock/caffee-latte.png",
+        price: {
+            small: 38,
+            medium: 42,
+            large: 46
+        }
+    },
+    {
+        drinkName: "Caffè Mocha",
+        isDrinkPopular: false,
+        imagePath: "images/stock/caffee-mocha.png",
+        price: {
+            small: 32,
+            medium: 36,
+            large: 40
+        }
+    },
+    {
+        drinkName: "Cappuccino",
+        isDrinkPopular: true,
+        imagePath: "images/stock/cappuccino.png",
         price: {
             small: 36,
             medium: 42,
-            big: 50
+            large: 50
         }
     },
     {
-        drinkName: "CAFFÈ MOCHA",
+        drinkName: "Caramel Macchiato",
         isDrinkPopular: false,
-        imagePath: "images/stock/mocca.png",
+        imagePath: "images/stock/caramel-macchiato.png",
         price: {
             small: 38,
             medium: 42,
-            big: 46
+            large: 46
         }
     },
     {
-        drinkName: "CAFFÈ LATTE",
-        isDrinkPopular: true,
-        imagePath: "images/stock/caffeelatte.png",
-        price: {
-            small: 38,
-            medium: 44,
-            big: 48
-        }
-    },
-    {
-        drinkName: "CARAMEL MACCHIATO",
-        isDrinkPopular: false,
-        imagePath: "images/stock/Caramel.png",
-        price: {
-            small: 45,
-            medium: 48,
-            big: 51
-        }
-    },
-    {
-        drinkName: "ESPRESSO",
-        isDrinkPopular: true,
-        imagePath: "images/stock/espresso.png",
-        price: {
-            small: 34,
-            medium: 38,
-            big: 42
-        }
-    },
-    {
-        drinkName: "CORTADO",
+        drinkName: "Cortado",
         isDrinkPopular: false,
         imagePath: "images/stock/cortado.png",
         price: {
-            small: 36,
-            medium: 40,
-            big: 44
+            small: 38,
+            medium: 44,
+            large: 48
         }
     },
     {
-        drinkName: "ISTE",
+        drinkName: "Espresso",
+        isDrinkPopular: true,
+        imagePath: "images/stock/espresso.png",
+        price: {
+            small: 45,
+            medium: 48,
+            large: 51
+        }
+    },
+    {
+        drinkName: "Filterkaffe",
+        isDrinkPopular: true,
+        imagePath: "images/stock/filterkaffe.png",
+        price: {
+            small: 34,
+            medium: 38,
+            large: 42
+        }
+    },
+    {
+        drinkName: "Iskaffe",
+        isDrinkPopular: true,
+        imagePath: "images/stock/iskaffe.png",
+        price: {
+            small: 36,
+            medium: 40,
+            large: 44
+        }
+    },
+    {
+        drinkName: "Iste",
         isDrinkPopular: false,
         imagePath: "images/stock/iste.png",
         price: {
             small: 38,
             medium: 47,
-            big: 55
+            large: 55
         }
     },
 ];
 
 const dessertItems = [
     {
-        dessertName: "BROWNIES",
-        isDessertPopular: true,
-        imagePath: "images/stock/brownie.png",
+        dessertName: "Brioche",
+        isDessertPopular: false,
+        imagePath: "images/stock/brioche.png",
         price: 44,
     },
     {
-        dessertName: "OREOKAKE",
+        dessertName: "Brownies",
         isDessertPopular: true,
-        imagePath: "images/stock/oreo.png",
+        imagePath: "images/stock/brownies.png",
         price: 54,
     },
     {
-        dessertName: "KANELBOLLE",
-        isDessertPopular: true,
-        imagePath: "images/stock/kanelbolle.png",
+        dessertName: "Chiapudding",
+        isDessertPopular: false,
+        imagePath: "images/stock/chiapudding.png",
         price: 46,
     },
     {
-        dessertName: "CROISSANT",
+        dessertName: "Croissant",
         isDessertPopular: true,
         imagePath: "images/stock/croissant.png",
         price: 38,
     },
     {
-        dessertName: "CHIAPUDDING",
-        isDessertPopular: false,
-        imagePath: "images/stock/ciapudding.png",
+        dessertName: "Kanelbolle",
+        isDessertPopular: true,
+        imagePath: "images/stock/kanelbolle.png",
         price: 42,
     },
     {
-        dessertName: "BRIOCHE",
-        isDessertPopular: false,
-        imagePath: "images/stock/Brioche.png",
+        dessertName: "Oreokake",
+        isDessertPopular: true,
+        imagePath: "images/stock/oreokake.png",
         price: 44,
     },
     {
-        dessertName: "SCONES",
+        dessertName: "Scones",
         isDessertPopular: true,
-        imagePath: "images/stock/scone.png",
+        imagePath: "images/stock/scones.png",
         price: 37,
     },
 ];
