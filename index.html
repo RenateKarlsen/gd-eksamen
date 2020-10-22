@@ -14,9 +14,15 @@
         <header id="user-account-header"></header>
         <nav id="main-navigation-section">
             <button type="button" class="button menu-button" id="drinks-menu-button"
-                onclick="renderDrinkMenu()">DRIKKE</button>
+                onclick="renderDrinkMenu(); menuSectionDisplay(); removeElement();">DRIKKE
+                <br>
+                <img src="/Images/Stock/coffee.png" id="button-photo-drink" alt="Drink" width="120px" height="120px">
+            </button>
             <button type="button" class="button menu-button" id="desserts-menu-button"
-                onclick="renderDessertMenu()">DESSERT</button>
+                onclick="renderDessertMenu(); menuSectionDisplay(); removeElement();">DESSERT
+                <br>
+                <img src="/Images/Stock/kanelbolle.png" id="button-photo-dessert" alt="Dessert" width="150px" height="150px">
+            </button>
             <button type="button" class="button orders-button" id="mobile-orders-button"
                 onclick="">MOBILBESTILLINGER</button>
             <button type="button" class="button orders-button" id="order-history-button" onclick="">TIDLIGERE

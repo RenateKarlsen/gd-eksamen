@@ -110,4 +110,25 @@ const renderActiveUserAccount = () => {
     }
 };
 
+function menuSectionDisplay() {
+    var A = document.getElementById("menu-section");
+    A.style.display = "block";
+};
+
+function removeElement() {
+    var drinks = document.getElementById("drinks-menu-button");
+    var desserts = document.getElementById("desserts-menu-button");
+
+    document.getElementById("drinks-menu-button").addEventListener("click", function(evt) {
+        var target = evt.target;
+        if (target.id === "drinks-menu-button") {
+            drinks.parentNode.removeChild(drinks);
+            desserts.parentNode.removeChild(desserts);
+        } else if (target.id === "desserts-menu-button") {
+            desserts.parentNode.removeChild(desserts);
+            drinks.parentNode.removeChild(drinks);
+        }
+    }, false);
+}
+
 renderActiveUserAccount();
