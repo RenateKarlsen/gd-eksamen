@@ -105,7 +105,7 @@ button {
     grid-row: 2 / 11;
 }
 
-#popular-items-menu {
+#popular-items-menu-container {
     display: grid;
     border: 1px solid var(--lighter-gray-color);
     overflow: scroll;
@@ -120,7 +120,6 @@ button {
 
 #popular-items-menu-header {
     display: grid;
-    visibility: hidden;
     padding: 10px;
     grid-template-columns: 40px 1fr;
     font-size: 20px;
@@ -133,29 +132,35 @@ button {
     color: white;
 }
 
-#popular-items-menu-container {
+#popular-items-menu {
     display: grid;
-
+    justify-items: center;
     /* THIS element's grid structure */
     grid-template-columns: repeat(5, 1fr);
-    grid-gap: 1rem;
+    grid-template-rows: 1fr;
 
     /* THIS element's placement in parent grid */
     grid-row: 2 / 3;
 }
 
-#main-menu {
+#main-menu-container {
     display: grid;
     border: 1px solid var(--lighter-gray-color);
     overflow: scroll;
 
-    /* THIS element's grid structure */
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-
     /* THIS element's placement in parent grid */
     grid-column: 1 / 6;
     grid-row: 3 / 6;
+}
+
+#main-menu {
+    display: grid;
+    overflow: scroll;
+    justify-items: center;
+
+    /* THIS element's grid structure */
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
 }
 
 #payment-section {
@@ -186,7 +191,8 @@ button {
 .item-card {
     border: 1px solid white;
     text-align: center;
-    margin: 15px;
+    margin: 10px;
+    padding: 10px;
     width: 7em;
     color: white;
 }
