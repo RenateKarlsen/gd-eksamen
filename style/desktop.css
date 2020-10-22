@@ -28,8 +28,6 @@ button {
     grid-gap: 1rem;
     width: 100%;
     height: 100%;
-
-    /* THIS element's grid structure */
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: repeat(10, 1fr);
 }
@@ -37,8 +35,6 @@ button {
 #user-account-header {
     display: grid;
     border-bottom: 1px solid var(--darker-gray-color);
-
-    /* THIS element's placement in parent grid */
     grid-column: 1 / 10;
     grid-row: 1;
 }
@@ -56,7 +52,7 @@ button {
     border-radius: 50%;
 }
 
-#active-user-account-display h2{
+#active-user-account-display h2 {
     color: var(--darker-gray-color);
     margin-bottom: 5px;
     margin-left: 10px;
@@ -66,14 +62,14 @@ button {
 #main-navigation-section {
     display: grid;
     grid-gap: 1rem;
-
-    /* THIS element's grid structure */
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(5, 1fr);
-
-    /* THIS element's placement in parent grid */
     grid-column: 1 / 3;
     grid-row: 2 / 11;
+}
+
+.menu-button {
+    font-size: 25px;
 }
 
 #drinks-menu-button {
@@ -82,25 +78,37 @@ button {
     grid-row: 1 / 3;
 }
 
+#drinks-menu-button h4 {
+    margin-top: 10px;
+}
+
 #desserts-menu-button {
     background-color: var(--desserts-menu-color);
     grid-column: 1 / 3;
     grid-row: 3 / 5;
 }
 
+#desserts-menu-button h4 {
+    margin-top: 20px;
+}
+
 .orders-button {
     background-color: var(--lighter-gray-color);
+}
+
+#mobile-orders-button h4 {
+    margin-top: 5px;
+}
+
+#order-history-button h4 {
+    margin-top: 15px;
 }
 
 #menu-section {
     display: grid;
     grid-gap: 1rem;
-
-    /* THIS element's grid structure */
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
-
-    /* THIS element's placement in parent grid */
     grid-column: 3 / 8;
     grid-row: 2 / 11;
 }
@@ -109,18 +117,15 @@ button {
     display: grid;
     border: 1px solid var(--lighter-gray-color);
     overflow: scroll;
-
-    /* THIS element's grid structure */
     grid-template-rows: 40px 1fr;
-
-    /* THIS element's placement in parent grid */
     grid-column: 1 / 6;
     grid-row: 1 / 3;
 }
 
 #popular-items-menu-header {
     display: grid;
-    padding: 10px;
+    padding: 12px;
+    padding-left: 25px;
     grid-template-columns: 40px 1fr;
     font-size: 20px;
     align-items: center;
@@ -136,11 +141,8 @@ button {
     display: grid;
     justify-items: center;
     padding: 20px;
-    /* THIS element's grid structure */
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 1fr;
-
-    /* THIS element's placement in parent grid */
     grid-row: 2 / 3;
 }
 
@@ -148,8 +150,6 @@ button {
     display: grid;
     border: 1px solid var(--lighter-gray-color);
     overflow: scroll;
-
-    /* THIS element's placement in parent grid */
     grid-column: 1 / 6;
     grid-row: 3 / 6;
 }
@@ -160,20 +160,14 @@ button {
     justify-items: center;
     padding: 20px;
     row-gap: 14px;
-
-    /* THIS element's grid structure */
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(2, 1fr);
 }
 
 #payment-section {
     display: grid;
-
-    /* THIS element's grid structure */
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 1fr);
-
-    /* THIS element's placement in parent grid */
     grid-column: 8 / 10;
     grid-row: 2 / 11;
 }
@@ -182,12 +176,8 @@ button {
     display: grid;
     border: 1px solid var(--lighter-gray-color);
     overflow: scroll;
-
-    /* THIS element's grid structure */
     grid-template-columns: 1fr;
     grid-template-rows: repeat(8, 1fr);
-
-    /* THIS element's placement in parent grid */
     grid-row: 1 / 5;
 }
 
