@@ -173,8 +173,10 @@ const renderActiveUserAccount = () => {
 const renderTrengerEtBraNavn = () => {
     createMenus();
     for (i = 0; i < 1; i++) {
-        main[i].style.backgroundColor = "blue";
-        main[i].innerHTML = "hallo";
+        main[i].style.backgroundColor = "var(--drinks-menu-color)";
+        main[i].innerHTML = `
+        <p>${"Hei:/"}</p>
+        `;
 
     }
     
