@@ -3,6 +3,7 @@ const popularItemsMenuContainer = document.getElementById("popular-items-menu-co
 const mainMenuContainer = document.getElementById("main-menu-container");
 const drinksMenuButton = document.getElementById("drinks-menu-button");
 const dessertsMenuButton = document.getElementById("desserts-menu-button");
+const main = document.getElementsByTagName("main");
 
 const createMenus = (menuButton) => {
     if (!popularItemsMenuContainer.hasChildNodes()) {
@@ -45,6 +46,7 @@ const createMenus = (menuButton) => {
 const createDrinkItem = (drinkItem) => {
     const drinkItemCard = document.createElement("div");
     drinkItemCard.className = "item-card drink-item-card";
+    drinkItemCard.setAttribute("onclick", "renderTrengerEtBraNavn()");
     drinkItemCard.innerHTML = `
         <img src=${drinkItem.imagePath} alt=${drinkItem.drinkName} width="70" height="70"> 
         <h4>${drinkItem.drinkName.toUpperCase()}</h4>
@@ -168,4 +170,16 @@ const renderActiveUserAccount = () => {
     });
 }
 
+const renderTrengerEtBraNavn = () => {
+    createMenus();
+    for (i = 0; i < 1; i++) {
+        main[i].style.backgroundColor = "blue";
+        main[i].innerHTML = "hallo";
+
+    }
+    
+}
+
 renderActiveUserAccount();
+
+
