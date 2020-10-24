@@ -172,10 +172,58 @@ const renderActiveUserAccount = () => {
 }
 
 const renderTrengerEtBraNavn = () => {
+
+    let indexPromp = 0;
+
+    switch (event.target.alt) {
+        case "Americano":
+            indexPromp = 0;
+        break;
+
+        case "Caffè Latte":
+            indexPromp = 1;
+        break;
+
+        case "Caffè Mocha":
+            indexPromp = 2;
+        break;
+
+        case "Cappuccino":
+            indexPromp = 3;
+        break;
+
+        case "Caramel Macchiato":
+            indexPromp = 4;
+        break;
+
+        case "Cortado":
+            indexPromp = 5;
+        break;
+
+        case "Espresso":
+            indexPromp = 6;
+        break;
+
+        case "Filterkaffe":
+            indexPromp = 7;
+        break;
+
+        case "Iskaffe":
+            indexPromp = 8;
+        break;
+
+        case "Iste":
+            indexPromp = 9;
+        break;
+    }
+
     for (i = 0; i < 1; i++) {
         main[i].style.backgroundColor = "var(--drinks-menu-color)";
         main[i].innerHTML = `
-        <h4>${event.target.alt}</h4>
+        <h4>${drinkItems[indexPromp].drinkName}</h4>
+        <h4>${drinkItems[indexPromp].price.small}</h4>
+        <h4>${drinkItems[indexPromp].price.medium}</h4>
+        <h4>${drinkItems[indexPromp].price.large}</h4>
        `;
     }
 }
