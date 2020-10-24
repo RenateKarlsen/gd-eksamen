@@ -46,6 +46,7 @@ const createMenus = (menuButton) => {
 const createDrinkItem = (drinkItem) => {
     const drinkItemCard = document.createElement("div");
     drinkItemCard.className = "item-card drink-item-card";
+    drinkItemCard.alt = drinkItem.drinkName;
     drinkItemCard.setAttribute("onclick", "renderTrengerEtBraNavn()");
     drinkItemCard.innerHTML = `
         <img src=${drinkItem.imagePath} alt=${drinkItem.drinkName} width="70" height="70"> 
@@ -171,17 +172,13 @@ const renderActiveUserAccount = () => {
 }
 
 const renderTrengerEtBraNavn = () => {
-    createMenus();
     for (i = 0; i < 1; i++) {
         main[i].style.backgroundColor = "var(--drinks-menu-color)";
         main[i].innerHTML = `
-        <p>${"Hei:/"}</p>
-        `;
-
+        <h4>${event.target.alt}</h4>
+       `;
     }
-    
 }
 
+
 renderActiveUserAccount();
-
-
