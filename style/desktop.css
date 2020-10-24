@@ -225,11 +225,20 @@ button {
     grid-row: 1 / 7;
     color: white;
 }
-=======
 
+#options-menu {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+
+    grid-column: 1 / 8;
+    grid-row: 1 / 11;
+}
 /*OPTIONS MENU*/
 
-#drinkImg{
+
+/* #drinkImg{
     position: relative;
     width: 100px;
     height: 100px;
@@ -302,4 +311,4 @@ button {
 }
 .grid-item3 { 
     grid-area: 2 / 4 / 3 / 5;
-}
+} */

@@ -106,8 +106,10 @@ const renderDrinks = () => {
 const createDessertItem = (dessertItem) => {
     const dessertItemCard = document.createElement("div");
     dessertItemCard.className = "item-card dessert-item-card";
+    dessertItemCard.alt = dessertItem.dessertName;
+    dessertItemCard.setAttribute("onclick", "renderOptions()");
     dessertItemCard.innerHTML = `
-        <img src=${dessertItem.imagePath} alt=${dessertItem.drinkName} width="80" height="80"> 
+        <img src=${dessertItem.imagePath} alt=${dessertItem.dessertName} width="80" height="80"> 
         <h4>${dessertItem.dessertName.toUpperCase()}</h4>
         <p>${dessertItem.price}</p>
     `;
@@ -219,83 +221,71 @@ const renderActiveUserAccount = () => {
 
 
 const renderOptions = () => {
+//Gets index based on name from alt-text (getIndex.js) - kinda jalla but it works!
+getIndex();
 
-    let drinkIndex = 0;
+//Removes menus so the boxes disappears
+menuSection.removeChild(popularItemsMenuContainer);
+menuSection.removeChild(mainMenuContainer);
 
-    switch (event.target.alt) {
-        case "Americano":
-            drinkIndex = 0;
-        break;
-
-        case "Caffè Latte":
-            drinkIndex = 1;
-        break;
-
-        case "Caffè Mocha":
-            drinkIndex = 2;
-        break;
-
-        case "Cappuccino":
-            drinkIndex = 3;
-        break;
-
-        case "Caramel Macchiato":
-            drinkIndex = 4;
-        break;
-
-        case "Cortado":
-            drinkIndex = 5;
-        break;
-
-        case "Espresso":
-            drinkIndex = 6;
-        break;
-
-        case "Filterkaffe":
-            drinkIndex = 7;
-        break;
-
-        case "Iskaffe":
-            drinkIndex = 8;
-        break;
-
-        case "Iste":
-            drinkIndex = 9;
-        break;
-
-        default:
-            break;
-    }
-
-    for (i = 0; i < 1; i++) {
-        main[i].style.backgroundColor = "var(--drinks-menu-color)";
-        main[i].innerHTML = `
-        <div id="optionsMain">
+        const optionsMenu = document.createElement("div");
+        optionsMenu.id = "options-menu";
+        
+        // Itemindex lower than 10 = drinks, higher than 10 = desserts.
+        if (itemIndex < 10) {
+            optionsMenu.style.backgroundColor = "var(--drinks-menu-color)";
+            optionsMenu.innerHTML = `
             <div class="grid-item0">
-                <h4>${drinkItems[drinkIndex].drinkName}</h4> 
-                <img id="drinkImg"src=${drinkItems[drinkIndex].imagePath} alt=${drinkItems[drinkIndex].drinkName}>
+                <h4>${drinkItems[itemIndex].drinkName}</h4> 
+                <img id="drinkImg"src=${drinkItems[itemIndex].imagePath} alt=${drinkItems[itemIndex].drinkName}>
             </div>
 
                 <div class="grid-item1">
                 <img  id= "coffeeSmall" src="Images/Icons/coffeecup.png">
-                <h4 id="smallTxt">${drinkItems[drinkIndex].price.small}kr</h4>
+                <h4 id="smallTxt">${drinkItems[itemIndex].price.small}kr</h4>
                 </div>
 
                 <div class="grid-item2">
                 <img  id="coffeeMedium"src="Images/Icons/coffeecup.png">
-                <h4 id="mediumTxt">${drinkItems[drinkIndex].price.medium}kr</h4>
+                <h4 id="mediumTxt">${drinkItems[itemIndex].price.medium}kr</h4>
                 </div>
 
                 <div class="grid-item3">
                 <img id="coffeeLarge"src="Images/Icons/coffeecup.png">
-                <h4 id="largeTxt">${drinkItems[drinkIndex].price.large}kr</h4>
+                <h4 id="largeTxt">${drinkItems[itemIndex].price.large}kr</h4>
                 </div>
 
-            
-        </div>
+                <button id="back-btn" onclick="back()"> X </button>
        `;
-    }
+
+        } else {
+            let dessertItemIndex = itemIndex - 10;
+            optionsMenu.style.backgroundColor = "var(--desserts-menu-color)";
+            optionsMenu.innerHTML = `
+            <div class="grid-item0">
+                <h4>${dessertItems[dessertItemIndex].dessertName}</h4> 
+                <img id="drinkImg"src=${dessertItems[dessertItemIndex].imagePath} alt=${dessertItems[dessertItemIndex].dessertName}>
+            </div>
+
+                <div class="grid-item1">
+                <img  id= "coffeeSmall" src="Images/Icons/coffeecup.png">
+                <h4 id="smallTxt">${dessertItems[dessertItemIndex].price}kr</h4>
+                </div>
+
+                <button id="back-btn" onclick="back()"> X </button>`; 
+            }
+
+    menuSection.appendChild(optionsMenu);
 }
+
+// The back button on options menu
+const back = () => {
+    const optionsMenu = document.getElementById("options-menu");
+    menuSection.removeChild(optionsMenu);
+    menuSection.appendChild(popularItemsMenuContainer);
+    menuSection.appendChild(mainMenuContainer);
+    };
 
 
 renderActiveUserAccount();
+
