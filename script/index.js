@@ -4,6 +4,7 @@ const popularItemsMenuContainer = document.getElementById("popular-items-menu-co
 const mainMenuContainer = document.getElementById("main-menu-container");
 const drinksMenuButton = document.getElementById("drinks-menu-button");
 const dessertsMenuButton = document.getElementById("desserts-menu-button");
+const main = document.getElementsByTagName("main");
 
 const handleMenu = (menuButton) => {
     if (menuSection.querySelector('#order-history-container') !== null) {
@@ -67,6 +68,8 @@ const updateMenu = (buttonClicked) => {
 const createDrinkItem = (drinkItem) => {
     const drinkItemCard = document.createElement("div");
     drinkItemCard.className = "item-card drink-item-card";
+    drinkItemCard.alt = drinkItem.drinkName;
+    drinkItemCard.setAttribute("onclick", "renderOptions()");
     drinkItemCard.innerHTML = `
         <img src=${drinkItem.imagePath} alt=${drinkItem.drinkName} width="70" height="70"> 
         <h4>${drinkItem.drinkName.toUpperCase()}</h4>
@@ -213,5 +216,86 @@ const renderActiveUserAccount = () => {
         })
     })
 };
+
+
+const renderOptions = () => {
+
+    let drinkIndex = 0;
+
+    switch (event.target.alt) {
+        case "Americano":
+            drinkIndex = 0;
+        break;
+
+        case "Caffè Latte":
+            drinkIndex = 1;
+        break;
+
+        case "Caffè Mocha":
+            drinkIndex = 2;
+        break;
+
+        case "Cappuccino":
+            drinkIndex = 3;
+        break;
+
+        case "Caramel Macchiato":
+            drinkIndex = 4;
+        break;
+
+        case "Cortado":
+            drinkIndex = 5;
+        break;
+
+        case "Espresso":
+            drinkIndex = 6;
+        break;
+
+        case "Filterkaffe":
+            drinkIndex = 7;
+        break;
+
+        case "Iskaffe":
+            drinkIndex = 8;
+        break;
+
+        case "Iste":
+            drinkIndex = 9;
+        break;
+
+        default:
+            break;
+    }
+
+    for (i = 0; i < 1; i++) {
+        main[i].style.backgroundColor = "var(--drinks-menu-color)";
+        main[i].innerHTML = `
+        <div id="optionsMain">
+            <div class="grid-item0">
+                <h4>${drinkItems[drinkIndex].drinkName}</h4> 
+                <img id="drinkImg"src=${drinkItems[drinkIndex].imagePath} alt=${drinkItems[drinkIndex].drinkName}>
+            </div>
+
+                <div class="grid-item1">
+                <img  id= "coffeeSmall" src="Images/Icons/coffeecup.png">
+                <h4 id="smallTxt">${drinkItems[drinkIndex].price.small}kr</h4>
+                </div>
+
+                <div class="grid-item2">
+                <img  id="coffeeMedium"src="Images/Icons/coffeecup.png">
+                <h4 id="mediumTxt">${drinkItems[drinkIndex].price.medium}kr</h4>
+                </div>
+
+                <div class="grid-item3">
+                <img id="coffeeLarge"src="Images/Icons/coffeecup.png">
+                <h4 id="largeTxt">${drinkItems[drinkIndex].price.large}kr</h4>
+                </div>
+
+            
+        </div>
+       `;
+    }
+}
+
 
 renderActiveUserAccount();
