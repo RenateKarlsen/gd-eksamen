@@ -171,13 +171,6 @@ const renderActiveUserAccount = () => {
     });
 }
 
-const createOptionsMenu = () =>{
-
-
-
-
-
-}
 
 const renderOptions = () => {
 
@@ -223,15 +216,37 @@ const renderOptions = () => {
         case "Iste":
             drinkIndex = 9;
         break;
+
+        default:
+            break;
     }
 
     for (i = 0; i < 1; i++) {
         main[i].style.backgroundColor = "var(--drinks-menu-color)";
         main[i].innerHTML = `
-        <h4>${drinkItems[drinkIndex].drinkName}</h4>
-        <h4>${drinkItems[drinkIndex].price.small}</h4>
-        <h4>${drinkItems[drinkIndex].price.medium}</h4>
-        <h4>${drinkItems[drinkIndex].price.large}</h4>
+        <div id="optionsMain">
+            <div class="grid-item0">
+                <h4>${drinkItems[drinkIndex].drinkName}</h4> 
+                <img id="drinkImg"src=${drinkItems[drinkIndex].imagePath} alt=${drinkItems[drinkIndex].drinkName}>
+            </div>
+
+                <div class="grid-item1">
+                <img  id= "coffeeSmall" src="Images/Icons/coffeecup.png">
+                <h4 id="smallTxt">${drinkItems[drinkIndex].price.small}kr</h4>
+                </div>
+
+                <div class="grid-item2">
+                <img  id="coffeeMedium"src="Images/Icons/coffeecup.png">
+                <h4 id="mediumTxt">${drinkItems[drinkIndex].price.medium}kr</h4>
+                </div>
+
+                <div class="grid-item3">
+                <img id="coffeeLarge"src="Images/Icons/coffeecup.png">
+                <h4 id="largeTxt">${drinkItems[drinkIndex].price.large}kr</h4>
+                </div>
+
+            
+        </div>
        `;
     }
 }
