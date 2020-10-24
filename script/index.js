@@ -47,7 +47,7 @@ const createDrinkItem = (drinkItem) => {
     const drinkItemCard = document.createElement("div");
     drinkItemCard.className = "item-card drink-item-card";
     drinkItemCard.alt = drinkItem.drinkName;
-    drinkItemCard.setAttribute("onclick", "renderTrengerEtBraNavn()");
+    drinkItemCard.setAttribute("onclick", "renderOptions()");
     drinkItemCard.innerHTML = `
         <img src=${drinkItem.imagePath} alt=${drinkItem.drinkName} width="70" height="70"> 
         <h4>${drinkItem.drinkName.toUpperCase()}</h4>
@@ -171,59 +171,67 @@ const renderActiveUserAccount = () => {
     });
 }
 
-const renderTrengerEtBraNavn = () => {
+const createOptionsMenu = () =>{
 
-    let indexPromp = 0;
+
+
+
+
+}
+
+const renderOptions = () => {
+
+    let drinkIndex = 0;
 
     switch (event.target.alt) {
         case "Americano":
-            indexPromp = 0;
+            drinkIndex = 0;
         break;
 
         case "Caffè Latte":
-            indexPromp = 1;
+            drinkIndex = 1;
         break;
 
         case "Caffè Mocha":
-            indexPromp = 2;
+            drinkIndex = 2;
         break;
 
         case "Cappuccino":
-            indexPromp = 3;
+            drinkIndex = 3;
         break;
 
         case "Caramel Macchiato":
-            indexPromp = 4;
+            drinkIndex = 4;
         break;
 
         case "Cortado":
-            indexPromp = 5;
+            drinkIndex = 5;
         break;
 
         case "Espresso":
-            indexPromp = 6;
+            drinkIndex = 6;
         break;
 
         case "Filterkaffe":
-            indexPromp = 7;
+            drinkIndex = 7;
         break;
 
         case "Iskaffe":
-            indexPromp = 8;
+            drinkIndex = 8;
         break;
 
         case "Iste":
-            indexPromp = 9;
+            drinkIndex = 9;
         break;
     }
 
     for (i = 0; i < 1; i++) {
         main[i].style.backgroundColor = "var(--drinks-menu-color)";
         main[i].innerHTML = `
-        <h4>${drinkItems[indexPromp].drinkName}</h4>
-        <h4>${drinkItems[indexPromp].price.small}</h4>
-        <h4>${drinkItems[indexPromp].price.medium}</h4>
-        <h4>${drinkItems[indexPromp].price.large}</h4>
+        <h4>${drinkItems[drinkIndex].drinkName}</h4>
+        <h4>${drinkItems[drinkIndex].price.small}</h4>
+        <h4>${drinkItems[drinkIndex].price.medium}</h4>
+        <h4>${drinkItems[drinkIndex].price.large}</h4>
        `;
     }
 }
