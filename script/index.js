@@ -1,45 +1,67 @@
 // DOM
+const menuSection = document.getElementById("menu-section");
 const popularItemsMenuContainer = document.getElementById("popular-items-menu-container");
 const mainMenuContainer = document.getElementById("main-menu-container");
 const drinksMenuButton = document.getElementById("drinks-menu-button");
 const dessertsMenuButton = document.getElementById("desserts-menu-button");
 
-const createMenus = (menuButton) => {
-    if (!popularItemsMenuContainer.hasChildNodes()) {
-        const popularItemsMenuHeader = document.createElement("div");
-        popularItemsMenuHeader.id = "popular-items-menu-header";
-        popularItemsMenuHeader.innerHTML = `
-            <img src="images/icons/heart.png" alt="Hjerte" width="30px" height="30px">
-            <h3>POPULÆRE</h3>
-        `;
-        popularItemsMenuContainer.appendChild(popularItemsMenuHeader);
+const handleMenu = (menuButton) => {
+    if (menuSection.querySelector('#order-history-container') !== null) {
+        removeChildNodes(menuSection);
+        menuSection.appendChild(popularItemsMenuContainer);
+        menuSection.appendChild(mainMenuContainer);
+    }
 
-        const popularItemsMenu = document.createElement("div");
-        popularItemsMenu.id = "popular-items-menu";
-        popularItemsMenuContainer.appendChild(popularItemsMenu);
-
-        const mainMenu = document.createElement("div");
-        mainMenu.id = "main-menu";
-        mainMenuContainer.appendChild(mainMenu);
-
-        if (menuButton === "drinks-menu-button") {
-            renderDrinkMenu()
-        } else {
-            renderDessertMenu()
-        }
+    if (!mainMenuContainer.hasChildNodes()) {
+        createMenu(menuButton);
     } else {
-        while (popularItemsMenuContainer.firstChild) {
-            popularItemsMenuContainer.removeChild(popularItemsMenuContainer.lastChild);
-        }
+        updateMenu(menuButton);
+    }
+};
 
-        while (mainMenuContainer.firstChild) {
-            mainMenuContainer.removeChild(mainMenuContainer.lastChild);
-        }
+const createMenu = (buttonClicked) => {
+    const popularItemsMenuHeader = document.createElement("div");
+    popularItemsMenuHeader.id = "popular-items-menu-header";
+    popularItemsMenuHeader.innerHTML = `
+        <img src="images/icons/heart.png" alt="Hjerte" width="30px" height="30px">
+        <h3>POPULÆRE</h3>
+    `;
+    popularItemsMenuContainer.appendChild(popularItemsMenuHeader);
 
+    const popularItemsMenu = document.createElement("div");
+    popularItemsMenu.id = "popular-items-menu";
+    popularItemsMenuContainer.appendChild(popularItemsMenu);
+
+    const mainMenu = document.createElement("div");
+    mainMenu.id = "main-menu";
+    mainMenuContainer.appendChild(mainMenu);
+
+    if (buttonClicked === "drinks-menu-button") {
+        renderDrinks();
+    } else {
+        renderDesserts();
+    }
+};
+
+const updateMenu = (buttonClicked) => {
+
+    const drinkItemCards = document.getElementsByClassName("drink-item-card");
+    const dessertItemCards = document.getElementsByClassName("dessert-item-card");
+
+    if (buttonClicked === "drinks-menu-button" && drinkItemCards.length > 0 ||
+        buttonClicked === "desserts-menu-button" && dessertItemCards.length > 0) {
+        removeChildNodes(popularItemsMenuContainer);
+        removeChildNodes(mainMenuContainer);
         popularItemsMenuContainer.style.border = "1px solid var(--lighter-gray-color)";
         mainMenuContainer.style.border = "1px solid var(--lighter-gray-color)";
+    } else {
+        if (buttonClicked === "drinks-menu-button") {
+            renderDrinks()
+        } else {
+            renderDesserts()
+        }
     }
-}
+};
 
 // CREATES DRINK ITEMS
 const createDrinkItem = (drinkItem) => {
@@ -55,10 +77,12 @@ const createDrinkItem = (drinkItem) => {
 };
 
 // RENDERS DRINKITEMS IN DRINK MENU
-const renderDrinkMenu = () => {
+const renderDrinks = () => {
     const popularItemsMenu = document.getElementById("popular-items-menu");
     const mainMenu = document.getElementById("main-menu");
-    emptyMenus();
+
+    removeChildNodes(popularItemsMenu);
+    removeChildNodes(mainMenu);
 
     drinkItems.map(drinkItem => {
         const drinkMenu = createDrinkItem(drinkItem);
@@ -89,10 +113,12 @@ const createDessertItem = (dessertItem) => {
 };
 
 // RENDERS DESERT ITEMS IN DESERT MENU
-const renderDessertMenu = () => {
+const renderDesserts = () => {
     const popularItemsMenu = document.getElementById("popular-items-menu");
     const mainMenu = document.getElementById("main-menu");
-    emptyMenus();
+
+    removeChildNodes(popularItemsMenu);
+    removeChildNodes(mainMenu);
 
     dessertItems.map(dessertItem => {
         const dessertMenu = createDessertItem(dessertItem);
@@ -109,18 +135,11 @@ const renderDessertMenu = () => {
     styleMenu("dessert");
 };
 
-const emptyMenus = () => {
-    const popularItemsMenu = document.getElementById("popular-items-menu");
-    const mainMenu = document.getElementById("main-menu");
-
-    while (popularItemsMenu.firstChild) {
-        popularItemsMenu.removeChild(popularItemsMenu.lastChild);
+const removeChildNodes = (container) => {
+    while (container.firstChild) {
+        container.removeChild(container.lastChild);
     }
-
-    while (mainMenu.firstChild) {
-        mainMenu.removeChild(mainMenu.lastChild);
-    }
-};
+}
 
 const styleMenu = (menu) => {
     const popularItemsMenuHeader = document.getElementById("popular-items-menu-header");
@@ -137,6 +156,33 @@ const styleMenu = (menu) => {
         popularItemsMenuHeader.style.backgroundColor = "var(--desserts-menu-color)";
         popularItemsMenu.style.backgroundColor = "var(--desserts-menu-color)";
         mainMenu.style.backgroundColor = "var(--desserts-menu-color)";
+    }
+};
+
+const revealOrderHistorySection = () => {
+    const orderHistoryContainer = document.createElement("div");
+    const orderContainer = document.createElement("div");
+
+    if (menuSection.querySelector('#order-history-container') === null) {
+        menuSection.removeChild(popularItemsMenuContainer);
+        menuSection.removeChild(mainMenuContainer);
+
+        orderHistoryContainer.id = "order-history-container";
+        orderHistoryContainer.innerHTML = `
+            <div id="order-history-container-header">
+                <i class="fa fa-cloud fa-5x"></i>
+                <h2>TIDLIGERE<br>BESTILLINGER</h2>
+            </div>
+            <div id="order-list"></div>
+        `;
+        menuSection.appendChild(orderHistoryContainer);
+
+        orderContainer.id = "order-container";
+        menuSection.appendChild(orderContainer);
+    } else {
+        removeChildNodes(menuSection);
+        menuSection.appendChild(popularItemsMenuContainer);
+        menuSection.appendChild(mainMenuContainer);
     }
 };
 
@@ -165,7 +211,7 @@ const renderActiveUserAccount = () => {
                 userAccountHeader.appendChild(activeUserAccountDisplay);
             }
         })
-    });
-}
+    })
+};
 
 renderActiveUserAccount();
