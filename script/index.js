@@ -5,8 +5,13 @@ const mainMenuContainer = document.getElementById("main-menu-container");
 const drinksMenuButton = document.getElementById("drinks-menu-button");
 const dessertsMenuButton = document.getElementById("desserts-menu-button");
 
-
 const handleMenu = (menuButton) => {
+    if (menuSection.querySelector('#order-history-container') !== null) {
+        removeChildNodes(menuSection);
+        menuSection.appendChild(popularItemsMenuContainer);
+        menuSection.appendChild(mainMenuContainer);
+    }
+
     if (!mainMenuContainer.hasChildNodes()) {
         createMenu(menuButton);
     } else {
@@ -39,6 +44,7 @@ const createMenu = (buttonClicked) => {
 };
 
 const updateMenu = (buttonClicked) => {
+
     const drinkItemCards = document.getElementsByClassName("drink-item-card");
     const dessertItemCards = document.getElementsByClassName("dessert-item-card");
 
@@ -55,8 +61,7 @@ const updateMenu = (buttonClicked) => {
             renderDesserts()
         }
     }
-}
-
+};
 
 // CREATES DRINK ITEMS
 const createDrinkItem = (drinkItem) => {
@@ -155,7 +160,6 @@ const styleMenu = (menu) => {
 };
 
 const revealOrderHistorySection = () => {
-
     const orderHistoryContainer = document.createElement("div");
     const orderContainer = document.createElement("div");
 
@@ -163,8 +167,14 @@ const revealOrderHistorySection = () => {
         menuSection.removeChild(popularItemsMenuContainer);
         menuSection.removeChild(mainMenuContainer);
 
-
         orderHistoryContainer.id = "order-history-container";
+        orderHistoryContainer.innerHTML = `
+            <div id="order-history-container-header">
+                <i class="fa fa-cloud fa-5x"></i>
+                <h2>TIDLIGERE<br>BESTILLINGER</h2>
+            </div>
+            <div id="order-list"></div>
+        `;
         menuSection.appendChild(orderHistoryContainer);
 
         orderContainer.id = "order-container";
@@ -174,7 +184,7 @@ const revealOrderHistorySection = () => {
         menuSection.appendChild(popularItemsMenuContainer);
         menuSection.appendChild(mainMenuContainer);
     }
-}
+};
 
 const renderActiveUserAccount = () => {
     const userAccountHeader = document.getElementById("user-account-header");
@@ -201,7 +211,7 @@ const renderActiveUserAccount = () => {
                 userAccountHeader.appendChild(activeUserAccountDisplay);
             }
         })
-    });
-}
+    })
+};
 
 renderActiveUserAccount();
