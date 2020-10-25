@@ -4,8 +4,16 @@ const popularItemsMenuContainer = document.getElementById("popular-items-menu-co
 const mainMenuContainer = document.getElementById("main-menu-container");
 const drinksMenuButton = document.getElementById("drinks-menu-button");
 const dessertsMenuButton = document.getElementById("desserts-menu-button");
+const mainNavigationSection = document.getElementById("main-navigation-section");
+const body = document.getElementsByTagName("body")[0];
+const mediaQuery = window.matchMedia("(max-width: 600px)")
 
 const handleMenu = (menuButton) => {
+    if (mediaQuery.matches) {
+        menuSection.style.display = "grid";
+        mainNavigationSection.style.display = "none";
+        body.style.margin = "0";
+    }
     if (menuSection.querySelector('#order-history-container') !== null) {
         removeChildNodes(menuSection);
         menuSection.appendChild(popularItemsMenuContainer);
@@ -67,11 +75,20 @@ const updateMenu = (buttonClicked) => {
 const createDrinkItem = (drinkItem) => {
     const drinkItemCard = document.createElement("div");
     drinkItemCard.className = "item-card drink-item-card";
-    drinkItemCard.innerHTML = `
-        <img src=${drinkItem.imagePath} alt=${drinkItem.drinkName} width="70" height="70"> 
-        <h4>${drinkItem.drinkName.toUpperCase()}</h4>
-        <p>${drinkItem.price.small}, ${drinkItem.price.medium}, ${drinkItem.price.large}</p>
-    `;
+
+    if (mediaQuery.matches) {
+        drinkItemCard.innerHTML = `
+            <img src=${drinkItem.imagePath} alt=${drinkItem.drinkName} width="70" height="70"> 
+            <h4>${drinkItem.drinkName.toUpperCase()}</h4>
+            <p>fra<br>kr ${drinkItem.price.small}</p>
+        `;
+    } else {
+        drinkItemCard.innerHTML = `
+            <img src=${drinkItem.imagePath} alt=${drinkItem.drinkName} width="70" height="70"> 
+            <h4>${drinkItem.drinkName.toUpperCase()}</h4>
+            <p>${drinkItem.price.small}, ${drinkItem.price.medium}, ${drinkItem.price.large}</p>
+        `;
+    }
 
     return drinkItemCard;
 };
@@ -84,12 +101,14 @@ const renderDrinks = () => {
     removeChildNodes(popularItemsMenu);
     removeChildNodes(mainMenu);
 
-    drinkItems.map(drinkItem => {
-        const drinkMenu = createDrinkItem(drinkItem);
-        if (drinkItem.isDrinkPopular === true) {
-            popularItemsMenu.appendChild(drinkMenu);
-        }
-    });
+    if (!mediaQuery.matches) {
+        drinkItems.map(drinkItem => {
+            const drinkMenu = createDrinkItem(drinkItem);
+            if (drinkItem.isDrinkPopular === true) {
+                popularItemsMenu.appendChild(drinkMenu);
+            }
+        });
+    }
 
     drinkItems.map(drinkItem => {
         const drinkMenu = createDrinkItem(drinkItem);
@@ -106,7 +125,7 @@ const createDessertItem = (dessertItem) => {
     dessertItemCard.innerHTML = `
         <img src=${dessertItem.imagePath} alt=${dessertItem.drinkName} width="80" height="80"> 
         <h4>${dessertItem.dessertName.toUpperCase()}</h4>
-        <p>${dessertItem.price}</p>
+        <p>kr ${dessertItem.price}</p>
     `;
 
     return dessertItemCard;
@@ -120,12 +139,14 @@ const renderDesserts = () => {
     removeChildNodes(popularItemsMenu);
     removeChildNodes(mainMenu);
 
-    dessertItems.map(dessertItem => {
-        const dessertMenu = createDessertItem(dessertItem);
-        if (dessertItem.isDessertPopular === true) {
-            popularItemsMenu.appendChild(dessertMenu);
-        }
-    });
+    if (!mediaQuery.matches) {
+        dessertItems.map(dessertItem => {
+            const dessertMenu = createDessertItem(dessertItem);
+            if (dessertItem.isDessertPopular === true) {
+                popularItemsMenu.appendChild(dessertMenu);
+            }
+        });
+    }
 
     dessertItems.map(dessertItem => {
         const dessertMenu = createDessertItem(dessertItem);
