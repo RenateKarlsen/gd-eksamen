@@ -240,17 +240,17 @@ menuSection.removeChild(mainMenuContainer);
                 <img id="drinkImg"src=${drinkItems[itemIndex].imagePath} alt=${drinkItems[itemIndex].drinkName}>
             </div>
 
-                <div class="grid-item1">
-                <img  id= "coffeeSmall" src="Images/Icons/coffeecup.png">
+                <div id=${drinkItems[itemIndex].price.small} onclick="selectSize()">
+                <img  id=${drinkItems[itemIndex].price.small} src="Images/Icons/coffeecup.png">
                 <h4 id="smallTxt">${drinkItems[itemIndex].price.small}kr</h4>
                 </div>
 
-                <div class="grid-item2">
+                <div class="grid-item2" onclick="selectSize()">
                 <img  id="coffeeMedium"src="Images/Icons/coffeecup.png">
                 <h4 id="mediumTxt">${drinkItems[itemIndex].price.medium}kr</h4>
                 </div>
 
-                <div class="grid-item3">
+                <div class="grid-item3" onclick="selectSize()">
                 <img id="coffeeLarge"src="Images/Icons/coffeecup.png">
                 <h4 id="largeTxt">${drinkItems[itemIndex].price.large}kr</h4>
                 </div>
@@ -262,7 +262,7 @@ menuSection.removeChild(mainMenuContainer);
             let dessertItemIndex = itemIndex - 10;
             optionsMenu.style.backgroundColor = "var(--desserts-menu-color)";
             optionsMenu.innerHTML = `
-            <div class="grid-item0">
+            <div id="${dessertItems[dessertItemIndex].dessertName}">
                 <h4>${dessertItems[dessertItemIndex].dessertName}</h4> 
                 <img id="drinkImg"src=${dessertItems[dessertItemIndex].imagePath} alt=${dessertItems[dessertItemIndex].dessertName}>
             </div>
@@ -285,6 +285,13 @@ const back = () => {
     menuSection.appendChild(popularItemsMenuContainer);
     menuSection.appendChild(mainMenuContainer);
     };
+
+const selectSize = () => {
+   console.log(event.target.id);
+   event.target.className;
+    };
+
+
 
 
 renderActiveUserAccount();
