@@ -182,7 +182,6 @@ button {
 }
 
 .item-card {
-    position: relative;
     border: 1px solid white;
     text-align: center;
     padding: 10px;

@@ -6,6 +6,7 @@ const drinksMenuButton = document.getElementById("drinks-menu-button");
 const dessertsMenuButton = document.getElementById("desserts-menu-button");
 const mainNavigationSection = document.getElementById("main-navigation-section");
 const body = document.getElementsByTagName("body")[0];
+const html = document.getElementsByTagName("html")[0];
 const mediaQuery = window.matchMedia("(max-width: 600px)")
 
 const handleMenu = (menuButton) => {
@@ -13,13 +14,14 @@ const handleMenu = (menuButton) => {
         menuSection.style.display = "grid";
         mainNavigationSection.style.display = "none";
         body.style.margin = "0";
+        body.style.height = "100%";
+        html.style.height = "100%";
     }
     if (menuSection.querySelector('#order-history-container') !== null) {
         removeChildNodes(menuSection);
         menuSection.appendChild(popularItemsMenuContainer);
         menuSection.appendChild(mainMenuContainer);
     }
-
     if (!mainMenuContainer.hasChildNodes()) {
         createMenu(menuButton);
     } else {
@@ -43,6 +45,16 @@ const createMenu = (buttonClicked) => {
     const mainMenu = document.createElement("div");
     mainMenu.id = "main-menu";
     mainMenuContainer.appendChild(mainMenu);
+
+    if (mediaQuery.matches) {
+        const menuHeader = document.createElement("div");
+        const headerName = buttonClicked === "drinks-menu-button" ? "DRIKKER" : "DESSERTER";
+        menuHeader.id = "menu-header";
+        menuHeader.innerHTML = `
+            <h3>${headerName}</h3;
+        `;
+        menuSection.appendChild(menuHeader);
+    }
 
     if (buttonClicked === "drinks-menu-button") {
         renderDrinks();
@@ -101,14 +113,13 @@ const renderDrinks = () => {
     removeChildNodes(popularItemsMenu);
     removeChildNodes(mainMenu);
 
-    if (!mediaQuery.matches) {
-        drinkItems.map(drinkItem => {
-            const drinkMenu = createDrinkItem(drinkItem);
-            if (drinkItem.isDrinkPopular === true) {
-                popularItemsMenu.appendChild(drinkMenu);
-            }
-        });
-    }
+    drinkItems.map(drinkItem => {
+        const drinkMenu = createDrinkItem(drinkItem);
+        if (drinkItem.isDrinkPopular === true) {
+            popularItemsMenu.appendChild(drinkMenu);
+        }
+    });
+
 
     drinkItems.map(drinkItem => {
         const drinkMenu = createDrinkItem(drinkItem);
@@ -118,7 +129,7 @@ const renderDrinks = () => {
     styleMenu("drink");
 };
 
-// CREATES DESERT ITEMS
+// CREATES DESSERT ITEMS
 const createDessertItem = (dessertItem) => {
     const dessertItemCard = document.createElement("div");
     dessertItemCard.className = "item-card dessert-item-card";
@@ -131,7 +142,7 @@ const createDessertItem = (dessertItem) => {
     return dessertItemCard;
 };
 
-// RENDERS DESERT ITEMS IN DESERT MENU
+// RENDERS DESSERT ITEMS IN DESERT MENU
 const renderDesserts = () => {
     const popularItemsMenu = document.getElementById("popular-items-menu");
     const mainMenu = document.getElementById("main-menu");
@@ -139,14 +150,12 @@ const renderDesserts = () => {
     removeChildNodes(popularItemsMenu);
     removeChildNodes(mainMenu);
 
-    if (!mediaQuery.matches) {
-        dessertItems.map(dessertItem => {
-            const dessertMenu = createDessertItem(dessertItem);
-            if (dessertItem.isDessertPopular === true) {
-                popularItemsMenu.appendChild(dessertMenu);
-            }
-        });
-    }
+    dessertItems.map(dessertItem => {
+        const dessertMenu = createDessertItem(dessertItem);
+        if (dessertItem.isDessertPopular === true) {
+            popularItemsMenu.appendChild(dessertMenu);
+        }
+    });
 
     dessertItems.map(dessertItem => {
         const dessertMenu = createDessertItem(dessertItem);
@@ -169,6 +178,15 @@ const styleMenu = (menu) => {
     popularItemsMenuContainer.style.border = "0px";
     mainMenuContainer.style.border = "0px";
 
+    if (mediaQuery.matches) {
+        const menuHeader = document.getElementById("menu-header");
+        if (menu === "drink") {
+            menuHeader.style.backgroundColor = "var(--drinks-menu-color)";
+        } else if (menu === "dessert") {
+            menuHeader.style.backgroundColor = "var(--desserts-menu-color)";
+        }
+    }
+
     if (menu === "drink") {
         popularItemsMenuHeader.style.backgroundColor = "var(--drinks-menu-color)";
         popularItemsMenu.style.backgroundColor = "var(--drinks-menu-color)";
@@ -179,6 +197,7 @@ const styleMenu = (menu) => {
         mainMenu.style.backgroundColor = "var(--desserts-menu-color)";
     }
 };
+
 
 const revealOrderHistorySection = () => {
     const orderHistoryContainer = document.createElement("div");
@@ -215,10 +234,8 @@ const renderActiveUserAccount = () => {
             let len = results.rows.length, i;
 
             // Check if no users is selected in the DB redirect to the login page
-            if (screen.width >= 1000) {
-                if (len === 0) {
-                    window.location.href = 'desktop-login.html';
-                }
+            if (len === 0) {
+                window.location.href = 'desktop-login.html';
             }
 
             for (i = 0; i < len; i++) {
@@ -235,4 +252,6 @@ const renderActiveUserAccount = () => {
     })
 };
 
-renderActiveUserAccount();
+if (!mediaQuery.matches) {
+    renderActiveUserAccount();
+}
