@@ -233,6 +233,11 @@ menuSection.removeChild(mainMenuContainer);
         
         // Itemindex lower than 10 = drinks, higher than 10 = desserts.
         if (itemIndex < 10) {
+
+            let drinkPriceSmall = drinkItems[itemIndex].price.small;
+            let drinkPriceMedium = drinkItems[itemIndex].price.medium;
+            let drinkPriceLarge = drinkItems[itemIndex].price.large;
+
             optionsMenu.style.backgroundColor = "var(--drinks-menu-color)";
             optionsMenu.innerHTML = `
             <div class="grid-item0">
@@ -240,19 +245,19 @@ menuSection.removeChild(mainMenuContainer);
                 <img id="drinkImg"src=${drinkItems[itemIndex].imagePath} alt=${drinkItems[itemIndex].drinkName}>
             </div>
 
-                <div id=${drinkItems[itemIndex].price.small} onclick="selectSize()">
-                <img  id=${drinkItems[itemIndex].price.small} src="Images/Icons/coffeecup.png">
-                <h4 id="smallTxt">${drinkItems[itemIndex].price.small}kr</h4>
+                <div id=${drinkPriceSmall} onclick="selectSize()">
+                <img  id=${drinkPriceSmall} src="Images/Icons/coffeecup.png">
+                <h4 id=${drinkPriceSmall}>${drinkPriceSmall}kr</h4>
                 </div>
 
                 <div class="grid-item2" onclick="selectSize()">
-                <img  id="coffeeMedium"src="Images/Icons/coffeecup.png">
-                <h4 id="mediumTxt">${drinkItems[itemIndex].price.medium}kr</h4>
+                <img  id=${drinkPriceMedium} src="Images/Icons/coffeecup.png">
+                <h4 id=${drinkPriceMedium}>${drinkPriceMedium}kr</h4>
                 </div>
 
                 <div class="grid-item3" onclick="selectSize()">
-                <img id="coffeeLarge"src="Images/Icons/coffeecup.png">
-                <h4 id="largeTxt">${drinkItems[itemIndex].price.large}kr</h4>
+                <img id=${drinkPriceLarge} src="Images/Icons/coffeecup.png">
+                <h4 id=${drinkPriceLarge}>${drinkPriceLarge}kr</h4>
                 </div>
 
                 <button id="back-btn" onclick="back()"> X </button>
@@ -268,7 +273,7 @@ menuSection.removeChild(mainMenuContainer);
             </div>
 
                 <div class="grid-item1">
-                <img  id= "coffeeSmall" src="Images/Icons/coffeecup.png">
+            
                 <h4 id="smallTxt">${dessertItems[dessertItemIndex].price}kr</h4>
                 </div>
 
@@ -287,10 +292,14 @@ const back = () => {
     };
 
 const selectSize = () => {
-   console.log(event.target.id);
-   event.target.className;
-    };
 
+   let targetID = event.target.id;
+   console.log(targetID);
+   event.target.className;
+    let price = parseInt (targetID) ;
+    alert(price);
+
+};
 
 
 
