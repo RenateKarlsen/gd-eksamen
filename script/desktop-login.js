@@ -1,3 +1,7 @@
+if (window.matchMedia("(max-width: 600px)").matches) {
+    document.location = "index.html";
+}
+
 const rightScrollButton = document.getElementById("right-scroll-button");
 const leftScrollButton = document.getElementById("left-scroll-button");
 
