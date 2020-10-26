@@ -5,6 +5,9 @@ const mainMenuContainer = document.getElementById("main-menu-container");
 const drinksMenuButton = document.getElementById("drinks-menu-button");
 const dessertsMenuButton = document.getElementById("desserts-menu-button");
 const main = document.getElementsByTagName("main");
+// JS CREATED DOM
+const totalPriceContainer = document.createElement("div");
+const totalPrice = document.createElement("h4");
 
 const handleMenu = (menuButton) => {
     if (menuSection.querySelector('#order-history-container') !== null) {
@@ -292,15 +295,49 @@ const back = () => {
     };
 
 const selectSize = () => {
+    const optionsMenu = document.getElementById("options-menu");;
+     renderExtraOptionsCard();
 
-   let targetID = event.target.id;
-   console.log(targetID);
-   event.target.className;
+    //RENDERS TOTAL PRICE
+    let targetID = event.target.id;
     let price = parseInt (targetID) ;
-    alert(price);
-
+    totalPrice.innerHTML = price;
+    totalPriceContainer.innerHTML = "TOTALT KR: "
+    totalPriceContainer.appendChild(totalPrice);
+    optionsMenu.appendChild(totalPriceContainer);
 };
 
+const renderExtraOptionsCard = () => {
+    const optionsMenu = document.getElementById("options-menu");
+    const extraOptionCardContainer = document.createElement("div");
+    // RENDERS EXTRA-OPTIONS-CARD FROM extraOptionsObj (data.js)
+    if (optionsMenu.childNodes.length < 12) {
+    Object.keys(extraOptionsObj, extraOptionCardContainer).forEach(key => {
+        const extraOptionCard = document.createElement("div");
+        extraOptionCardContainer.className = "extra-options-card-container";
+        extraOptionCard.className = "extra-option-card";
+        extraOptionCard.id = extraOptionsObj[key].name;
+        extraOptionCard.setAttribute("onclick", "updatePrice()");
+        extraOptionCard.setAttribute("price", extraOptionsObj[key].price);     
+    
+        extraOptionCard.innerHTML = `
+            <h4 id="extra-option-name-h4">${extraOptionsObj[key].name}</h4>
+            <h4 id="extra-option-price-h4">${extraOptionsObj[key].price}</h4>
+        `;
+        extraOptionCardContainer.appendChild(extraOptionCard);
+        optionsMenu.appendChild(extraOptionCardContainer);
+        });
+    };
+};
+
+
+const updatePrice = () => {
+    let extraPrice = parseInt(event.target.getAttribute("price"));
+    price = parseInt(totalPrice.innerHTML);
+    updatedPrice = price + extraPrice;
+    console.log(updatedPrice)
+    totalPrice.innerHTML = updatedPrice;
+};
 
 
 renderActiveUserAccount();
