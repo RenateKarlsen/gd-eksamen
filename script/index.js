@@ -16,6 +16,20 @@ const handleMenu = (menuButton) => {
         body.style.margin = "0";
         body.style.height = "100%";
         html.style.height = "100%";
+
+        if (menuSection.querySelector('#menu-header') === null) {
+            const menuHeader = document.createElement("div");
+            menuHeader.id = "menu-header";
+            menuSection.insertBefore(menuHeader, menuSection.firstChild);
+        }
+        const menuHeader = document.getElementById("menu-header");
+        const headerName = menuButton === "drinks-menu-button" ? "DRIKKER" : "DESSERTER";
+        menuHeader.innerHTML = `
+            <button type="button" class="mobile-back-button" id="menu-back-button" onclick="returnToPreviousPage(id)">
+                <i class="fa fa-chevron-left fa-3x"></i>
+            </button>
+            <h3>${headerName}</h3;
+        `;
     }
     if (menuSection.querySelector('#order-history-container') !== null) {
         removeChildNodes(menuSection);
@@ -30,19 +44,6 @@ const handleMenu = (menuButton) => {
 };
 
 const createMenu = (buttonClicked) => {
-    if (mediaQuery.matches && menuSection.querySelector('#menu-header') === null) {
-        const menuHeader = document.createElement("div");
-        menuHeader.id = "menu-header";
-        const headerName = buttonClicked === "drinks-menu-button" ? "DRIKKER" : "DESSERTER";
-        menuHeader.innerHTML = `
-            <button type="button" class="mobile-back-button" id="menu-back-button" onclick="returnToPreviousPage(id)">
-                <i class="fa fa-chevron-left fa-3x"></i>
-            </button>
-            <h3>${headerName}</h3;
-        `;
-        menuSection.insertBefore(menuHeader, menuSection.firstChild);
-    }
-
     const popularItemsMenuHeader = document.createElement("div");
     popularItemsMenuHeader.id = "popular-items-menu-header";
 
@@ -76,17 +77,6 @@ const createMenu = (buttonClicked) => {
 const updateMenu = (buttonClicked) => {
     const drinkItemCards = document.getElementsByClassName("drink-item-card");
     const dessertItemCards = document.getElementsByClassName("dessert-item-card");
-
-    if (mediaQuery.matches) {
-        const menuHeader = document.getElementById("menu-header");
-        const headerName = buttonClicked === "drinks-menu-button" ? "DRIKKER" : "DESSERTER";
-        menuHeader.innerHTML = `
-            <button type="button" class="mobile-back-button" id="menu-back-button" onclick="returnToPreviousPage(id)">
-                <i class="fa fa-chevron-left fa-3x"></i>
-            </button>
-            <h3>${headerName}</h3;
-        `;
-    }
 
     if (buttonClicked === "drinks-menu-button" && drinkItemCards.length > 0 ||
         buttonClicked === "desserts-menu-button" && dessertItemCards.length > 0) {
