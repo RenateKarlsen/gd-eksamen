@@ -3,8 +3,8 @@
     --lighter-gray-color: rgb(179, 179, 179);
     --confirm-btn-color: rgb(36, 224, 133);
     --confirm-btn-active-color: rgb(61, 255, 161);
-    --drinks-menu-color: rgb(171, 162, 138);
-    --desserts-menu-color: rgb(224, 177, 216);
+    --drinks-menu-color: rgb(209, 209, 209);
+    --desserts-menu-color: rgb(255, 185, 243);
 }
 
 html, body {
@@ -22,6 +22,27 @@ button {
     cursor: pointer;
     color: white;
 }
+
+
+/* STYLE SCROLLBAR */
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+
 
 #main-wrapper {
     display: grid;
@@ -111,6 +132,7 @@ button {
     grid-template-rows: repeat(5, 1fr);
     grid-column: 3 / 8;
     grid-row: 2 / 11;
+    overflow: scroll;
 }
 
 #popular-items-menu-container {
@@ -187,15 +209,19 @@ button {
     padding: 10px;
     height: 10em;
     width: 7em;
-    color: white;
+    color: black;
 }
 
 .drink-item-card {
     background-color: var(--drinks-menu-color);
+    border-radius: 20px;
+    background-image: linear-gradient(rgb(221, 220, 220), rgb(241, 241, 241));
 }
 
 .dessert-item-card {
     background-color: var(--desserts-menu-color);
+    border-radius: 20px;
+    background-image: linear-gradient(rgb(221, 220, 220), rgb(241, 241, 241));
 }
 
 #order-history-container {
