@@ -78,7 +78,6 @@ button {
     display: grid;
     margin-left: 0px;
     overflow-x: auto;
-    grid-auto-columns: repeat(auto-fill);
     grid-auto-flow: column;
     grid-gap: 1rem;
     -ms-overflow-style: none;

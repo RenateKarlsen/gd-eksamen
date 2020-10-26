@@ -30,12 +30,32 @@ const handleMenu = (menuButton) => {
 };
 
 const createMenu = (buttonClicked) => {
+    if (mediaQuery.matches && menuSection.querySelector('#menu-header') === null) {
+        const menuHeader = document.createElement("div");
+        const headerName = buttonClicked === "drinks-menu-button" ? "DRIKKER" : "DESSERTER";
+        menuHeader.id = "menu-header";
+        menuHeader.innerHTML = `
+            <button type="button" class="mobile-back-button" id="menu-back-button" onclick="returnToPreviousPage(id)">
+                <i class="fa fa-chevron-left fa-3x"></i>
+            </button>
+            <h3>${headerName}</h3;
+        `;
+        menuSection.insertBefore(menuHeader, menuSection.firstChild);
+    }
+
     const popularItemsMenuHeader = document.createElement("div");
     popularItemsMenuHeader.id = "popular-items-menu-header";
-    popularItemsMenuHeader.innerHTML = `
+
+    if (!mediaQuery.matches) {
+        popularItemsMenuHeader.innerHTML = `
         <img src="images/icons/heart.png" alt="Hjerte" width="30px" height="30px">
         <h3>POPULÆRE</h3>
     `;
+    } else {
+        popularItemsMenuHeader.innerHTML = `
+        <h3>HURTIGKJØP</h3>
+    `;
+    }
     popularItemsMenuContainer.appendChild(popularItemsMenuHeader);
 
     const popularItemsMenu = document.createElement("div");
@@ -46,16 +66,6 @@ const createMenu = (buttonClicked) => {
     mainMenu.id = "main-menu";
     mainMenuContainer.appendChild(mainMenu);
 
-    if (mediaQuery.matches) {
-        const menuHeader = document.createElement("div");
-        const headerName = buttonClicked === "drinks-menu-button" ? "DRIKKER" : "DESSERTER";
-        menuHeader.id = "menu-header";
-        menuHeader.innerHTML = `
-            <h3>${headerName}</h3;
-        `;
-        menuSection.appendChild(menuHeader);
-    }
-
     if (buttonClicked === "drinks-menu-button") {
         renderDrinks();
     } else {
@@ -64,7 +74,6 @@ const createMenu = (buttonClicked) => {
 };
 
 const updateMenu = (buttonClicked) => {
-
     const drinkItemCards = document.getElementsByClassName("drink-item-card");
     const dessertItemCards = document.getElementsByClassName("dessert-item-card");
 
@@ -113,13 +122,21 @@ const renderDrinks = () => {
     removeChildNodes(popularItemsMenu);
     removeChildNodes(mainMenu);
 
-    drinkItems.map(drinkItem => {
-        const drinkMenu = createDrinkItem(drinkItem);
-        if (drinkItem.isDrinkPopular === true) {
-            popularItemsMenu.appendChild(drinkMenu);
-        }
-    });
-
+    if (!mediaQuery.matches) {
+        drinkItems.map(drinkItem => {
+            const drinkMenu = createDrinkItem(drinkItem);
+            if (drinkItem.isDrinkPopular === true) {
+                popularItemsMenu.appendChild(drinkMenu);
+            }
+        });
+    } else {
+        drinkItems.map(drinkItem => {
+            const drinkMenu = createDrinkItem(drinkItem);
+            if (drinkItem.isPurchasedByUserEarlier === true) {
+                popularItemsMenu.appendChild(drinkMenu);
+            }
+        });
+    }
 
     drinkItems.map(drinkItem => {
         const drinkMenu = createDrinkItem(drinkItem);
@@ -150,12 +167,21 @@ const renderDesserts = () => {
     removeChildNodes(popularItemsMenu);
     removeChildNodes(mainMenu);
 
-    dessertItems.map(dessertItem => {
-        const dessertMenu = createDessertItem(dessertItem);
-        if (dessertItem.isDessertPopular === true) {
-            popularItemsMenu.appendChild(dessertMenu);
-        }
-    });
+    if (!mediaQuery.matches) {
+        dessertItems.map(dessertItem => {
+            const dessertMenu = createDessertItem(dessertItem);
+            if (dessertItem.isDessertPopular === true) {
+                popularItemsMenu.appendChild(dessertMenu);
+            }
+        });
+    } else {
+        dessertItems.map(dessertItem => {
+            const dessertMenu = createDessertItem(dessertItem);
+            if (dessertItem.isPurchasedByUserEarlier === true) {
+                popularItemsMenu.appendChild(dessertMenu);
+            }
+        });
+    }
 
     dessertItems.map(dessertItem => {
         const dessertMenu = createDessertItem(dessertItem);
@@ -169,7 +195,7 @@ const removeChildNodes = (container) => {
     while (container.firstChild) {
         container.removeChild(container.lastChild);
     }
-}
+};
 
 const styleMenu = (menu) => {
     const popularItemsMenuHeader = document.getElementById("popular-items-menu-header");
@@ -180,8 +206,10 @@ const styleMenu = (menu) => {
 
     if (mediaQuery.matches) {
         const menuHeader = document.getElementById("menu-header");
+        const menuBackButton = document.getElementById("menu-back-button");
         if (menu === "drink") {
             menuHeader.style.backgroundColor = "var(--drinks-menu-color)";
+            menuBackButton.style.backgroundColor = "none";
         } else if (menu === "dessert") {
             menuHeader.style.backgroundColor = "var(--desserts-menu-color)";
         }
@@ -197,7 +225,6 @@ const styleMenu = (menu) => {
         mainMenu.style.backgroundColor = "var(--desserts-menu-color)";
     }
 };
-
 
 const revealOrderHistorySection = () => {
     const orderHistoryContainer = document.createElement("div");
@@ -254,4 +281,16 @@ const renderActiveUserAccount = () => {
 
 if (!mediaQuery.matches) {
     renderActiveUserAccount();
-}
+};
+
+// MOBILE
+
+const returnToPreviousPage = (button) => {
+    if (button === "menu-back-button") {
+        body.style.margin = "1rem";
+        body.style.height = "98%";
+        html.style.height = "98%";
+        menuSection.style.display = "none";
+        mainNavigationSection.style.display = "grid";
+    }
+};
