@@ -32,8 +32,8 @@ const handleMenu = (menuButton) => {
 const createMenu = (buttonClicked) => {
     if (mediaQuery.matches && menuSection.querySelector('#menu-header') === null) {
         const menuHeader = document.createElement("div");
-        const headerName = buttonClicked === "drinks-menu-button" ? "DRIKKER" : "DESSERTER";
         menuHeader.id = "menu-header";
+        const headerName = buttonClicked === "drinks-menu-button" ? "DRIKKER" : "DESSERTER";
         menuHeader.innerHTML = `
             <button type="button" class="mobile-back-button" id="menu-back-button" onclick="returnToPreviousPage(id)">
                 <i class="fa fa-chevron-left fa-3x"></i>
@@ -48,13 +48,13 @@ const createMenu = (buttonClicked) => {
 
     if (!mediaQuery.matches) {
         popularItemsMenuHeader.innerHTML = `
-        <img src="images/icons/heart.png" alt="Hjerte" width="30px" height="30px">
-        <h3>POPULÆRE</h3>
-    `;
+            <img src="images/icons/heart.png" alt="Hjerte" width="30px" height="30px">
+            <h3>POPULÆRE</h3>
+        `;
     } else {
         popularItemsMenuHeader.innerHTML = `
-        <h3>HURTIGKJØP</h3>
-    `;
+            <h3>HURTIGKJØP</h3>
+        `;
     }
     popularItemsMenuContainer.appendChild(popularItemsMenuHeader);
 
@@ -76,6 +76,17 @@ const createMenu = (buttonClicked) => {
 const updateMenu = (buttonClicked) => {
     const drinkItemCards = document.getElementsByClassName("drink-item-card");
     const dessertItemCards = document.getElementsByClassName("dessert-item-card");
+
+    if (mediaQuery.matches) {
+        const menuHeader = document.getElementById("menu-header");
+        const headerName = buttonClicked === "drinks-menu-button" ? "DRIKKER" : "DESSERTER";
+        menuHeader.innerHTML = `
+            <button type="button" class="mobile-back-button" id="menu-back-button" onclick="returnToPreviousPage(id)">
+                <i class="fa fa-chevron-left fa-3x"></i>
+            </button>
+            <h3>${headerName}</h3;
+        `;
+    }
 
     if (buttonClicked === "drinks-menu-button" && drinkItemCards.length > 0 ||
         buttonClicked === "desserts-menu-button" && dessertItemCards.length > 0) {
