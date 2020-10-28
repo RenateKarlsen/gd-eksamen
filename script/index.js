@@ -271,16 +271,14 @@ menuSection.removeChild(mainMenuContainer);
             let dessertItemIndex = itemIndex - 10;
             optionsMenu.style.backgroundColor = "var(--desserts-menu-color)";
             optionsMenu.innerHTML = `
-            <div id="${dessertItems[dessertItemIndex].dessertName}">
+            <div class="dessertItem" id="${dessertItems[dessertItemIndex].dessertName}">
                 <h4>${dessertItems[dessertItemIndex].dessertName}</h4> 
                 <img id="drinkImg"src=${dessertItems[dessertItemIndex].imagePath} alt=${dessertItems[dessertItemIndex].dessertName}>
+                <h4 id="smallTxt">${dessertItems[dessertItemIndex].price}kr</h4>
             </div>
 
-                <div class="grid-item1">
-            
-                <h4 id="smallTxt">${dessertItems[dessertItemIndex].price}kr</h4>
-                </div>
-
+                
+                
                 <button id="back-btn" onclick="back()"> X </button>`; 
             }
 
@@ -347,6 +345,7 @@ const updatePrice = () => {
     console.log(updatedPrice);
     totalPrice.innerHTML = updatedPrice;
 };
+
 
 
 
