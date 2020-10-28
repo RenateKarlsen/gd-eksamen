@@ -248,21 +248,22 @@ menuSection.removeChild(mainMenuContainer);
                 <img id="drinkImg"src=${drinkItems[itemIndex].imagePath} alt=${drinkItems[itemIndex].drinkName}>
             </div>
 
-                <div id=${drinkPriceSmall} onclick="selectSize()">
+            <div class="drinkSize">
+                <div class ="smallDrink" id=${drinkPriceSmall} onclick="selectSize(); this.onclick=null;">
                 <img  id=${drinkPriceSmall} src="Images/Icons/coffeecup.png">
                 <h4 id=${drinkPriceSmall}>${drinkPriceSmall}kr</h4>
                 </div>
 
-                <div class="grid-item2" onclick="selectSize()">
+                <div class="medDrink" onclick="selectSize(); this.onclick=null;">
                 <img  id=${drinkPriceMedium} src="Images/Icons/coffeecup.png">
                 <h4 id=${drinkPriceMedium}>${drinkPriceMedium}kr</h4>
                 </div>
 
-                <div class="grid-item3" onclick="selectSize()">
+                <div class="largeDrink" onclick="selectSize(); this.onclick=null;">
                 <img id=${drinkPriceLarge} src="Images/Icons/coffeecup.png">
                 <h4 id=${drinkPriceLarge}>${drinkPriceLarge}kr</h4>
                 </div>
-
+            </div>
                 <button id="back-btn" onclick="back()"> X </button>
        `;
 
@@ -295,17 +296,22 @@ const back = () => {
     };
 
 const selectSize = () => {
-    const optionsMenu = document.getElementById("options-menu");;
+
+
+    const optionsMenu = document.getElementById("options-menu");   
      renderExtraOptionsCard();
 
     //RENDERS TOTAL PRICE
     let targetID = event.target.id;
     let price = parseInt (targetID) ;
     totalPrice.innerHTML = price;
+    totalPriceContainer.id = "totalPrice";
     totalPriceContainer.innerHTML = "TOTALT KR: "
     totalPriceContainer.appendChild(totalPrice);
     optionsMenu.appendChild(totalPriceContainer);
 };
+
+
 
 const renderExtraOptionsCard = () => {
     const optionsMenu = document.getElementById("options-menu");
@@ -321,8 +327,11 @@ const renderExtraOptionsCard = () => {
         extraOptionCard.setAttribute("price", extraOptionsObj[key].price);     
     
         extraOptionCard.innerHTML = `
-            <h4 id="extra-option-name-h4">${extraOptionsObj[key].name}</h4>
-            <h4 id="extra-option-price-h4">${extraOptionsObj[key].price}</h4>
+            <div id="test">
+                <img src="">
+                <h4 id="extra-option-name-h4">${extraOptionsObj[key].name}</h4>
+                <h4 id="extra-option-price-h4">${extraOptionsObj[key].price}kr</h4>
+           </div>
         `;
         extraOptionCardContainer.appendChild(extraOptionCard);
         optionsMenu.appendChild(extraOptionCardContainer);
@@ -335,9 +344,11 @@ const updatePrice = () => {
     let extraPrice = parseInt(event.target.getAttribute("price"));
     price = parseInt(totalPrice.innerHTML);
     updatedPrice = price + extraPrice;
-    console.log(updatedPrice)
+    console.log(updatedPrice);
     totalPrice.innerHTML = updatedPrice;
 };
+
+
 
 
 renderActiveUserAccount();
