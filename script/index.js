@@ -325,7 +325,7 @@ const renderExtraOptionsCard = () => {
         extraOptionCard.setAttribute("price", extraOptionsObj[key].price);     
     
         extraOptionCard.innerHTML = `
-            <div id="test">
+            <div id="optionCard">
                 <img src="">
                 <h4 id="extra-option-name-h4">${extraOptionsObj[key].name}</h4>
                 <h4 id="extra-option-price-h4">${extraOptionsObj[key].price}kr</h4>

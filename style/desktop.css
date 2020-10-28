@@ -247,51 +247,57 @@ button {
 .grid-item0{
 
     text-align: center;
-    left:450px;
+    left:425px;
+    margin:10px;
+    height: 200px;
+    width: 150px;
     position: relative;
+    border-radius: 20px;
+    background-image: linear-gradient(rgb(221, 220, 220), rgb(241, 241, 241));
 }
-
 
 
 .smallDrink > img{
     width: 70px;
     height: 70px;
     position: absolute;
-    left:90px;
-    top:85px;
+    left:70px;
+    top:50px;
 }
 
 .smallDrink > h4{
     position: absolute;
     top:150px;
-    left:100px;
+    left:80px;
 }
 
 .medDrink >img {
     width: 100px;
     height: 100px;
     position: absolute;
-    left:320px;
-    top:55px;
+    top:20px;
+    left:60px;
 }
 .medDrink >h4{
     position: absolute;
     top:150px;
-    left:350px;
+    left:80px;
 }
 
 .largeDrink >img {
     width: 120px;
     height: 120px;
     position: absolute;
-    left:560px;
-    top:35px;
+    left:50px;
+    top:5px;
+    
 }
 
 .largeDrink > h4{
     position: absolute;
-    top: 150px;
-    left: 600px;
+    top:150px;
+    left:80px;
+    
 }
 
 
@@ -312,32 +318,32 @@ button {
     top:200px;
     
 }
-/*BORDER ER MIDLERTIDIG*/
+
 .smallDrink, .medDrink, .largeDrink{
     margin: 20px;
     text-align: center;
-    border:2px solid black;
+    border-radius: 20px;
+    background-image: linear-gradient(rgb(221, 220, 220), rgb(241, 241, 241));
     width: 200px;
     height: 200px;
-}
-
-.extra-options-card-container {
-    display: flex;
-    flex-direction: row;
     position: relative;
-    top: 500px;
-    left:-800px;
-    
+    left:-50px;
 }
 
-#test{
+
+
+#optionCard{
     margin:10px;
 }
 
 /*FIX APPEND*/
 #totalPrice{
     position: relative;
-    left:-580px;
+    left:-675px;
+    background-color: var(--drinks-menu-color);
+    background-image: linear-gradient(rgb(221, 220, 220), rgb(241, 241, 241));
+    height: 100px;
+    width: 350px;
 }
 
 .dessertItem{
@@ -345,7 +351,21 @@ button {
     left:380px;
     top:30px;
     text-align: center;
-    border: 2px solid black;
+    background-color: var(--drinks-menu-color);
+    border-radius: 20px;
+    background-image: linear-gradient(rgb(221, 220, 220), rgb(241, 241, 241));
 }
 
+.extra-options-card-container {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: 500px;
+    left:-775px;
+    height: 130px;
+    background-color: var(--drinks-menu-color);
+    border-radius: 20px;
+    background-image: linear-gradient(rgb(221, 220, 220), rgb(241, 241, 241));
+    
+}
 
