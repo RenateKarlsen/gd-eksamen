@@ -239,31 +239,31 @@ menuSection.removeChild(mainMenuContainer);
             let drinkPriceLarge = drinkItems[itemIndex].price.large;
 
             menuSection.style.backgroundColor = "var(--drinks-menu-color)";
+            menuSection.style.padding = "2em";
+            menuSection.style.gridGap = "2em";
             menuSection.innerHTML = `
 
-        <div class="grid-container1">
-                <div class="itemImgAndName">
+                <div class = "itemImgAndName">
                     <h4>${drinkItems[itemIndex].drinkName}</h4> 
                     <img id="drinkImg"src=${drinkItems[itemIndex].imagePath} alt=${drinkItems[itemIndex].drinkName}>
                 </div>
 
-            
-                <div class ="smallDrink" id=${drinkPriceSmall} onclick="selectSize(); this.onclick=null;">
-                <img  id=${drinkPriceSmall} src="Images/Icons/coffeecup.png">
-                <h4 id=${drinkPriceSmall}>${drinkPriceSmall}kr</h4>
-                </div>
+                    <div class="smallDrink" id=${drinkPriceSmall} onclick="selectSize(); this.onclick=null;">
+                    <img  id=${drinkPriceSmall} src="Images/Icons/coffeecup.png">
+                    <h4 id=${drinkPriceSmall}>${drinkPriceSmall}kr</h4>
+                    </div>
 
-                <div class="medDrink" onclick="selectSize(); this.onclick=null;">
-                <img  id=${drinkPriceMedium} src="Images/Icons/coffeecup.png">
-                <h4 id=${drinkPriceMedium}>${drinkPriceMedium}kr</h4>
-                </div>
+                    <div class="medDrink" onclick="selectSize(); this.onclick=null;">
+                    <img  id=${drinkPriceMedium} src="Images/Icons/coffeecup.png">
+                    <h4 id=${drinkPriceMedium}>${drinkPriceMedium}kr</h4>
+                    </div>
 
-                <div class="largeDrink" onclick="selectSize(); this.onclick=null;">
-                <img id=${drinkPriceLarge} src="Images/Icons/coffeecup.png">
-                <h4 id=${drinkPriceLarge}>${drinkPriceLarge}kr</h4>
-                </div>
-            
-        </div>
+                    <div class="largeDrink" onclick="selectSize(); this.onclick=null;">
+                    <img id=${drinkPriceLarge} src="Images/Icons/coffeecup.png">
+                    <h4 id=${drinkPriceLarge}>${drinkPriceLarge}kr</h4>
+                    </div>
+             
+
          
             <button id="back-btn" onclick="back()"> X </button>
        `;
@@ -329,8 +329,8 @@ const renderExtraOptionsCard = () => {
     
         extraOptionCard.innerHTML = `
                 <img src="">
-                <h4 id="extra-option-name-h4">${extraOptionsObj[key].name}</h4>
-                <h4 id="extra-option-price-h4">${extraOptionsObj[key].price}kr</h4>
+                <h4 id="extra-option-name-h4" style="pointer-events:none">${extraOptionsObj[key].name}</h4>
+                <h4 id="extra-option-price-h4" style="pointer-events:none">${extraOptionsObj[key].price}kr</h4>
         `;
         extraOptionCardContainer.appendChild(extraOptionCard);
         menuSection.appendChild(extraOptionCardContainer);
