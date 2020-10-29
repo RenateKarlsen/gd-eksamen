@@ -294,8 +294,6 @@ const back = () => {
     };
 
 const selectSize = () => {
-
-
     const optionsMenu = document.getElementById("options-menu");   
      renderExtraOptionsCard();
 
@@ -325,11 +323,9 @@ const renderExtraOptionsCard = () => {
         extraOptionCard.setAttribute("price", extraOptionsObj[key].price);     
     
         extraOptionCard.innerHTML = `
-            <div id="optionCard">
                 <img src="">
                 <h4 id="extra-option-name-h4">${extraOptionsObj[key].name}</h4>
                 <h4 id="extra-option-price-h4">${extraOptionsObj[key].price}kr</h4>
-           </div>
         `;
         extraOptionCardContainer.appendChild(extraOptionCard);
         optionsMenu.appendChild(extraOptionCardContainer);
@@ -343,7 +339,7 @@ const updatePrice = () => {
     price = parseInt(totalPrice.innerHTML);
     updatedPrice = price + extraPrice;
     console.log(updatedPrice);
-    totalPrice.innerHTML = updatedPrice;
+    totalPrice.innerHTML = parseInt(updatedPrice);
 };
 
 
