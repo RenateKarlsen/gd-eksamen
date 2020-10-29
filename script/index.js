@@ -230,9 +230,6 @@ getIndex();
 //Removes menus so the boxes disappears
 menuSection.removeChild(popularItemsMenuContainer);
 menuSection.removeChild(mainMenuContainer);
-
-        const optionsMenu = document.createElement("div");
-        optionsMenu.id = "options-menu";
         
         // Itemindex lower than 10 = drinks, higher than 10 = desserts.
         if (itemIndex < 10) {
@@ -241,9 +238,9 @@ menuSection.removeChild(mainMenuContainer);
             let drinkPriceMedium = drinkItems[itemIndex].price.medium;
             let drinkPriceLarge = drinkItems[itemIndex].price.large;
 
-            optionsMenu.style.backgroundColor = "var(--drinks-menu-color)";
-            optionsMenu.innerHTML = `
-            <div class="grid-item0">
+            menuSection.style.backgroundColor = "var(--drinks-menu-color)";
+            menuSection.innerHTML = `
+            <div class="itemImgAndName">
                 <h4>${drinkItems[itemIndex].drinkName}</h4> 
                 <img id="drinkImg"src=${drinkItems[itemIndex].imagePath} alt=${drinkItems[itemIndex].drinkName}>
             </div>
@@ -269,8 +266,8 @@ menuSection.removeChild(mainMenuContainer);
 
         } else {
             let dessertItemIndex = itemIndex - 10;
-            optionsMenu.style.backgroundColor = "var(--desserts-menu-color)";
-            optionsMenu.innerHTML = `
+            menuSection.style.backgroundColor = "var(--desserts-menu-color)";
+            menuSection.innerHTML = `
             <div class="dessertItem" id="${dessertItems[dessertItemIndex].dessertName}">
                 <h4>${dessertItems[dessertItemIndex].dessertName}</h4> 
                 <img id="drinkImg"src=${dessertItems[dessertItemIndex].imagePath} alt=${dessertItems[dessertItemIndex].dessertName}>
@@ -282,19 +279,16 @@ menuSection.removeChild(mainMenuContainer);
                 <button id="back-btn" onclick="back()"> X </button>`; 
             }
 
-    menuSection.appendChild(optionsMenu);
 }
 
 // The back button on options menu
 const back = () => {
-    const optionsMenu = document.getElementById("options-menu");
-    menuSection.removeChild(optionsMenu);
+    menuSection.innerHTML = "";
     menuSection.appendChild(popularItemsMenuContainer);
     menuSection.appendChild(mainMenuContainer);
     };
 
-const selectSize = () => {
-    const optionsMenu = document.getElementById("options-menu");   
+const selectSize = () => {   
      renderExtraOptionsCard();
 
     //RENDERS TOTAL PRICE
@@ -304,16 +298,23 @@ const selectSize = () => {
     totalPriceContainer.id = "totalPrice";
     totalPriceContainer.innerHTML = "TOTALT KR: "
     totalPriceContainer.appendChild(totalPrice);
-    optionsMenu.appendChild(totalPriceContainer);
+    menuSection.appendChild(totalPriceContainer);
+
+    //RENDERS CONFIRM ORDER BTN
+    const confirmOrderBtn = document.createElement("button");
+    confirmOrderBtn.className = "confirm-order-btn";
+    confirmOrderBtn.innerHTML = "Legg til i bestilling";
+    confirmOrderBtn.setAttribute("onclick", "addItemToOrder()");
+    menuSection.appendChild(confirmOrderBtn);
+
 };
 
 
 
 const renderExtraOptionsCard = () => {
-    const optionsMenu = document.getElementById("options-menu");
     const extraOptionCardContainer = document.createElement("div");
     // RENDERS EXTRA-OPTIONS-CARD FROM extraOptionsObj (data.js)
-    if (optionsMenu.childNodes.length < 12) {
+    if (menuSection.childNodes.length < 12) {
     Object.keys(extraOptionsObj, extraOptionCardContainer).forEach(key => {
         const extraOptionCard = document.createElement("div");
         extraOptionCardContainer.className = "extra-options-card-container";
@@ -328,7 +329,7 @@ const renderExtraOptionsCard = () => {
                 <h4 id="extra-option-price-h4">${extraOptionsObj[key].price}kr</h4>
         `;
         extraOptionCardContainer.appendChild(extraOptionCard);
-        optionsMenu.appendChild(extraOptionCardContainer);
+        menuSection.appendChild(extraOptionCardContainer);
         });
     };
 };
@@ -342,7 +343,17 @@ const updatePrice = () => {
     totalPrice.innerHTML = parseInt(updatedPrice);
 };
 
-
+const addItemToOrder = () => {
+    //totalPrice.innerHTML = updatedPrice;
+    let updatedPrice = totalPrice.innerHTML;
+    const orderSectionContainer = document.getElementById("order-section");
+    const orderItemCard = document.createElement("div");
+    orderItemCard.id = "order-item-card";
+    orderItemCard.innerHTML = `${updatedPrice}`;
+    orderSectionContainer.appendChild(orderItemCard);
+    console.log(orderItemCard);
+    back();
+}
 
 
 
