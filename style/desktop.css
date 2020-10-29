@@ -209,18 +209,20 @@ button {
 
 .item-card {
     text-align: center;
-    border: 2px solid	#ffffff;
+  /*  border: 2px solid	#ffffff; */
     padding: 10px;
     height: 10em;
     width: 7em;
     color:rgb(102, 102, 102);
-    box-shadow: 0 3px 30px rgba(255, 255, 255, 0.5);
+ /*   box-shadow: 0 3px 30px rgba(255, 255, 255, 0.5); */
 }
 
 .drink-item-card {
     background-color: var(--drinks-menu-color);
     border-radius: 20px;
-    background-image: linear-gradient(#6fada8, #ffffff);
+    background: linear-gradient(#eeeeee, #ffffff);
+    box-shadow: 0 3px 10px #04979765;
+    border: 3px solid	#02b6b6;
 
 }
 
