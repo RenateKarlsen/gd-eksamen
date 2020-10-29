@@ -7,8 +7,8 @@
     #main-wrapper {
         grid-template-columns: 1fr;
         grid-template-rows: repeat(2, 1fr);
-        background-color: thistle;
     }
+
 
     /* START SCREEN */
 
@@ -21,11 +21,14 @@
     #drinks-menu-button {
         width: 100%;
         grid-row: 2 / 3;
+        border-radius: 50px;
     }
 
     #desserts-menu-button {
         width: 100%;
         grid-row: 3 / 4;
+        border-radius: 50px;
+        padding-top: 20px;
     }
 
     /* MENU SCREEN */
@@ -39,7 +42,7 @@
     }
 
     #menu-header{
-        color: white;
+        color: #000000;
         font-size: 30px;
         text-align: center;
     }
@@ -47,7 +50,7 @@
     #popular-items-menu-container {
         grid-column: 1 / 2;
         grid-row: 2 / 3;
-        overflow: scroll;
+
     }
 
     #popular-items-menu {
@@ -55,7 +58,7 @@
     }
 
     #popular-items-menu .item-card {
-        border-radius: 50px;
+        border-radius: 25px;
         width: 100%;
     }
 
@@ -87,7 +90,7 @@
         display: grid;
         grid-template-columns: 1fr 4fr 1fr;
         grid-template-rows: 1fr;
-        border-radius: 50px;
+        border-radius: 25px;
         width: 90%;
         font-size: 15px;
         min-height: 4vh;
@@ -108,7 +111,7 @@
     }
 
     .item-card p {
-        border-radius: 50%;
+        border-radius: 50;
         height: 75%;
     }
 }

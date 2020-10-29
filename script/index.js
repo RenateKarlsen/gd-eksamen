@@ -17,7 +17,7 @@ const handleMenu = (menuButton) => {
         body.style.height = "100%";
         html.style.height = "100%";
     }
-    if (menuSection.querySelector('#order-history-container') !== null) {
+    if (menuSection.querySelector('#order-history- container') !== null) {
         removeChildNodes(menuSection);
         menuSection.appendChild(popularItemsMenuContainer);
         menuSection.appendChild(mainMenuContainer);
@@ -48,7 +48,7 @@ const createMenu = (buttonClicked) => {
 
     if (mediaQuery.matches) {
         const menuHeader = document.createElement("div");
-        const headerName = buttonClicked === "drinks-menu-button" ? "DRIKKER" : "DESSERTER";
+        const headerName = buttonClicked === "drinks-menu-button" ? "DRIKKER" : "DESSERT";
         menuHeader.id = "menu-header";
         menuHeader.innerHTML = `
             <h3>${headerName}</h3;
