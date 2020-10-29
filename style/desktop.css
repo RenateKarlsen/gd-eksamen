@@ -275,59 +275,35 @@ button {
 
   .itemImgAndName { 
       grid-area: itemImgAndName; 
-      background-color: var(--drinks-menu-color);
-      border-radius: 20px;
-      background-image: linear-gradient(rgb(221, 220, 220), rgb(241, 241, 241));
-      text-align: center;
+      
     }
 
   .smallDrink { 
       grid-area: smallDrink;
-      background-color: var(--drinks-menu-color);
-      border-radius: 20px;
-      background-image: linear-gradient(rgb(221, 220, 220), rgb(241, 241, 241));
-      text-align: center;
+      
      }
   .medDrink {
        grid-area: medDrink; 
-       background-color: var(--drinks-menu-color);
-       border-radius: 20px;
-       background-image: linear-gradient(rgb(221, 220, 220), rgb(241, 241, 241));
-       text-align: center;
+       
     }
   .largeDrink { 
       grid-area: largeDrink; 
+      
+    }
+
+    .itemImgAndName, .smallDrink, .medDrink, .largeDrink{
       background-color: var(--drinks-menu-color);
       border-radius: 20px;
       background-image: linear-gradient(rgb(221, 220, 220), rgb(241, 241, 241));
       text-align: center;
     }
 
-  .itemImgAndName > img{
+  .itemImgAndName > img , .smallDrink > img, .medDrink > img, .largeDrink > img{
       width: 100px;
       height: 100px;
       margin:20px;
   }
 
-  .smallDrink > img{
-    width: 100px;
-    height: 100px;
-    margin:20px;
-  }
-
-  .medDrink > img{
-      width: 100px;
-      height: 100px;
-      margin:20px;
-  }
-
-  .largeDrink > img{
-      width: 100px;
-      height: 100px;
-      margin:20px;
-      
-  }
-  
   #back-btn{
     grid-row: 1;
     grid-column: 1;
