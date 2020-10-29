@@ -240,12 +240,14 @@ menuSection.removeChild(mainMenuContainer);
 
             menuSection.style.backgroundColor = "var(--drinks-menu-color)";
             menuSection.innerHTML = `
-            <div class="itemImgAndName">
-                <h4>${drinkItems[itemIndex].drinkName}</h4> 
-                <img id="drinkImg"src=${drinkItems[itemIndex].imagePath} alt=${drinkItems[itemIndex].drinkName}>
-            </div>
 
-            <div class="drinkSize">
+        <div class="grid-container1">
+                <div class="itemImgAndName">
+                    <h4>${drinkItems[itemIndex].drinkName}</h4> 
+                    <img id="drinkImg"src=${drinkItems[itemIndex].imagePath} alt=${drinkItems[itemIndex].drinkName}>
+                </div>
+
+            
                 <div class ="smallDrink" id=${drinkPriceSmall} onclick="selectSize(); this.onclick=null;">
                 <img  id=${drinkPriceSmall} src="Images/Icons/coffeecup.png">
                 <h4 id=${drinkPriceSmall}>${drinkPriceSmall}kr</h4>
@@ -260,8 +262,10 @@ menuSection.removeChild(mainMenuContainer);
                 <img id=${drinkPriceLarge} src="Images/Icons/coffeecup.png">
                 <h4 id=${drinkPriceLarge}>${drinkPriceLarge}kr</h4>
                 </div>
-            </div>
-                <button id="back-btn" onclick="back()"> X </button>
+            
+        </div>
+         
+            <button id="back-btn" onclick="back()"> X </button>
        `;
 
         } else {
