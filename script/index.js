@@ -16,6 +16,20 @@ const handleMenu = (menuButton) => {
         body.style.margin = "0";
         body.style.height = "100%";
         html.style.height = "100%";
+
+        if (menuSection.querySelector('#menu-header') === null) {
+            const menuHeader = document.createElement("div");
+            menuHeader.id = "menu-header";
+            menuSection.insertBefore(menuHeader, menuSection.firstChild);
+        }
+        const menuHeader = document.getElementById("menu-header");
+        const headerName = menuButton === "drinks-menu-button" ? "DRIKKER" : "DESSERTER";
+        menuHeader.innerHTML = `
+            <button type="button" class="mobile-back-button" id="menu-back-button" onclick="returnToPreviousPage(id)">
+                <i class="fa fa-chevron-left fa-3x"></i>
+            </button>
+            <h3>${headerName}</h3;
+        `;
     }
     if (menuSection.querySelector('#order-history-container') !== null) {
         removeChildNodes(menuSection);
@@ -32,10 +46,17 @@ const handleMenu = (menuButton) => {
 const createMenu = (buttonClicked) => {
     const popularItemsMenuHeader = document.createElement("div");
     popularItemsMenuHeader.id = "popular-items-menu-header";
-    popularItemsMenuHeader.innerHTML = `
-        <img src="images/icons/heart.png" alt="Hjerte" width="30px" height="30px">
-        <h3>POPULÆRE</h3>
-    `;
+
+    if (!mediaQuery.matches) {
+        popularItemsMenuHeader.innerHTML = `
+            <img src="images/icons/heart.png" alt="Hjerte" width="30px" height="30px">
+            <h3>POPULÆRE</h3>
+        `;
+    } else {
+        popularItemsMenuHeader.innerHTML = `
+            <h3>HURTIGKJØP</h3>
+        `;
+    }
     popularItemsMenuContainer.appendChild(popularItemsMenuHeader);
 
     const popularItemsMenu = document.createElement("div");
@@ -46,16 +67,6 @@ const createMenu = (buttonClicked) => {
     mainMenu.id = "main-menu";
     mainMenuContainer.appendChild(mainMenu);
 
-    if (mediaQuery.matches) {
-        const menuHeader = document.createElement("div");
-        const headerName = buttonClicked === "drinks-menu-button" ? "DRIKKER" : "DESSERTER";
-        menuHeader.id = "menu-header";
-        menuHeader.innerHTML = `
-            <h3>${headerName}</h3;
-        `;
-        menuSection.appendChild(menuHeader);
-    }
-
     if (buttonClicked === "drinks-menu-button") {
         renderDrinks();
     } else {
@@ -64,7 +75,6 @@ const createMenu = (buttonClicked) => {
 };
 
 const updateMenu = (buttonClicked) => {
-
     const drinkItemCards = document.getElementsByClassName("drink-item-card");
     const dessertItemCards = document.getElementsByClassName("dessert-item-card");
 
@@ -113,13 +123,21 @@ const renderDrinks = () => {
     removeChildNodes(popularItemsMenu);
     removeChildNodes(mainMenu);
 
-    drinkItems.map(drinkItem => {
-        const drinkMenu = createDrinkItem(drinkItem);
-        if (drinkItem.isDrinkPopular === true) {
-            popularItemsMenu.appendChild(drinkMenu);
-        }
-    });
-
+    if (!mediaQuery.matches) {
+        drinkItems.map(drinkItem => {
+            const drinkMenu = createDrinkItem(drinkItem);
+            if (drinkItem.isDrinkPopular === true) {
+                popularItemsMenu.appendChild(drinkMenu);
+            }
+        });
+    } else {
+        drinkItems.map(drinkItem => {
+            const drinkMenu = createDrinkItem(drinkItem);
+            if (drinkItem.isPurchasedByUserEarlier === true) {
+                popularItemsMenu.appendChild(drinkMenu);
+            }
+        });
+    }
 
     drinkItems.map(drinkItem => {
         const drinkMenu = createDrinkItem(drinkItem);
@@ -150,12 +168,21 @@ const renderDesserts = () => {
     removeChildNodes(popularItemsMenu);
     removeChildNodes(mainMenu);
 
-    dessertItems.map(dessertItem => {
-        const dessertMenu = createDessertItem(dessertItem);
-        if (dessertItem.isDessertPopular === true) {
-            popularItemsMenu.appendChild(dessertMenu);
-        }
-    });
+    if (!mediaQuery.matches) {
+        dessertItems.map(dessertItem => {
+            const dessertMenu = createDessertItem(dessertItem);
+            if (dessertItem.isDessertPopular === true) {
+                popularItemsMenu.appendChild(dessertMenu);
+            }
+        });
+    } else {
+        dessertItems.map(dessertItem => {
+            const dessertMenu = createDessertItem(dessertItem);
+            if (dessertItem.isPurchasedByUserEarlier === true) {
+                popularItemsMenu.appendChild(dessertMenu);
+            }
+        });
+    }
 
     dessertItems.map(dessertItem => {
         const dessertMenu = createDessertItem(dessertItem);
@@ -169,7 +196,7 @@ const removeChildNodes = (container) => {
     while (container.firstChild) {
         container.removeChild(container.lastChild);
     }
-}
+};
 
 const styleMenu = (menu) => {
     const popularItemsMenuHeader = document.getElementById("popular-items-menu-header");
@@ -180,8 +207,10 @@ const styleMenu = (menu) => {
 
     if (mediaQuery.matches) {
         const menuHeader = document.getElementById("menu-header");
+        const menuBackButton = document.getElementById("menu-back-button");
         if (menu === "drink") {
             menuHeader.style.backgroundColor = "var(--drinks-menu-color)";
+            menuBackButton.style.backgroundColor = "none";
         } else if (menu === "dessert") {
             menuHeader.style.backgroundColor = "var(--desserts-menu-color)";
         }
@@ -197,7 +226,6 @@ const styleMenu = (menu) => {
         mainMenu.style.backgroundColor = "var(--desserts-menu-color)";
     }
 };
-
 
 const revealOrderHistorySection = () => {
     const orderHistoryContainer = document.createElement("div");
@@ -219,11 +247,99 @@ const revealOrderHistorySection = () => {
 
         orderContainer.id = "order-container";
         menuSection.appendChild(orderContainer);
+
+        renderOrderHistory();
     } else {
         removeChildNodes(menuSection);
         menuSection.appendChild(popularItemsMenuContainer);
         menuSection.appendChild(mainMenuContainer);
     }
+};
+
+const renderOrderHistory = () => {
+    const orderList = document.getElementById("order-list");
+    const completedOrdersReversed = completedOrders.reverse();
+    for (let i = 0; i < completedOrdersReversed.length; i++) {
+        const listedOrder = document.createElement("div");
+        listedOrder.className = "listed-order";
+        listedOrder.setAttribute("onclick", `renderOrder(this, ${completedOrders[i].orderNr})`);
+
+        let items = ``;
+            if (completedOrders[i].items.length === 1) {
+                items = `${completedOrders[i].items[0].name}`;
+            } else if (completedOrders[i].items.length === 2) {
+                items = `${completedOrders[i].items[0].name}, ${completedOrders[i].items[1].name}`;
+            } else {
+                items = `${completedOrders[i].items[0].name}, ${completedOrders[i].items[1].name}...`;
+            }
+
+        listedOrder.innerHTML = `
+             <h3>${completedOrders[i].orderNr}</h3>
+             <div class="listed-order-content">
+                <p>${items.toUpperCase()}</p>
+             </div>
+             <div class="order-pointer"></div>
+         `;
+
+        orderList.appendChild(listedOrder);
+    }
+};
+
+const renderOrder = (orderElement, orderNr) => {
+    styleListedOrders(orderElement);
+    const orderContainer = document.getElementById("order-container");
+    const orderIndex = orderNr - 1;
+    orderContainer.innerHTML = `
+        <div id="order-container-header">
+            <h2>BESTILLING NR.</h2>
+            <h1>${orderNr}</h1>
+        </div>
+        <div id="order-details"></div>
+        <div id="completed-order-total-price">
+            <h2>TOTALT</h2>
+            <h1>KR ${completedOrders[orderIndex].totalPrice}</h1>
+        </div>
+    `;
+
+    const orderDetails = document.getElementById("order-details");
+    for (let i = 0; i < completedOrders[orderIndex].items.length; i++) {
+        const completedOrderItemCard = document.createElement("div");
+        completedOrderItemCard.innerHTML = `
+            <img src=${completedOrders[orderIndex].items[i].imagePath} alt=${completedOrders[orderIndex].items[i].name} width="80" height="80">
+            <h3>${completedOrders[orderIndex].items[i].name.toUpperCase()}</h3>
+            <h2>${completedOrders[orderIndex].items[i].price}</h2>
+        `;
+
+        if (completedOrders[orderIndex].items[i].isDrink === true) {
+            const extrasList = document.createElement("ul");
+                for (let i2 = 0; i2 < completedOrders[orderIndex].items[i].extras.length; i2++) {
+                    extrasList.innerHTML += `<li>${completedOrders[orderIndex].items[i].extras[i2].name.toUpperCase()}</li>`
+            }
+            completedOrderItemCard.appendChild(extrasList);            
+        }
+        orderDetails.appendChild(completedOrderItemCard);
+    }
+};
+
+const styleListedOrders = (orderElement) => {
+    const orderContainer = document.getElementById("order-container");
+    const listedOrders = document.getElementsByClassName("listed-order");
+    const orderPointers = document.getElementsByClassName("order-pointer");
+    const orderElementChildren = orderElement.children;
+
+    for (let i = 0; i < listedOrders.length; i++) {
+        listedOrders[i].children[0].style.backgroundColor = "var(--standard-gray-color)";
+        listedOrders[i].children[1].style.backgroundColor = "var(--standard-gray-color)";
+    }
+
+    for (let i = 0; i < orderPointers.length; i++) {
+        orderPointers[i].style.display = "none";
+    }
+
+    orderContainer.style.backgroundColor = "var(--lighter-gray-color)";
+    orderElementChildren[0].style.backgroundColor = "var(--darker-gray-color)";
+    orderElementChildren[1].style.backgroundColor = "var(--darker-gray-color)";
+    orderElementChildren[2].style.display = "block";
 };
 
 const renderActiveUserAccount = () => {
@@ -254,4 +370,16 @@ const renderActiveUserAccount = () => {
 
 if (!mediaQuery.matches) {
     renderActiveUserAccount();
-}
+};
+
+// MOBILE
+
+const returnToPreviousPage = (button) => {
+    if (button === "menu-back-button") {
+        body.style.margin = "1rem";
+        body.style.height = "98%";
+        html.style.height = "98%";
+        menuSection.style.display = "none";
+        mainNavigationSection.style.display = "grid";
+    }
+};

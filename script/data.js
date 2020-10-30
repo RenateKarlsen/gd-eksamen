@@ -4,6 +4,7 @@ const drinkItems = [
     {
         drinkName: "Americano",
         isDrinkPopular: false,
+        isPurchasedByUserEarlier: false,
         imagePath: "images/stock/americano.png",
         price: {
             small: 28,
@@ -14,6 +15,7 @@ const drinkItems = [
     {
         drinkName: "Caffè Latte",
         isDrinkPopular: true,
+        isPurchasedByUserEarlier: false,
         imagePath: "images/stock/caffee-latte.png",
         price: {
             small: 38,
@@ -24,6 +26,7 @@ const drinkItems = [
     {
         drinkName: "Caffè Mocha",
         isDrinkPopular: false,
+        isPurchasedByUserEarlier: false,
         imagePath: "images/stock/caffee-mocha.png",
         price: {
             small: 32,
@@ -34,6 +37,7 @@ const drinkItems = [
     {
         drinkName: "Cappuccino",
         isDrinkPopular: true,
+        isPurchasedByUserEarlier: false,
         imagePath: "images/stock/cappuccino.png",
         price: {
             small: 36,
@@ -44,6 +48,7 @@ const drinkItems = [
     {
         drinkName: "Caramel Macchiato",
         isDrinkPopular: false,
+        isPurchasedByUserEarlier: true,
         imagePath: "images/stock/caramel-macchiato.png",
         price: {
             small: 38,
@@ -54,6 +59,7 @@ const drinkItems = [
     {
         drinkName: "Cortado",
         isDrinkPopular: false,
+        isPurchasedByUserEarlier: false,
         imagePath: "images/stock/cortado.png",
         price: {
             small: 38,
@@ -64,6 +70,7 @@ const drinkItems = [
     {
         drinkName: "Espresso",
         isDrinkPopular: true,
+        isPurchasedByUserEarlier: false,
         imagePath: "images/stock/espresso.png",
         price: {
             small: 45,
@@ -74,6 +81,7 @@ const drinkItems = [
     {
         drinkName: "Filterkaffe",
         isDrinkPopular: true,
+        isPurchasedByUserEarlier: true,
         imagePath: "images/stock/filterkaffe.png",
         price: {
             small: 34,
@@ -84,6 +92,7 @@ const drinkItems = [
     {
         drinkName: "Iskaffe",
         isDrinkPopular: true,
+        isPurchasedByUserEarlier: true,
         imagePath: "images/stock/iskaffe.png",
         price: {
             small: 36,
@@ -94,6 +103,7 @@ const drinkItems = [
     {
         drinkName: "Iste",
         isDrinkPopular: false,
+        isPurchasedByUserEarlier: false,
         imagePath: "images/stock/iste.png",
         price: {
             small: 38,
@@ -107,42 +117,49 @@ const dessertItems = [
     {
         dessertName: "Brioche",
         isDessertPopular: false,
+        isPurchasedByUserEarlier: false,
         imagePath: "images/stock/brioche.png",
         price: 44,
     },
     {
         dessertName: "Brownies",
         isDessertPopular: true,
+        isPurchasedByUserEarlier: false,
         imagePath: "images/stock/brownies.png",
         price: 54,
     },
     {
         dessertName: "Chiapudding",
         isDessertPopular: false,
+        isPurchasedByUserEarlier: false,
         imagePath: "images/stock/chiapudding.png",
         price: 46,
     },
     {
         dessertName: "Croissant",
         isDessertPopular: true,
+        isPurchasedByUserEarlier: true,
         imagePath: "images/stock/croissant.png",
         price: 38,
     },
     {
         dessertName: "Kanelbolle",
         isDessertPopular: true,
+        isPurchasedByUserEarlier: false,
         imagePath: "images/stock/kanelbolle.png",
         price: 42,
     },
     {
         dessertName: "Oreokake",
         isDessertPopular: true,
+        isPurchasedByUserEarlier: true,
         imagePath: "images/stock/oreokake.png",
         price: 44,
     },
     {
         dessertName: "Scones",
         isDessertPopular: true,
+        isPurchasedByUserEarlier: false,
         imagePath: "images/stock/scones.png",
         price: 37,
     },
@@ -180,3 +197,80 @@ const employees = [
         image: "5.png"
     }
 ];
+
+const completedOrders = [
+    {
+        orderNr: 1,
+        totalPrice: 90,
+        items: [
+            {
+                name: "Caffè Latte",
+                isDrink: true,
+                imagePath: "images/stock/caffee-latte.png",
+                size: "medium",
+                price: 45,
+                extras: [
+                    {
+                        name: "soyamelk",
+                        price: 3
+                    }
+                ]
+            },
+            {
+                name: "Espresso",
+                isDrink: true,
+                imagePath: "images/stock/espresso.png",
+                size: "small",
+                price: 45,
+                extras: []
+            }
+        ]
+    },
+    {
+        orderNr: 2,
+        totalPrice: 133,
+        items: [
+            {
+                name: "Filterkaffe",
+                isDrink: true,
+                imagePath: "images/stock/filterkaffe.png",
+                size: "large",
+                price: 42,
+                extras: []
+            },
+            {
+                name: "Iste",
+                isDrink: true,
+                imagePath: "images/stock/iste.png",
+                size: "large",
+                price: 55,
+                extras: []
+            },
+            {
+                name: "Oreokake",
+                isDrink: false,
+                imagePath: "images/stock/oreokake.png",
+                price: 44
+            }
+        ]
+    },
+    {
+        orderNr: 3,
+        totalPrice: 34,
+        items: [
+            {
+                name: "Filterkaffe",
+                isDrink: true,
+                imagePath: "images/stock/filterkaffe.png",
+                size: "small",
+                price: 34,
+                extras: [
+                    {
+                        name: "kumelk",
+                        price: 0
+                    }
+                ]
+            }
+        ]
+    }
+]
