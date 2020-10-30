@@ -283,7 +283,7 @@ const renderOrderHistory = () => {
 
         orderList.appendChild(listedOrder);
     }
-}
+};
 
 const renderOrder = (orderElement, orderNr) => {
     styleListedOrders(orderElement);
@@ -299,10 +299,27 @@ const renderOrder = (orderElement, orderNr) => {
             <h2>TOTALT</h2>
             <h1>KR ${completedOrders[orderIndex].totalPrice}</h1>
         </div>
-`;
+    `;
 
+    const orderDetails = document.getElementById("order-details");
+    for (let i = 0; i < completedOrders[orderIndex].items.length; i++) {
+        const completedOrderItemCard = document.createElement("div");
+        completedOrderItemCard.innerHTML = `
+            <img src=${completedOrders[orderIndex].items[i].imagePath} alt=${completedOrders[orderIndex].items[i].name} width="80" height="80">
+            <h3>${completedOrders[orderIndex].items[i].name.toUpperCase()}</h3>
+            <h2>${completedOrders[orderIndex].items[i].price}</h2>
+        `;
 
-}
+        if (completedOrders[orderIndex].items[i].isDrink === true) {
+            const extrasList = document.createElement("ul");
+                for (let i2 = 0; i2 < completedOrders[orderIndex].items[i].extras.length; i2++) {
+                    extrasList.innerHTML += `<li>${completedOrders[orderIndex].items[i].extras[i2].name.toUpperCase()}</li>`
+            }
+            completedOrderItemCard.appendChild(extrasList);            
+        }
+        orderDetails.appendChild(completedOrderItemCard);
+    }
+};
 
 const styleListedOrders = (orderElement) => {
     const orderContainer = document.getElementById("order-container");
@@ -323,7 +340,7 @@ const styleListedOrders = (orderElement) => {
     orderElementChildren[0].style.backgroundColor = "var(--darker-gray-color)";
     orderElementChildren[1].style.backgroundColor = "var(--darker-gray-color)";
     orderElementChildren[2].style.display = "block";
-}
+};
 
 const renderActiveUserAccount = () => {
     const userAccountHeader = document.getElementById("user-account-header");

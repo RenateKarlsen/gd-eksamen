@@ -205,6 +205,7 @@ const completedOrders = [
         items: [
             {
                 name: "Caffè Latte",
+                isDrink: true,
                 imagePath: "images/stock/caffee-latte.png",
                 size: "medium",
                 price: 45,
@@ -217,6 +218,7 @@ const completedOrders = [
             },
             {
                 name: "Espresso",
+                isDrink: true,
                 imagePath: "images/stock/espresso.png",
                 size: "small",
                 price: 45,
@@ -230,6 +232,7 @@ const completedOrders = [
         items: [
             {
                 name: "Filterkaffe",
+                isDrink: true,
                 imagePath: "images/stock/filterkaffe.png",
                 size: "large",
                 price: 42,
@@ -237,6 +240,7 @@ const completedOrders = [
             },
             {
                 name: "Iste",
+                isDrink: true,
                 imagePath: "images/stock/iste.png",
                 size: "large",
                 price: 55,
@@ -244,6 +248,7 @@ const completedOrders = [
             },
             {
                 name: "Oreokake",
+                isDrink: false,
                 imagePath: "images/stock/oreokake.png",
                 price: 44
             }
@@ -255,6 +260,7 @@ const completedOrders = [
         items: [
             {
                 name: "Filterkaffe",
+                isDrink: true,
                 imagePath: "images/stock/filterkaffe.png",
                 size: "small",
                 price: 34,
