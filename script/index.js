@@ -210,7 +210,7 @@ const styleMenu = (menu) => {
         const menuBackButton = document.getElementById("menu-back-button");
         if (menu === "drink") {
             menuHeader.style.backgroundColor = "var(--drinks-menu-color)";
-            menuBackButton.style.backgroundColor = "none";
+            menuBackButton.style.backgroundColor = "var(--drinks-menu-color)";
         } else if (menu === "dessert") {
             menuHeader.style.backgroundColor = "var(--desserts-menu-color)";
         }

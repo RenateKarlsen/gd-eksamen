@@ -37,19 +37,25 @@
 
     #menu-section {
         grid-template-columns: 1fr;
-        grid-template-rows: 12% 25% 63%;
+        grid-template-rows: 10% 27% 63%;
         row-gap: 0.2vh;
         grid-column: 1 / 2;
         grid-row: 1 / 3;
     }
 
     #menu-header{
-        display: grid;
-        grid-template-columns: 20% 1fr;
-        grid-template-rows: 1fr;
         color: white;
         font-size: 30px;
         text-align: center;
+    }
+
+    #menu-header button {
+        float: left;
+        height: 100%;
+    }
+
+    #menu-header h3 {
+        margin-right: 2.3rem;
     }
 
     /* INHERITS FROM DESKTOP.CSS:
@@ -62,7 +68,6 @@
     #popular-items-menu-container {
         grid-column: 1 / 2;
         grid-row: 2 / 3;
-        overflow: hidden;
     }
 
     /* INHERITS FROM DESKTOP.CSS:
@@ -75,7 +80,10 @@
     } */
 
     #popular-items-menu {
+        grid-template-columns: repeat(3, 1fr);
         grid-auto-flow: column;
+        grid-gap: 1em;
+        padding-top: 0;
     }
 
     #popular-items-menu-header {
@@ -86,22 +94,39 @@
     }
 
     #popular-items-menu .item-card {
+        display: block;
         text-align: center;
         border-radius: 30px;
         padding: 10px;
-        margin-left: 5px;
-        margin-right: 5px;
-        width: 22vw;
-        max-height: 12vh;
-        min-height: 4vh;
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(3, 1fr);
-        justify-items: center;
+        grid-template-rows: 33% 20% 33%;
+        max-height: 7em;
+        height: 7em;
+        width: 5.5em;
+        border: 0;
+        background-color: transparent;
     }
 
+    #popular-items-menu > .item-card > h4, p {
+        margin: 0;
+        padding: 0;
+        height: 40%;
+    }
+
+    /* .item-card {
+        display: grid;
+        grid-template-columns: 1fr 4fr 1fr;
+        grid-template-rows: 1fr;
+        border-radius: 20px;
+        width: 90%;
+        font-size: 15px;
+        min-height: 4vh;
+        max-height: 4vh;
+        padding: 20px;
+    } */
+
     #popular-items-menu .item-card img{
-        width: 65px;
-        height: 65px;
+
     }
 
     /* INHERITS FROM DESKTOP.CSS:
@@ -146,7 +171,7 @@
         display: grid;
         grid-template-columns: 1fr 4fr 1fr;
         grid-template-rows: 1fr;
-        border-radius: 50px;
+        border-radius: 20px;
         width: 90%;
         font-size: 15px;
         min-height: 4vh;
