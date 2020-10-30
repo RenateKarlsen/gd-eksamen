@@ -197,3 +197,74 @@ const employees = [
         image: "5.png"
     }
 ];
+
+const completedOrders = [
+    {
+        orderNr: 1,
+        totalPrice: 90,
+        items: [
+            {
+                name: "Caffè Latte",
+                imagePath: "images/stock/caffee-latte.png",
+                size: "medium",
+                price: 45,
+                extras: [
+                    {
+                        name: "soyamelk",
+                        price: 3
+                    }
+                ]
+            },
+            {
+                name: "Espresso",
+                imagePath: "images/stock/espresso.png",
+                size: "small",
+                price: 45,
+                extras: []
+            }
+        ]
+    },
+    {
+        orderNr: 2,
+        totalPrice: 133,
+        items: [
+            {
+                name: "Filterkaffe",
+                imagePath: "images/stock/filterkaffe.png",
+                size: "large",
+                price: 42,
+                extras: []
+            },
+            {
+                name: "Iste",
+                imagePath: "images/stock/iste.png",
+                size: "large",
+                price: 55,
+                extras: []
+            },
+            {
+                name: "Oreokake",
+                imagePath: "images/stock/oreokake.png",
+                price: 44
+            }
+        ]
+    },
+    {
+        orderNr: 3,
+        totalPrice: 34,
+        items: [
+            {
+                name: "Filterkaffe",
+                imagePath: "images/stock/filterkaffe.png",
+                size: "small",
+                price: 34,
+                extras: [
+                    {
+                        name: "kumelk",
+                        price: 0
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -247,12 +247,83 @@ const revealOrderHistorySection = () => {
 
         orderContainer.id = "order-container";
         menuSection.appendChild(orderContainer);
+
+        renderOrderHistory();
     } else {
         removeChildNodes(menuSection);
         menuSection.appendChild(popularItemsMenuContainer);
         menuSection.appendChild(mainMenuContainer);
     }
 };
+
+const renderOrderHistory = () => {
+    const orderList = document.getElementById("order-list");
+    const completedOrdersReversed = completedOrders.reverse();
+    for (let i = 0; i < completedOrdersReversed.length; i++) {
+        const listedOrder = document.createElement("div");
+        listedOrder.className = "listed-order";
+        listedOrder.setAttribute("onclick", `renderOrder(this, ${completedOrders[i].orderNr})`);
+
+        let items = ``;
+            if (completedOrders[i].items.length === 1) {
+                items = `${completedOrders[i].items[0].name}`;
+            } else if (completedOrders[i].items.length === 2) {
+                items = `${completedOrders[i].items[0].name}, ${completedOrders[i].items[1].name}`;
+            } else {
+                items = `${completedOrders[i].items[0].name}, ${completedOrders[i].items[1].name}...`;
+            }
+
+        listedOrder.innerHTML = `
+             <h3>${completedOrders[i].orderNr}</h3>
+             <div class="listed-order-content">
+                <p>${items.toUpperCase()}</p>
+             </div>
+             <div class="order-pointer"></div>
+         `;
+
+        orderList.appendChild(listedOrder);
+    }
+}
+
+const renderOrder = (orderElement, orderNr) => {
+    styleListedOrders(orderElement);
+    const orderContainer = document.getElementById("order-container");
+    const orderIndex = orderNr - 1;
+    orderContainer.innerHTML = `
+        <div id="order-container-header">
+            <h2>BESTILLING NR.</h2>
+            <h1>${orderNr}</h1>
+        </div>
+        <div id="order-details"></div>
+        <div id="completed-order-total-price">
+            <h2>TOTALT</h2>
+            <h1>KR ${completedOrders[orderIndex].totalPrice}</h1>
+        </div>
+`;
+
+
+}
+
+const styleListedOrders = (orderElement) => {
+    const orderContainer = document.getElementById("order-container");
+    const listedOrders = document.getElementsByClassName("listed-order");
+    const orderPointers = document.getElementsByClassName("order-pointer");
+    const orderElementChildren = orderElement.children;
+
+    for (let i = 0; i < listedOrders.length; i++) {
+        listedOrders[i].children[0].style.backgroundColor = "var(--standard-gray-color)";
+        listedOrders[i].children[1].style.backgroundColor = "var(--standard-gray-color)";
+    }
+
+    for (let i = 0; i < orderPointers.length; i++) {
+        orderPointers[i].style.display = "none";
+    }
+
+    orderContainer.style.backgroundColor = "var(--lighter-gray-color)";
+    orderElementChildren[0].style.backgroundColor = "var(--darker-gray-color)";
+    orderElementChildren[1].style.backgroundColor = "var(--darker-gray-color)";
+    orderElementChildren[2].style.display = "block";
+}
 
 const renderActiveUserAccount = () => {
     const userAccountHeader = document.getElementById("user-account-header");

@@ -1,4 +1,5 @@
 :root {
+    --standard-gray-color: rgb(150, 150, 150);
     --darker-gray-color: rgb(102, 102, 102);
     --lighter-gray-color: rgb(179, 179, 179);
     --confirm-btn-color: rgb(36, 224, 133);
@@ -202,6 +203,8 @@ button {
     display: grid;
     background-color: var(--lighter-gray-color);
     padding: 20px;
+    padding-right: 17px;
+    grid-gap: 2em;
     grid-template-rows: 100px 1fr;
     grid-column: 1 / 4;
     grid-row: 1 / 7;
@@ -213,14 +216,100 @@ button {
     grid-template-columns: 100px 1fr;
 }
 
-#order-history-container-header h2{
+#order-history-container-header h2 {
     margin: 15px;
     margin-left: 0px;
 }
 
+#order-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(10, 1em);
+    grid-auto-flow: row;
+    grid-gap: 3em;
+}
+
+.listed-order {
+    display: grid;
+    grid-template-columns: 3rem 1fr 1rem;
+    grid-template-rows: 1fr;
+    grid-gap: 0.2em;
+    height: 30px;
+    align-content: center;
+    cursor: pointer;
+}
+
+.order-pointer {
+    display: none;
+    border-style: solid;
+    border-width: 30px 0 30px 30px;
+    border-color: transparent transparent transparent var(--darker-gray-color);
+}
+
+.listed-order p {
+    font-size: 13px;
+}
+
+.listed-order h3, .listed-order-content {
+    background-color: var(--standard-gray-color);
+    padding-left: 1em;
+    position: relative;
+}
+
+.listed-order-content h5 {
+    position: absolute;
+    float: right;
+}
+
+.listed-order h3 {
+
+}
+
 #order-container {
+    display: grid;
     border: 1px solid var(--lighter-gray-color);
+    padding: 20px;
+    grid-gap: 2em;
+    grid-template-rows: 100px 1fr 100px;
     grid-column: 4 / 8;
     grid-row: 1 / 7;
     color: white;
+}
+
+#order-container-header {
+    display: grid;
+    grid-template-columns: 1fr 140px;
+    align-items: center;
+    padding-top: 5px;
+}
+
+#order-container-header h2 {
+    margin: 0;
+    padding: 1em 0.5em 1em 0em;
+    justify-self: end;;
+}
+
+#order-container-header h1 {
+    font-size: 60px;
+    margin: 0;
+    padding-bottom: 0.39em;
+}
+
+#order-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(auto-fill, minmax(100px, 200px));
+    grid-auto-flow: row;
+    grid-gap: 3em;
+
+}
+
+#completed-order-total-price h2 {
+    font-size: 30px;
+    margin: 0px 0px 0px 5px;
+}
+
+#completed-order-total-price h1 {
+    font-size: 50px;
+    margin: 0px 0px 0px 5px;
 }
