@@ -8,7 +8,6 @@
     --desserts-menu-color:#ff9900;
 }
 
-
 html, body {
     height: 98%;
     box-sizing: border-box;
@@ -80,7 +79,6 @@ ul::-webkit-scrollbar {
     grid-row: 2 / 11;
 }
 
-/* STYLE SCROLLBAR */
 ::-webkit-scrollbar {
     width: 15px;
 }

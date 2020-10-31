@@ -9,6 +9,12 @@ const body = document.getElementsByTagName("body")[0];
 const html = document.getElementsByTagName("html")[0];
 const mediaQuery = window.matchMedia("(max-width: 600px)")
 
+mediaQuery.addEventListener("change", (e) => {
+    if (e.matches) {
+    location.reload();
+    }
+});
+
 const handleMenu = (menuButton) => {
     if (mediaQuery.matches) {
         menuSection.style.display = "grid";
