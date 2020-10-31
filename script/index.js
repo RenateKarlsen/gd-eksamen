@@ -258,27 +258,27 @@ const revealOrderHistorySection = () => {
 
 const renderOrderHistory = () => {
     const orderList = document.getElementById("order-list");
-    const completedOrdersReversed = completedOrders.reverse();
-    for (let i = 0; i < completedOrdersReversed.length; i++) {
+    for (let i = 0; i < completedOrders.length; i++) {
         const listedOrder = document.createElement("div");
         listedOrder.className = "listed-order";
         listedOrder.setAttribute("onclick", `renderOrder(this, ${completedOrders[i].orderNr})`);
 
-        let items = ``;
-            if (completedOrders[i].items.length === 1) {
-                items = `${completedOrders[i].items[0].name}`;
-            } else if (completedOrders[i].items.length === 2) {
-                items = `${completedOrders[i].items[0].name}, ${completedOrders[i].items[1].name}`;
-            } else {
-                items = `${completedOrders[i].items[0].name}, ${completedOrders[i].items[1].name}...`;
-            }
+        let item = ``;
+        if (completedOrders[i].items.length === 1) {
+            item = `${completedOrders[i].items[0].name}`;
+        } else {
+            item = `${completedOrders[i].items[0].name} ++`;
+        }
 
         listedOrder.innerHTML = `
-             <h3>${completedOrders[i].orderNr}</h3>
-             <div class="listed-order-content">
-                <p>${items.toUpperCase()}</p>
-             </div>
-             <div class="order-pointer"></div>
+            <div class="ordernr-container">
+                <h3>${completedOrders[i].orderNr}</h3>
+            </div>
+            <div class="listed-order-content">
+                <p>${item.toUpperCase()}</p>
+                <h5>${completedOrders[i].totalPrice},00</h5>
+            </div>
+            <div class="order-pointer"></div>
          `;
 
         orderList.appendChild(listedOrder);
@@ -297,29 +297,66 @@ const renderOrder = (orderElement, orderNr) => {
         <div id="order-details"></div>
         <div id="completed-order-total-price">
             <h2>TOTALT</h2>
-            <h1>KR ${completedOrders[orderIndex].totalPrice}</h1>
+            <h1>KR ${completedOrders[orderIndex].totalPrice},00</h1>
         </div>
     `;
 
     const orderDetails = document.getElementById("order-details");
     for (let i = 0; i < completedOrders[orderIndex].items.length; i++) {
+        const completedOrderItemCardContainer = document.createElement("div");
         const completedOrderItemCard = document.createElement("div");
+        const completedOrderItemCardImgContainer = document.createElement("div");
+        completedOrderItemCardContainer.className = "completed-order-item-card-container";
+        completedOrderItemCard.className = "completed-order-item-card";
+        completedOrderItemCardImgContainer.className = "image-container";
+
+        completedOrderItemCardImgContainer.innerHTML = `
+            <img src=${completedOrders[orderIndex].items[i].imagePath} alt=${completedOrders[orderIndex].items[i].name} width="70" height="70">
+        `;
+        completedOrderItemCardContainer.appendChild(completedOrderItemCardImgContainer);
         completedOrderItemCard.innerHTML = `
-            <img src=${completedOrders[orderIndex].items[i].imagePath} alt=${completedOrders[orderIndex].items[i].name} width="80" height="80">
             <h3>${completedOrders[orderIndex].items[i].name.toUpperCase()}</h3>
-            <h2>${completedOrders[orderIndex].items[i].price}</h2>
+            <h2>${completedOrders[orderIndex].items[i].price},00</h2>
         `;
 
         if (completedOrders[orderIndex].items[i].isDrink === true) {
-            const extrasList = document.createElement("ul");
-                for (let i2 = 0; i2 < completedOrders[orderIndex].items[i].extras.length; i2++) {
-                    extrasList.innerHTML += `<li>${completedOrders[orderIndex].items[i].extras[i2].name.toUpperCase()}</li>`
+            const sizeImagesContainer = document.createElement("div");
+            sizeImagesContainer.className = "size-images-container";
+            if (completedOrders[orderIndex].items[i].size === "small") {
+                sizeImagesContainer.innerHTML += `
+                    <i class="chosenSize fa fa-coffee fa-1x"></i>
+                    <i class="fa fa-coffee fa-2x"></i>
+                    <i class="fa fa-coffee fa-3x"></i>
+                `;
+            } else if (completedOrders[orderIndex].items[i].size === "medium") {
+                sizeImagesContainer.innerHTML += `
+                    <i class="fa fa-coffee fa-1x"></i>
+                    <i class="chosenSize fa fa-coffee fa-2x"></i>
+                    <i class="fa fa-coffee fa-3x"></i>
+                `;
+            } else {
+                sizeImagesContainer.innerHTML += `
+                    <i class="fa fa-coffee fa-1x"></i>
+                    <i class="fa fa-coffee fa-2x"></i>
+                    <i class="chosenSize fa fa-coffee fa-3x"></i>
+                `;
             }
-            completedOrderItemCard.appendChild(extrasList);            
+            completedOrderItemCard.appendChild(sizeImagesContainer);
+            const extrasList = document.createElement("ul");
+            for (let i2 = 0; i2 < completedOrders[orderIndex].items[i].extras.length; i2++) {
+                extrasList.innerHTML += `<li>+ ${completedOrders[orderIndex].items[i].extras[i2].name.toUpperCase()}</li>`
+            }
+            completedOrderItemCard.appendChild(extrasList);
+
+            completedOrderItemCardImgContainer.style.backgroundColor = "var(--drinks-menu-color)";
+            completedOrderItemCard.style.backgroundColor = "var(--drinks-menu-color)";
+            completedOrderItemCard.classList.add("drink-grid");
         }
-        orderDetails.appendChild(completedOrderItemCard);
+        completedOrderItemCardContainer.appendChild(completedOrderItemCard);
+        orderDetails.appendChild(completedOrderItemCardContainer);
     }
 };
+
 
 const styleListedOrders = (orderElement) => {
     const orderContainer = document.getElementById("order-container");
