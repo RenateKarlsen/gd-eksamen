@@ -1,12 +1,13 @@
 :root {
-    --standard-gray-color: rgb(150, 150, 150);
-    --darker-gray-color: rgb(102, 102, 102);
+    --standard-gray-color: #969696;
+    --darker-gray-color: #666666;
     --lighter-gray-color: rgb(179, 179, 179);
     --confirm-btn-color: rgb(36, 224, 133);
     --confirm-btn-active-color: rgb(61, 255, 161);
-    --drinks-menu-color: rgba(215, 199, 230, 0.767);
-    --desserts-menu-color: rgb(224, 177, 216);
+    --drinks-menu-color:   #6a91fc80;
+    --desserts-menu-color: #f8a52986;
 }
+
 
 html, body {
     height: 98%;
@@ -69,12 +70,32 @@ button {
     grid-row: 2 / 11;
 }
 
+/* STYLE SCROLLBAR */
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    box-shadow: inset 0 0 6px #a5a5a54d;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #b3b3b3;   
+    border-radius: 20px;    
+    border: 3px solid #ffffff;  
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
 .menu-button {
     font-size: 25px;
 }
 
 #drinks-menu-button {
-    background-color: var(--drinks-menu-color);
+    background-color: #4569fc;
     grid-column: 1 / 3;
     grid-row: 1 / 3;
 }
@@ -84,7 +105,7 @@ button {
 }
 
 #desserts-menu-button {
-    background-color: var(--desserts-menu-color);
+    background-color: #ff9900;
     grid-column: 1 / 3;
     grid-row: 3 / 5;
 }
@@ -188,15 +209,21 @@ button {
     padding: 10px;
     height: 10em;
     width: 7em;
-    color: white;
+    color: var(--darker-gray-color);
 }
 
 .drink-item-card {
     background-color: var(--drinks-menu-color);
+    border-radius: 20px;
+    background: radial-gradient(circle, #e9e8e8 0%, #ffffff 100%);
+    box-shadow: 0 3px 10px #12359788;
 }
 
 .dessert-item-card {
     background-color: var(--desserts-menu-color);
+    border-radius: 20px;
+    background: radial-gradient(circle, #eeeeee 0%, #ffffff 100%);
+    box-shadow: 0 5px 10px #de421373;
 }
 
 #order-history-container {
