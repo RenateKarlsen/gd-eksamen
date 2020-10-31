@@ -4,8 +4,8 @@
     --lighter-gray-color: rgb(179, 179, 179);
     --confirm-btn-color: rgb(36, 224, 133);
     --confirm-btn-active-color: rgb(61, 255, 161);
-    --drinks-menu-color:   #6a91fc80;
-    --desserts-menu-color: #f8a52986;
+    --drinks-menu-color:   #4569fc;
+    --desserts-menu-color:#ff9900;
 }
 
 
@@ -216,14 +216,14 @@ button {
     background-color: var(--drinks-menu-color);
     border-radius: 20px;
     background: radial-gradient(circle, #e9e8e8 0%, #ffffff 100%);
-    box-shadow: 0 3px 10px #12359788;
+    box-shadow: 0 3px 10px #4e4e4e88;
 }
 
 .dessert-item-card {
     background-color: var(--desserts-menu-color);
     border-radius: 20px;
     background: radial-gradient(circle, #eeeeee 0%, #ffffff 100%);
-    box-shadow: 0 5px 10px #de421373;
+    box-shadow: 0 5px 10px #38383873;
 }
 
 #order-history-container {
