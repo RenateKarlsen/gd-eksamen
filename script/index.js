@@ -9,6 +9,12 @@ const body = document.getElementsByTagName("body")[0];
 const html = document.getElementsByTagName("html")[0];
 const mediaQuery = window.matchMedia("(max-width: 600px)")
 
+mediaQuery.addEventListener("change", (e) => {
+    if (e.matches) {
+    location.reload();
+    }
+});
+
 const handleMenu = (menuButton) => {
     if (mediaQuery.matches) {
         menuSection.style.display = "grid";
@@ -247,11 +253,136 @@ const revealOrderHistorySection = () => {
 
         orderContainer.id = "order-container";
         menuSection.appendChild(orderContainer);
+
+        renderOrderHistory();
     } else {
         removeChildNodes(menuSection);
         menuSection.appendChild(popularItemsMenuContainer);
         menuSection.appendChild(mainMenuContainer);
     }
+};
+
+const renderOrderHistory = () => {
+    const orderList = document.getElementById("order-list");
+    for (let i = 0; i < completedOrders.length; i++) {
+        const listedOrder = document.createElement("div");
+        listedOrder.className = "listed-order";
+        listedOrder.setAttribute("onclick", `renderOrder(this, ${completedOrders[i].orderNr})`);
+
+        let item = ``;
+        if (completedOrders[i].items.length === 1) {
+            item = `${completedOrders[i].items[0].name}`;
+        } else {
+            item = `${completedOrders[i].items[0].name} ++`;
+        }
+
+        listedOrder.innerHTML = `
+            <div class="ordernr-container">
+                <h3>${completedOrders[i].orderNr}</h3>
+            </div>
+            <div class="listed-order-content">
+                <p>${item.toUpperCase()}</p>
+                <h5>${completedOrders[i].totalPrice},00</h5>
+            </div>
+            <div class="order-pointer"></div>
+         `;
+
+        orderList.appendChild(listedOrder);
+    }
+};
+
+const renderOrder = (orderElement, orderNr) => {
+    styleListedOrders(orderElement);
+    const orderContainer = document.getElementById("order-container");
+    const orderIndex = orderNr - 1;
+    orderContainer.innerHTML = `
+        <div id="order-container-header">
+            <h2>BESTILLING NR.</h2>
+            <h1>${orderNr}</h1>
+        </div>
+        <div id="order-details"></div>
+        <div id="completed-order-total-price">
+            <h2>TOTALT</h2>
+            <h1>KR ${completedOrders[orderIndex].totalPrice},00</h1>
+        </div>
+    `;
+
+    const orderDetails = document.getElementById("order-details");
+    for (let i = 0; i < completedOrders[orderIndex].items.length; i++) {
+        const completedOrderItemCardContainer = document.createElement("div");
+        const completedOrderItemCard = document.createElement("div");
+        const completedOrderItemCardImgContainer = document.createElement("div");
+        completedOrderItemCardContainer.className = "completed-order-item-card-container";
+        completedOrderItemCard.className = "completed-order-item-card";
+        completedOrderItemCardImgContainer.className = "image-container";
+
+        completedOrderItemCardImgContainer.innerHTML = `
+            <img src=${completedOrders[orderIndex].items[i].imagePath} alt=${completedOrders[orderIndex].items[i].name} width="70" height="70">
+        `;
+        completedOrderItemCardContainer.appendChild(completedOrderItemCardImgContainer);
+        completedOrderItemCard.innerHTML = `
+            <h3>${completedOrders[orderIndex].items[i].name.toUpperCase()}</h3>
+            <h2>${completedOrders[orderIndex].items[i].price},00</h2>
+        `;
+
+        if (completedOrders[orderIndex].items[i].isDrink === true) {
+            const sizeImagesContainer = document.createElement("div");
+            sizeImagesContainer.className = "size-images-container";
+            if (completedOrders[orderIndex].items[i].size === "small") {
+                sizeImagesContainer.innerHTML += `
+                    <i class="chosenSize fa fa-coffee fa-1x"></i>
+                    <i class="fa fa-coffee fa-2x"></i>
+                    <i class="fa fa-coffee fa-3x"></i>
+                `;
+            } else if (completedOrders[orderIndex].items[i].size === "medium") {
+                sizeImagesContainer.innerHTML += `
+                    <i class="fa fa-coffee fa-1x"></i>
+                    <i class="chosenSize fa fa-coffee fa-2x"></i>
+                    <i class="fa fa-coffee fa-3x"></i>
+                `;
+            } else {
+                sizeImagesContainer.innerHTML += `
+                    <i class="fa fa-coffee fa-1x"></i>
+                    <i class="fa fa-coffee fa-2x"></i>
+                    <i class="chosenSize fa fa-coffee fa-3x"></i>
+                `;
+            }
+            completedOrderItemCard.appendChild(sizeImagesContainer);
+            const extrasList = document.createElement("ul");
+            for (let i2 = 0; i2 < completedOrders[orderIndex].items[i].extras.length; i2++) {
+                extrasList.innerHTML += `<li>+ ${completedOrders[orderIndex].items[i].extras[i2].name.toUpperCase()}</li>`
+            }
+            completedOrderItemCard.appendChild(extrasList);
+
+            completedOrderItemCardImgContainer.style.backgroundColor = "var(--drinks-menu-color)";
+            completedOrderItemCard.style.backgroundColor = "var(--drinks-menu-color)";
+            completedOrderItemCard.classList.add("drink-grid");
+        }
+        completedOrderItemCardContainer.appendChild(completedOrderItemCard);
+        orderDetails.appendChild(completedOrderItemCardContainer);
+    }
+};
+
+
+const styleListedOrders = (orderElement) => {
+    const orderContainer = document.getElementById("order-container");
+    const listedOrders = document.getElementsByClassName("listed-order");
+    const orderPointers = document.getElementsByClassName("order-pointer");
+    const orderElementChildren = orderElement.children;
+
+    for (let i = 0; i < listedOrders.length; i++) {
+        listedOrders[i].children[0].style.backgroundColor = "var(--standard-gray-color)";
+        listedOrders[i].children[1].style.backgroundColor = "var(--standard-gray-color)";
+    }
+
+    for (let i = 0; i < orderPointers.length; i++) {
+        orderPointers[i].style.display = "none";
+    }
+
+    orderContainer.style.backgroundColor = "var(--lighter-gray-color)";
+    orderElementChildren[0].style.backgroundColor = "var(--darker-gray-color)";
+    orderElementChildren[1].style.backgroundColor = "var(--darker-gray-color)";
+    orderElementChildren[2].style.display = "block";
 };
 
 const renderActiveUserAccount = () => {

@@ -197,3 +197,134 @@ const employees = [
         image: "5.png"
     }
 ];
+
+const completedOrders = [
+    {
+        orderNr: 1,
+        totalPrice: 82,
+        items: [
+            {
+                name: "Caffè Latte",
+                isDrink: true,
+                imagePath: "images/stock/caffee-latte.png",
+                size: "medium",
+                price: 48,
+                extras: [
+                    {
+                        name: "kumelk",
+                        price: 0
+                    },
+                    {
+                        name: "krem",
+                        price: 4
+                    }
+                ]
+            },
+            {
+                name: "Espresso",
+                isDrink: true,
+                imagePath: "images/stock/espresso.png",
+                size: "small",
+                price: 34,
+                extras: []
+            }
+        ]
+    },
+    {
+        orderNr: 2,
+        totalPrice: 127,
+        items: [
+            {
+                name: "Filterkaffe",
+                isDrink: true,
+                imagePath: "images/stock/filterkaffe.png",
+                size: "large",
+                price: 36,
+                extras: []
+            },
+            {
+                name: "Iste",
+                isDrink: true,
+                imagePath: "images/stock/iste.png",
+                size: "medium",
+                price: 47,
+                extras: []
+            },
+            {
+                name: "Oreokake",
+                isDrink: false,
+                imagePath: "images/stock/oreokake.png",
+                price: 44
+            }
+        ]
+    },
+    {
+        orderNr: 3,
+        totalPrice: 34,
+        items: [
+            {
+                name: "Filterkaffe",
+                isDrink: true,
+                imagePath: "images/stock/filterkaffe.png",
+                size: "small",
+                price: 34,
+                extras: [
+                    {
+                        name: "kumelk",
+                        price: 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        orderNr: 4,
+        totalPrice: 157,
+        items: [
+            {
+                name: "Caramel Macchiato",
+                isDrink: true,
+                imagePath: "images/stock/caramel-macchiato.png",
+                size: "medium",
+                price: 55,
+                extras: [
+                    {
+                        name: "soyamelk",
+                        price: 3
+                    },
+                    {
+                        name: "krem",
+                        price: 4
+                    }
+                ]
+            },
+            {
+                name: "Filterkaffe",
+                isDrink: true,
+                imagePath: "images/stock/filterkaffe.png",
+                size: "large",
+                price: 36,
+                extras: []
+            },
+            {
+                name: "Filterkaffe",
+                isDrink: true,
+                imagePath: "images/stock/filterkaffe.png",
+                size: "small",
+                price: 28,
+                extras: [
+                    {
+                        name: "kumelk",
+                        price: 0
+                    }
+                ]
+            },
+            {
+                name: "Croissant",
+                isDrink: false,
+                imagePath: "images/stock/croissant.png",
+                price: 38
+            }
+        ]
+    }
+]
