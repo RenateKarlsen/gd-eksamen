@@ -328,3 +328,11 @@ const completedOrders = [
         ]
     }
 ]
+const extraOptionsObj = [
+    {name: "ESPRESSO",       price: 6}, 
+    {name: "KUMELK",         price: 0},
+    {name: "SOYAMELK",       price: 3},
+    {name: "VANILJESIRUP",   price: 3},
+    {name: "SJOKOLADESIRUP", price: 3},
+    {name: "KREM",           price: 4}
+];
