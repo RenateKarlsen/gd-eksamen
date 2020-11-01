@@ -32,7 +32,7 @@ const handleMenu = (menuButton) => {
         const headerName = menuButton === "drinks-menu-button" ? "DRIKKER" : "DESSERTER";
         menuHeader.innerHTML = `
             <button type="button" class="mobile-back-button" id="menu-back-button" onclick="returnToPreviousPage(id)">
-                <i class="fa fa-arrow-circle-left fa-4x"></i>
+                <i class="fa fa-angle-left fa-4x"></i>
             </button>
             <h3>${headerName}</h3;
         `;

@@ -140,7 +140,7 @@ ul::-webkit-scrollbar {
 
 /* MENU BACK BUTTON*/ 
 .mobile-back-button {
-    background-color: var(--drinks-menu-color);
+    background-color: transparent;
 }
 
 #menu-section {
