@@ -362,7 +362,7 @@ ul::-webkit-scrollbar {
     margin: 0px 0px 0px 5px;
 }
 
-.chosenSize {
+.notChosen {
     color: var(--standard-gray-color);
 }
 

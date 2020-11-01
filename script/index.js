@@ -331,19 +331,19 @@ const renderOrder = (orderElement, orderNr) => {
             if (completedOrders[orderIndex].items[i].size === "small") {
                 sizeImagesContainer.innerHTML += `
                     <i class="chosenSize fa fa-coffee fa-1x"></i>
-                    <i class="fa fa-coffee fa-2x"></i>
-                    <i class="fa fa-coffee fa-3x"></i>
+                    <i class="notChosen fa fa-coffee fa-2x"></i>
+                    <i class="notChosen fa fa-coffee fa-3x"></i>
                 `;
             } else if (completedOrders[orderIndex].items[i].size === "medium") {
                 sizeImagesContainer.innerHTML += `
-                    <i class="fa fa-coffee fa-1x"></i>
+                    <i class="noChosen fa fa-coffee fa-1x"></i>
                     <i class="chosenSize fa fa-coffee fa-2x"></i>
-                    <i class="fa fa-coffee fa-3x"></i>
+                    <i class="notChosen fa fa-coffee fa-3x"></i>
                 `;
             } else {
                 sizeImagesContainer.innerHTML += `
-                    <i class="fa fa-coffee fa-1x"></i>
-                    <i class="fa fa-coffee fa-2x"></i>
+                    <i class="notChosen fa fa-coffee fa-1x"></i>
+                    <i class="notChosen fa fa-coffee fa-2x"></i>
                     <i class="chosenSize fa fa-coffee fa-3x"></i>
                 `;
             }
