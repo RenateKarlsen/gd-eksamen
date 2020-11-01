@@ -336,7 +336,7 @@ const renderOrder = (orderElement, orderNr) => {
                 `;
             } else if (completedOrders[orderIndex].items[i].size === "medium") {
                 sizeImagesContainer.innerHTML += `
-                    <i class="noChosen fa fa-coffee fa-1x"></i>
+                    <i class="notChosen fa fa-coffee fa-1x"></i>
                     <i class="chosenSize fa fa-coffee fa-2x"></i>
                     <i class="notChosen fa fa-coffee fa-3x"></i>
                 `;

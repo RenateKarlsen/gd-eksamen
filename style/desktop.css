@@ -379,6 +379,7 @@ ul::-webkit-scrollbar {
     height: 100%;
     box-shadow: 0 5px 10px #38383873;
     border-radius: 5px;
+    
 }
 
 .image-container img {
