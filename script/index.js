@@ -1,4 +1,3 @@
-// DOM
 const menuSection = document.getElementById("menu-section");
 const popularItemsMenuContainer = document.getElementById("popular-items-menu-container");
 const mainMenuContainer = document.getElementById("main-menu-container");
@@ -9,7 +8,7 @@ const body = document.getElementsByTagName("body")[0];
 const html = document.getElementsByTagName("html")[0];
 const main = document.getElementsByTagName("main");
 const totalPriceContainer = document.createElement("div");
-const totalPrice = document.createElement("h4");
+const totalPrice = document.createElement("h2");
 const mediaQuery = window.matchMedia("(max-width: 600px)")
 
 mediaQuery.addEventListener("change", (e) => {
@@ -103,20 +102,23 @@ const updateMenu = (buttonClicked) => {
 };
 
 // CREATES DRINK ITEMS
-const createDrinkItem = (drinkItem) => {
+const createDrinkItem = (drinkItem, id) => {
+    const index = id - 1;
     const drinkItemCard = document.createElement("div");
     drinkItemCard.className = "item-card drink-item-card";
+    drinkItemCard.id = `item-card-${drinkItem.name}`;
+    drinkItemCard.setAttribute("onclick", `renderOptions(${index})`);
 
     if (mediaQuery.matches) {
         drinkItemCard.innerHTML = `
-            <img src=${drinkItem.imagePath} alt=${drinkItem.drinkName} width="70" height="70"> 
-            <h4>${drinkItem.drinkName.toUpperCase()}</h4>
+            <img src=${drinkItem.imagePath} alt=${drinkItem.name} width="70" height="70"> 
+            <h4>${drinkItem.name.toUpperCase()}</h4>
             <p>fra<br>kr ${drinkItem.price.small}</p>
         `;
     } else {
         drinkItemCard.innerHTML = `
-            <img src=${drinkItem.imagePath} alt=${drinkItem.drinkName} width="70" height="70"> 
-            <h4>${drinkItem.drinkName.toUpperCase()}</h4>
+            <img src=${drinkItem.imagePath} alt=${drinkItem.name} width="70" height="70"> 
+            <h4>${drinkItem.name.toUpperCase()}</h4>
             <p>${drinkItem.price.small}, ${drinkItem.price.medium}, ${drinkItem.price.large}</p>
         `;
     }
@@ -132,39 +134,44 @@ const renderDrinks = () => {
     removeChildNodes(popularItemsMenu);
     removeChildNodes(mainMenu);
 
+    let i = 0;
+    drinkItems.map(drinkItem => {
+        i++;
+        const drinkMenu = createDrinkItem(drinkItem, i);
+        mainMenu.appendChild(drinkMenu);
+    });
+
+    let i2 = 0;
     if (!mediaQuery.matches) {
         drinkItems.map(drinkItem => {
-            const drinkMenu = createDrinkItem(drinkItem);
+            i2++;
+            const drinkMenu = createDrinkItem(drinkItem, i2);
             if (drinkItem.isDrinkPopular === true) {
                 popularItemsMenu.appendChild(drinkMenu);
             }
         });
     } else {
+        let i3 = 0;
         drinkItems.map(drinkItem => {
-            const drinkMenu = createDrinkItem(drinkItem);
+            i3++;
+            const drinkMenu = createDrinkItem(drinkItem, i3);
             if (drinkItem.isPurchasedByUserEarlier === true) {
                 popularItemsMenu.appendChild(drinkMenu);
             }
         });
     }
-
-    drinkItems.map(drinkItem => {
-        const drinkMenu = createDrinkItem(drinkItem);
-        mainMenu.appendChild(drinkMenu);
-    });
-
     styleMenu("drink");
 };
 
 // CREATES DESSERT ITEMS
-const createDessertItem = (dessertItem) => {
+const createDessertItem = (dessertItem, id) => {
+    const index = id - 1;
     const dessertItemCard = document.createElement("div");
     dessertItemCard.className = "item-card dessert-item-card";
-    dessertItemCard.alt = dessertItem.dessertName;
-    dessertItemCard.setAttribute("onclick", "renderOptions()");
+    dessertItemCard.setAttribute("onclick", `addItemToOrder(${index}, false, null)`);
     dessertItemCard.innerHTML = `
-        <img src=${dessertItem.imagePath} alt=${dessertItem.dessertName} width="80" height="80"> 
-        <h4>${dessertItem.dessertName.toUpperCase()}</h4>
+        <img src=${dessertItem.imagePath} alt=${dessertItem.name} width="80" height="80"> 
+        <h4>${dessertItem.name.toUpperCase()}</h4>
         <p>kr ${dessertItem.price}</p>
     `;
 
@@ -179,26 +186,32 @@ const renderDesserts = () => {
     removeChildNodes(popularItemsMenu);
     removeChildNodes(mainMenu);
 
+    let i = 0;
+    dessertItems.map(dessertItem => {
+        i++;
+        const dessertMenu = createDessertItem(dessertItem, i);
+        mainMenu.appendChild(dessertMenu);
+    });
+
+    let i2 = 0;
     if (!mediaQuery.matches) {
+        i2++;
         dessertItems.map(dessertItem => {
-            const dessertMenu = createDessertItem(dessertItem);
+            const dessertMenu = createDessertItem(dessertItem, i2);
             if (dessertItem.isDessertPopular === true) {
                 popularItemsMenu.appendChild(dessertMenu);
             }
         });
     } else {
+        let i3 = 0;
         dessertItems.map(dessertItem => {
-            const dessertMenu = createDessertItem(dessertItem);
+            i3++;
+            const dessertMenu = createDessertItem(dessertItem, i3);
             if (dessertItem.isPurchasedByUserEarlier === true) {
                 popularItemsMenu.appendChild(dessertMenu);
             }
         });
     }
-
-    dessertItems.map(dessertItem => {
-        const dessertMenu = createDessertItem(dessertItem);
-        mainMenu.appendChild(dessertMenu);
-    });
 
     styleMenu("dessert");
 };
@@ -333,13 +346,13 @@ const renderOrder = (orderElement, orderNr) => {
         if (completedOrders[orderIndex].items[i].isDrink === true) {
             const sizeImagesContainer = document.createElement("div");
             sizeImagesContainer.className = "size-images-container";
-            if (completedOrders[orderIndex].items[i].size === "small") {
+            if (completedOrders[orderIndex].items[i].size === 1) {
                 sizeImagesContainer.innerHTML += `
                     <i class="chosenSize fa fa-coffee fa-1x"></i>
                     <i class="fa fa-coffee fa-2x"></i>
                     <i class="fa fa-coffee fa-3x"></i>
                 `;
-            } else if (completedOrders[orderIndex].items[i].size === "medium") {
+            } else if (completedOrders[orderIndex].items[i].size === 2) {
                 sizeImagesContainer.innerHTML += `
                     <i class="fa fa-coffee fa-1x"></i>
                     <i class="chosenSize fa fa-coffee fa-2x"></i>
@@ -416,55 +429,41 @@ const renderActiveUserAccount = () => {
     })
 };
 
-const renderOptions = () => {
-    //Gets index based on name from alt-text (getIndex.js) - kinda jalla but it works!
-    getIndex();
-
+const renderOptions = (index) => {
     //Removes menus so the boxes disappears
     menuSection.removeChild(popularItemsMenuContainer);
     menuSection.removeChild(mainMenuContainer);
 
-    // Itemindex lower than 10 = drinks, higher than 10 = desserts.
-    if (itemIndex < 10) {
-        let drinkPriceSmall = drinkItems[itemIndex].price.small;
-        let drinkPriceMedium = drinkItems[itemIndex].price.medium;
-        let drinkPriceLarge = drinkItems[itemIndex].price.large;
+    let drinkPriceSmall = drinkItems[index].price.small;
+    let drinkPriceMedium = drinkItems[index].price.medium;
+    let drinkPriceLarge = drinkItems[index].price.large;
 
-        menuSection.style.backgroundColor = "var(--drinks-menu-color)";
-        menuSection.style.padding = "2em";
-        menuSection.style.gridGap = "2em";
-        menuSection.innerHTML = `
-            <div class = "itemImgAndName">
-                <h4>${drinkItems[itemIndex].drinkName}</h4> 
-                <img id="drinkImg"src=${drinkItems[itemIndex].imagePath} alt=${drinkItems[itemIndex].drinkName}>
+    menuSection.style.backgroundColor = "var(--drinks-menu-color)";
+    menuSection.style.padding = "2em";
+    menuSection.style.gridGap = "1em";
+    menuSection.style.gridTemplateColumns = "repeat(7, 1fr)";
+    menuSection.innerHTML = `
+            <div class ="item-img-and-name">
+                <h1>${drinkItems[index].name.toUpperCase()}</h1> 
+                <img id="drinkImg"src=${drinkItems[index].imagePath} alt=${drinkItems[index].name}>
             </div>
-            <div class="smallDrink" id=${drinkPriceSmall} onclick="selectSize(); this.onclick=null;">
-                <img  id=${drinkPriceSmall} src="Images/Icons/coffeecup.png">
-                <h4 id=${drinkPriceSmall}>${drinkPriceSmall}kr</h4>
+            <div class="drink-size small-drink" id=${drinkPriceSmall} onclick="selectSize(this, ${index}, ${drinkPriceSmall}, 1)">
+                <h3>LITEN</h3>
+                <i class="fa fa-coffee fa-2x"></i>
+                <h4>KR ${drinkPriceSmall}</h4>
             </div>
-            <div class="medDrink" onclick="selectSize(); this.onclick=null;">
-                <img  id=${drinkPriceMedium} src="Images/Icons/coffeecup.png">
-                <h4 id=${drinkPriceMedium}>${drinkPriceMedium}kr</h4>
+            <div class="drink-size medium-drink" onclick="selectSize(this, ${index}, ${drinkPriceMedium}, 2)">
+                <h3>MEDIUM</h3>
+                <i class="fa fa-coffee fa-3x"></i>
+                <h4>KR ${drinkPriceMedium}</h4>
             </div>
-            <div class="largeDrink" onclick="selectSize(); this.onclick=null;">
-                <img id=${drinkPriceLarge} src="Images/Icons/coffeecup.png">
-                <h4 id=${drinkPriceLarge}>${drinkPriceLarge}kr</h4>
+            <div class="drink-size large-drink" onclick="selectSize(this, ${index}, ${drinkPriceLarge}, 3">
+                <h3>STOR</h3>
+                <i class="fa fa-coffee fa-4x"></i>
+                <h4>KR ${drinkPriceLarge}</h4>
             </div>
-            <button id="back-btn" onclick="back()"> X </button>
+            <button id="back-btn" onclick="back()"><i class="fa fa-arrow-left fa-4x"></i></button>
        `;
-
-    } else {
-        let dessertItemIndex = itemIndex - 10;
-        menuSection.style.backgroundColor = "var(--desserts-menu-color)";
-        menuSection.innerHTML = `
-            <div class="dessertItem" id="${dessertItems[dessertItemIndex].dessertName}">
-                <h4>${dessertItems[dessertItemIndex].dessertName}</h4> 
-                <img id="drinkImg"src=${dessertItems[dessertItemIndex].imagePath} alt=${dessertItems[dessertItemIndex].dessertName}>
-                <h4 id="smallTxt">${dessertItems[dessertItemIndex].price}kr</h4>
-            </div>
-            <button id="back-btn" onclick="back()"> X </button>
-        `;
-    }
 };
 
 // The back button on options menu
@@ -472,45 +471,51 @@ const back = () => {
     menuSection.innerHTML = "";
     menuSection.appendChild(popularItemsMenuContainer);
     menuSection.appendChild(mainMenuContainer);
+    menuSection.style.backgroundColor = "transparent";
+    menuSection.style.padding = "0";
+    menuSection.style.gridGap = "1rem";
+    menuSection.style.gridTemplateColumns = "repeat(8, 1fr)";
 };
 
-const selectSize = () => {
-    renderExtraOptionsCard();
-
-    //RENDERS TOTAL PRICE
-    let targetID = event.target.id;
-    let price = parseInt(targetID);
-    totalPrice.innerHTML = price;
-    totalPriceContainer.id = "total-price";
-    totalPriceContainer.innerHTML = "TOTALT KR: "
-    totalPriceContainer.appendChild(totalPrice);
-    menuSection.appendChild(totalPriceContainer);
+const selectSize = (sizeElement, index, price, size) => {
+    renderExtraOptionsCard(index, price);
+    updatePrice(price, null, null);
 
     //RENDERS CONFIRM ORDER BTN
     const confirmOrderBtn = document.createElement("button");
     confirmOrderBtn.className = "confirm-order-btn";
-    confirmOrderBtn.innerHTML = "Legg til i bestilling";
-    confirmOrderBtn.setAttribute("onclick", "addItemToOrder()");
+    confirmOrderBtn.innerHTML = "LEGG TIL I BESTILLING";
+    confirmOrderBtn.setAttribute("onclick", `addItemToOrder(${index}, true, ${size})`);
     menuSection.appendChild(confirmOrderBtn);
 
+    const drinkSizeElements = document.getElementsByClassName("drink-size");
+    for (element of drinkSizeElements) {
+        element.style.backgroundColor = "var(--drinks-menu-color)";
+        element.style.color = "#ffffff";
+    }
+    sizeElement.style.backgroundColor = "#ffffff";
+    sizeElement.style.color = "var(--drinks-menu-color)";
 };
 
-const renderExtraOptionsCard = () => {
+const renderExtraOptionsCard = (index, price) => {
     const extraOptionCardContainer = document.createElement("div");
     // RENDERS EXTRA-OPTIONS-CARD FROM extraOptionsObj (data.js)
+
+    let i = 0;
     if (menuSection.childNodes.length < 12) {
         Object.keys(extraOptionsObj, extraOptionCardContainer).forEach(key => {
+            i++;
+            const extraPrice = extraOptionsObj[key].price;
             const extraOptionCard = document.createElement("div");
             extraOptionCardContainer.className = "extra-options-card-container";
             extraOptionCard.className = "extra-option-card";
-            extraOptionCard.id = extraOptionsObj[key].name;
-            extraOptionCard.setAttribute("onclick", "updatePrice()");
-            extraOptionCard.setAttribute("price", extraOptionsObj[key].price);
+            extraOptionCard.id = `extra-option-card-${extraOptionsObj[key].name}`;
+            extraOptionCard.setAttribute("onclick", `updatePrice(${price}, ${extraPrice}, this)`);
 
             extraOptionCard.innerHTML = `
-                <img src="">
-                <h4 id="extra-option-name-h4" style="pointer-events:none">${extraOptionsObj[key].name}</h4>
-                <h4 id="extra-option-price-h4" style="pointer-events:none">${extraOptionsObj[key].price}kr</h4>
+                <img src="images/icons/${extraOptionsObj[key].image}" alt="${extraOptionsObj[key].name}" width="30px" height="30px">
+                <h4 id="extra-option-name-h4">${extraOptionsObj[key].name.toUpperCase()}</h4>
+                <h4 id="extra-option-price-h4">KR ${extraOptionsObj[key].price}</h4>
             `;
             extraOptionCardContainer.appendChild(extraOptionCard);
             menuSection.appendChild(extraOptionCardContainer);
@@ -518,23 +523,72 @@ const renderExtraOptionsCard = () => {
     };
 };
 
-const updatePrice = () => {
-    let extraPrice = parseInt(event.target.getAttribute("price"));
-    price = parseInt(totalPrice.innerHTML);
-    updatedPrice = price + extraPrice;
-    console.log(updatedPrice);
-    totalPrice.innerHTML = parseInt(updatedPrice);
+const updatePrice = (oldPrice, extraPrice, extrasElement) => {
+    totalPriceContainer.id = "total-price-container";
+    totalPrice.id = "total-price";
+    totalPriceContainer.innerHTML = `
+        <h3>TOTALT KR </h3>
+    `;
+
+    totalPrice.innerHTML = oldPrice;
+    totalPriceContainer.appendChild(totalPrice);
+    menuSection.appendChild(totalPriceContainer);
+
+    if (extrasElement !== null) {
+        let updatedPrice = oldPrice + extraPrice;
+
+        if (extrasElement.style.backgroundColor === "") {
+
+            extrasElement.style.backgroundColor = "#ffffff";
+            extrasElement.style.color = "var(--drinks-menu-color)";
+        } else {
+            updatedPrice = updatedPrice - extraPrice
+
+            extrasElement.style.backgroundColor = "";
+            extrasElement.style.color = "#ffffff";
+        }
+        totalPrice.innerHTML = updatedPrice;
+    }
 };
 
-const addItemToOrder = () => {
-    //totalPrice.innerHTML = updatedPrice;
-    let updatedPrice = totalPrice.innerHTML;
+const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
     const orderSectionContainer = document.getElementById("order-section");
     const orderItemCard = document.createElement("div");
     orderItemCard.id = "order-item-card";
-    orderItemCard.innerHTML = `${updatedPrice}`;
+    const items = [];
+
+    if (isTheItemADrink === true) {
+        const name = drinkItems[index].name;
+        const isDrink = true;
+        const imagePath = drinkItems[index].imagePath;
+        const size = sizeNr;
+        const price = parseInt(totalPrice.innerHTML);
+
+        const item = { name, isDrink, imagePath, size, price };
+        items.push(item);
+
+        orderItemCard.innerHTML = `
+            <img src="${imagePath}" alt="${name}" width="30px" height="30px">
+            <h4>${name.toUpperCase()}</h4>
+            <h2>${price}</h2>
+        `;
+    } else {
+        const name = dessertItems[index].name;
+        const isDrink = false;
+        const imagePath = dessertItems[index].imagePath;
+        const price = dessertItems[index].price;
+
+        const item = { name, isDrink, imagePath, price };
+        items.push(item);
+
+        orderItemCard.innerHTML = `
+            <img src="${imagePath}" alt="${name}" width="30px" height="30px">
+            <h4>${name.toUpperCase()}</h4>
+            <h2>${price}</h2>
+        `;
+    }
+    console.log(items)
     orderSectionContainer.appendChild(orderItemCard);
-    console.log(orderItemCard);
     back();
 };
 
