@@ -7,9 +7,9 @@ const drinkItems = [
         isPurchasedByUserEarlier: false,
         imagePath: "images/stock/americano.png",
         price: {
-            small: 28,
-            medium: 32,
-            large: 36
+            small: 32,
+            medium: 36,
+            large: 40
         }
     },
     {
@@ -19,8 +19,8 @@ const drinkItems = [
         imagePath: "images/stock/caffee-latte.png",
         price: {
             small: 38,
-            medium: 42,
-            large: 46
+            medium: 44,
+            large: 48
         }
     },
     {
@@ -29,9 +29,9 @@ const drinkItems = [
         isPurchasedByUserEarlier: false,
         imagePath: "images/stock/caffee-mocha.png",
         price: {
-            small: 32,
-            medium: 36,
-            large: 40
+            small: 38,
+            medium: 42,
+            large: 46
         }
     },
     {
@@ -40,9 +40,9 @@ const drinkItems = [
         isPurchasedByUserEarlier: false,
         imagePath: "images/stock/cappuccino.png",
         price: {
-            small: 36,
+            small: 38,
             medium: 42,
-            large: 50
+            large: 46
         }
     },
     {
@@ -51,9 +51,9 @@ const drinkItems = [
         isPurchasedByUserEarlier: true,
         imagePath: "images/stock/caramel-macchiato.png",
         price: {
-            small: 38,
-            medium: 42,
-            large: 46
+            small: 45,
+            medium: 48,
+            large: 51
         }
     },
     {
@@ -62,9 +62,9 @@ const drinkItems = [
         isPurchasedByUserEarlier: false,
         imagePath: "images/stock/cortado.png",
         price: {
-            small: 38,
-            medium: 44,
-            large: 48
+            small: 36,
+            medium: 40,
+            large: 44
         }
     },
     {
@@ -73,9 +73,9 @@ const drinkItems = [
         isPurchasedByUserEarlier: false,
         imagePath: "images/stock/espresso.png",
         price: {
-            small: 45,
-            medium: 48,
-            large: 51
+            small: 34,
+            medium: 38,
+            large: 42
         }
     },
     {
@@ -84,9 +84,9 @@ const drinkItems = [
         isPurchasedByUserEarlier: true,
         imagePath: "images/stock/filterkaffe.png",
         price: {
-            small: 34,
-            medium: 38,
-            large: 42
+            small: 28,
+            medium: 32,
+            large: 36
         }
     },
     {
@@ -96,8 +96,8 @@ const drinkItems = [
         imagePath: "images/stock/iskaffe.png",
         price: {
             small: 36,
-            medium: 40,
-            large: 44
+            medium: 42,
+            large: 50
         }
     },
     {
@@ -126,14 +126,14 @@ const dessertItems = [
         isDessertPopular: true,
         isPurchasedByUserEarlier: false,
         imagePath: "images/stock/brownies.png",
-        price: 54,
+        price: 44,
     },
     {
         name: "Chiapudding",
         isDessertPopular: false,
         isPurchasedByUserEarlier: false,
         imagePath: "images/stock/chiapudding.png",
-        price: 46,
+        price: 42,
     },
     {
         name: "Croissant",
@@ -147,14 +147,14 @@ const dessertItems = [
         isDessertPopular: true,
         isPurchasedByUserEarlier: false,
         imagePath: "images/stock/kanelbolle.png",
-        price: 42,
+        price: 46,
     },
     {
         name: "Oreokake",
         isDessertPopular: true,
         isPurchasedByUserEarlier: true,
         imagePath: "images/stock/oreokake.png",
-        price: 44,
+        price: 54,
     },
     {
         name: "Scones",
@@ -197,6 +197,8 @@ const employees = [
         image: "5.png"
     }
 ];
+
+let orderItems = [];
 
 const completedOrders = [
     {

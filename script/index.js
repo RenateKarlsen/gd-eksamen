@@ -193,10 +193,10 @@ const renderDesserts = () => {
         mainMenu.appendChild(dessertMenu);
     });
 
-    let i2 = 0;
     if (!mediaQuery.matches) {
-        i2++;
+        let i2 = 0;
         dessertItems.map(dessertItem => {
+            i2++;
             const dessertMenu = createDessertItem(dessertItem, i2);
             if (dessertItem.isDessertPopular === true) {
                 popularItemsMenu.appendChild(dessertMenu);
@@ -262,7 +262,7 @@ const revealOrderHistorySection = () => {
         orderHistoryContainer.id = "order-history-container";
         orderHistoryContainer.innerHTML = `
             <div id="order-history-container-header">
-                <i class="fa fa-cloud fa-5x"></i>
+                <i class="fa fa-cloud fa-5x" aria-hidden="true" alt="Sky"></i>
                 <h2>TIDLIGERE<br>BESTILLINGER</h2>
             </div>
             <div id="order-list"></div>
@@ -348,21 +348,21 @@ const renderOrder = (orderElement, orderNr) => {
             sizeImagesContainer.className = "size-images-container";
             if (completedOrders[orderIndex].items[i].size === 1) {
                 sizeImagesContainer.innerHTML += `
-                    <i class="chosenSize fa fa-coffee fa-1x"></i>
-                    <i class="fa fa-coffee fa-2x"></i>
-                    <i class="fa fa-coffee fa-3x"></i>
+                    <i class="chosenSize fa fa-coffee fa-1x" aria-hidden="true" alt="Liten kaffekopp"></i>
+                    <i class="fa fa-coffee fa-2x" aria-hidden="true" alt="Medium kaffekopp"></i>
+                    <i class="fa fa-coffee fa-3x" aria-hidden="true" alt="Stor kaffekopp"></i>
                 `;
             } else if (completedOrders[orderIndex].items[i].size === 2) {
                 sizeImagesContainer.innerHTML += `
-                    <i class="fa fa-coffee fa-1x"></i>
-                    <i class="chosenSize fa fa-coffee fa-2x"></i>
-                    <i class="fa fa-coffee fa-3x"></i>
+                    <i class="fa fa-coffee fa-1x" aria-hidden="true" alt="Liten kaffekopp"></i>
+                    <i class="chosenSize fa fa-coffee fa-2x" aria-hidden="true" alt="Medium kaffekopp"></i>
+                    <i class="fa fa-coffee fa-3x" aria-hidden="true" alt="Stor kaffekopp"></i>
                 `;
             } else {
                 sizeImagesContainer.innerHTML += `
-                    <i class="fa fa-coffee fa-1x"></i>
-                    <i class="fa fa-coffee fa-2x"></i>
-                    <i class="chosenSize fa fa-coffee fa-3x"></i>
+                    <i class="fa fa-coffee fa-1x" aria-hidden="true" alt="Liten kaffekopp"></i>
+                    <i class="fa fa-coffee fa-2x" aria-hidden="true" alt="Medium kaffekopp"></i>
+                    <i class="chosenSize fa fa-coffee fa-3x" aria-hidden="true" alt="Stor kaffekopp"></i>
                 `;
             }
             completedOrderItemCard.appendChild(sizeImagesContainer);
@@ -449,20 +449,20 @@ const renderOptions = (index) => {
             </div>
             <div class="drink-size small-drink" id=${drinkPriceSmall} onclick="selectSize(this, ${index}, ${drinkPriceSmall}, 1)">
                 <h3>LITEN</h3>
-                <i class="fa fa-coffee fa-2x"></i>
+                <i class="fa fa-coffee fa-2x" aria-hidden="true" alt="Liten kaffekopp"></i>
                 <h4>KR ${drinkPriceSmall}</h4>
             </div>
             <div class="drink-size medium-drink" onclick="selectSize(this, ${index}, ${drinkPriceMedium}, 2)">
                 <h3>MEDIUM</h3>
-                <i class="fa fa-coffee fa-3x"></i>
+                <i class="fa fa-coffee fa-3x" aria-hidden="true" alt="Medium kaffekopp"></i>
                 <h4>KR ${drinkPriceMedium}</h4>
             </div>
-            <div class="drink-size large-drink" onclick="selectSize(this, ${index}, ${drinkPriceLarge}, 3">
+            <div class="drink-size large-drink" onclick="selectSize(this, ${index}, ${drinkPriceLarge}, 3)">
                 <h3>STOR</h3>
-                <i class="fa fa-coffee fa-4x"></i>
+                <i class="fa fa-coffee fa-4x" aria-hidden="true" alt="Stor kaffekopp"></i>
                 <h4>KR ${drinkPriceLarge}</h4>
             </div>
-            <button id="back-btn" onclick="back()"><i class="fa fa-arrow-left fa-4x"></i></button>
+            <button id="back-btn" onclick="back()"><i class="fa fa-arrow-left fa-4x" aria-hidden="true" alt="Pil venstre"></i></button>
        `;
 };
 
@@ -552,10 +552,24 @@ const updatePrice = (oldPrice, extraPrice, extrasElement) => {
 };
 
 const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
+    const paymentSection = document.getElementById("payment-section");
     const orderSectionContainer = document.getElementById("order-section");
     const orderItemCard = document.createElement("div");
-    orderItemCard.id = "order-item-card";
-    const items = [];
+    orderItemCard.className = "order-item-card";
+
+    if (orderSectionContainer.querySelector('#order-section-list') === null) {
+        orderSectionContainer.innerHTML = `
+            <div id="order-section-header">
+                <i class="fa fa-shopping-cart fa-2x aria-hidden="true" alt="Handlevogn"></i>
+                <h3>BESTILLING</h3>
+            </div>
+            <div id="order-section-list"></div>
+            <div id="order-section-total-price-container">
+                <h3>TOTALT Å BETALE:</h3>
+                <p id="order-section-total-price"><p>
+            </div>
+        `;
+    }
 
     if (isTheItemADrink === true) {
         const name = drinkItems[index].name;
@@ -563,14 +577,20 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
         const imagePath = drinkItems[index].imagePath;
         const size = sizeNr;
         const price = parseInt(totalPrice.innerHTML);
+        const extras = [];
 
-        const item = { name, isDrink, imagePath, size, price };
-        items.push(item);
+        const item = { name, isDrink, imagePath, size, price, extras };
+        orderItems.push(item);
 
         orderItemCard.innerHTML = `
-            <img src="${imagePath}" alt="${name}" width="30px" height="30px">
-            <h4>${name.toUpperCase()}</h4>
-            <h2>${price}</h2>
+            <div class="order-item-card-content">
+                <img src="${imagePath}" alt="${name}" width="40px" height="40px">
+                <h4>${name.toUpperCase()}</h4>
+                <h2>${price}</h2>
+            </div>
+            <button>
+                <i class="fa fa-trash fa-2x"></i>
+            </button>
         `;
     } else {
         const name = dessertItems[index].name;
@@ -579,17 +599,94 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
         const price = dessertItems[index].price;
 
         const item = { name, isDrink, imagePath, price };
-        items.push(item);
+        orderItems.push(item);
 
         orderItemCard.innerHTML = `
-            <img src="${imagePath}" alt="${name}" width="30px" height="30px">
-            <h4>${name.toUpperCase()}</h4>
-            <h2>${price}</h2>
+            <div class="order-item-card-content">
+                <img src="${imagePath}" alt="${name}" width="40px" height="40px">
+                <h4>${name.toUpperCase()}</h4>
+                <h2>${price}</h2>
+            </div>
+            <button>
+                <i class="fa fa-trash fa-2x"></i>
+            </button>
         `;
     }
-    console.log(items)
-    orderSectionContainer.appendChild(orderItemCard);
+
+    const orderSectionTotalPrice = document.getElementById("order-section-total-price");
+    let orderTotalPrice = 0;
+    for (let i = 0; i < orderItems.length; i++) {
+        orderTotalPrice += orderItems[i].price;
+    }
+    orderSectionTotalPrice.innerHTML = `
+        KR ${orderTotalPrice},00
+    `;
+
+    const orderSectionList = document.getElementById("order-section-list");
+    orderSectionList.appendChild(orderItemCard);
+
+    if (paymentSection.querySelector('.pay-button') === null) {
+        revealOrderSection(orderSectionContainer, paymentSection);
+    }
+
     back();
+};
+
+const completeOrder = () => {
+    const paymentSection = document.getElementById("payment-section");
+    const orderSection = document.getElementById("order-section");
+
+    const items = orderItems;
+    const orderNr = completedOrders.length + 1;
+    let totalPrice = 0;
+    for (let i = 0; i < items.length; i++) {
+        totalPrice += items[i].price;
+    }
+    const order = { orderNr, totalPrice, items };
+    orderItems = [];
+    completedOrders.push(order);
+
+    while (paymentSection.lastChild.id !== "order-section") {
+        paymentSection.removeChild(paymentSection.lastChild);
+    }
+    removeChildNodes(orderSection);
+    removeChildNodes(popularItemsMenuContainer)
+    removeChildNodes(mainMenuContainer);
+
+    paymentSection.style.border = "1px solid var(--lighter-gray-color)";
+    popularItemsMenuContainer.style.border = "1px solid var(--lighter-gray-color)";
+    mainMenuContainer.style.border = "1px solid var(--lighter-gray-color)";
+    orderSection.style.backgroundColor = "transparent";
+};
+
+const revealOrderSection = (orderSectionContainer, paymentSection) => {
+    orderSectionContainer.style.backgroundColor = "var(--lighter-gray-color)";
+    paymentSection.style.border = "0";
+    paymentSection.style.gridTemplateRows = "repeat(5, 1fr)";
+
+    const cashPayButton = document.createElement("button");
+    cashPayButton.addEventListener("click", () => {
+        completeOrder()
+    });
+    cashPayButton.className = "pay-button";
+    cashPayButton.innerHTML = `
+        <i class="fa fa-money fa-4x aria-hidden="true" alt="Pengeseddel"></i>
+        <h4>KONTANTER</h4>
+    `;
+
+    const cardPayButton = document.createElement("button");
+    cardPayButton.addEventListener("click", () => {
+        completeOrder()
+    });
+    cardPayButton.className = "pay-button";
+    cardPayButton.id = "card-pay-button";
+    cardPayButton.innerHTML = `
+        <i class="fa fa-credit-card fa-3x" aria-hidden="true" alt="Kredittkort"></i>
+        <h4>KORT</h4>
+    `;
+
+    paymentSection.appendChild(cashPayButton);
+    paymentSection.appendChild(cardPayButton);
 };
 
 if (!mediaQuery.matches) {
