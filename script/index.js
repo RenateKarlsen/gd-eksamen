@@ -375,6 +375,9 @@ const renderOrder = (orderElement, orderNr) => {
             completedOrderItemCardImgContainer.style.backgroundColor = "var(--drinks-menu-color)";
             completedOrderItemCard.style.backgroundColor = "var(--drinks-menu-color)";
             completedOrderItemCard.classList.add("drink-grid");
+        } else {
+            const img = completedOrderItemCardImgContainer.childNodes[1];
+            img.style.marginTop = "0";
         }
         completedOrderItemCardContainer.appendChild(completedOrderItemCard);
         orderDetails.appendChild(completedOrderItemCardContainer);
@@ -584,9 +587,9 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
 
         orderItemCard.innerHTML = `
             <div class="order-item-card-content" style="background-color:var(--drinks-menu-color)">
-                <img src="${imagePath}" alt="${name}" width="40px" height="40px">
+                <img src="${imagePath}" alt="${name}" width="50px" height="50px">
                 <h4>${name.toUpperCase()}</h4>
-                <h2>${price}</h2>
+                <h2>${price},00</h2>
             </div>
             <button id="delete-item-button" style="background-color:var(--drinks-menu-color)">
                 <i class="fa fa-trash fa-2x"></i>
@@ -603,9 +606,9 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
 
         orderItemCard.innerHTML = `
             <div class="order-item-card-content" style="background-color:var(--desserts-menu-color)">
-                <img src="${imagePath}" alt="${name}" width="40px" height="40px">
+                <img src="${imagePath}" alt="${name}" width="50px" height="50px">
                 <h4>${name.toUpperCase()}</h4>
-                <h2>${price}</h2>
+                <h2>${price},00</h2>
             </div>
             <button id="delete-item-button" style="background-color:var(--desserts-menu-color)">
                 <i class="fa fa-trash fa-2x"></i>
