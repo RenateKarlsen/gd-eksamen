@@ -34,7 +34,7 @@ const handleMenu = (menuButton) => {
         const headerName = menuButton === "drinks-menu-button" ? "DRIKKER" : "DESSERTER";
         menuHeader.innerHTML = `
             <button type="button" class="mobile-back-button" id="menu-back-button" onclick="returnToPreviousPage(id)">
-                <i class="fa fa-chevron-left fa-3x"></i>
+                <i class="fa fa-angle-left fa-4x"></i>
             </button>
             <h3>${headerName}</h3;
         `;
@@ -361,6 +361,7 @@ const renderOrder = (orderElement, orderNr) => {
                     <i class="chosenSize fa fa-coffee fa-1x" alt="Liten kaffekopp"></i>
                     <i class="fa fa-coffee fa-2x" alt="Medium kaffekopp"></i>
                     <i class="fa fa-coffee fa-3x" alt="Stor kaffekopp"></i>
+
                 `;
             } else if (completedOrders[orderIndex].items[i].size === 2) {
                 sizeImagesContainer.innerHTML += `

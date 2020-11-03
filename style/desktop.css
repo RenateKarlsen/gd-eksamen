@@ -79,6 +79,8 @@ ul::-webkit-scrollbar {
     grid-row: 2 / 11;
 }
 
+
+/* STYLE SCROLLBAR */
 ::-webkit-scrollbar {
     width: 15px;
 }
@@ -89,14 +91,17 @@ ul::-webkit-scrollbar {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #b3b3b3;      
-    border: 3px solid #ffffff;  
+    background-color: #d4d4d4;      
+    border: 2px solid #ffffff;  
+    border-radius: 5px; 
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: var(--darker-gray-color); 
 }
 
+
+/* MENY */
 .menu-button {
     font-size: 25px;
     outline: none;
@@ -147,6 +152,11 @@ ul::-webkit-scrollbar {
 
 #order-history-button h4 {
     margin-top: 15px;
+}
+
+/* MENU BACK BUTTON*/ 
+.mobile-back-button {
+    background-color: transparent;
 }
 
 #menu-section {
