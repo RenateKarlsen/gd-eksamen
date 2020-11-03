@@ -161,4 +161,7 @@ button {
 
 #start-button:active {
     background-color: var(--confirm-btn-active-color);
+    -webkit-box-shadow: inset 0px 0px 10px #c1c1c1;
+    -moz-box-shadow: inset 0px 0px 10px #c1c1c1;
+    box-shadow: inset 0px 0px 10px #c1c1c1;
 }

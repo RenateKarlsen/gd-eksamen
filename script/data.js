@@ -2,32 +2,10 @@ const db = openDatabase('mydb', '1.0', 'GD-eksamen', 2 * 1024 * 1024);
 
 const drinkItems = [
     {
-        drinkName: "Americano",
+        name: "Americano",
         isDrinkPopular: false,
         isPurchasedByUserEarlier: false,
         imagePath: "images/stock/americano.png",
-        price: {
-            small: 28,
-            medium: 32,
-            large: 36
-        }
-    },
-    {
-        drinkName: "Caffè Latte",
-        isDrinkPopular: true,
-        isPurchasedByUserEarlier: false,
-        imagePath: "images/stock/caffee-latte.png",
-        price: {
-            small: 38,
-            medium: 42,
-            large: 46
-        }
-    },
-    {
-        drinkName: "Caffè Mocha",
-        isDrinkPopular: false,
-        isPurchasedByUserEarlier: false,
-        imagePath: "images/stock/caffee-mocha.png",
         price: {
             small: 32,
             medium: 36,
@@ -35,32 +13,10 @@ const drinkItems = [
         }
     },
     {
-        drinkName: "Cappuccino",
+        name: "Caffè Latte",
         isDrinkPopular: true,
         isPurchasedByUserEarlier: false,
-        imagePath: "images/stock/cappuccino.png",
-        price: {
-            small: 36,
-            medium: 42,
-            large: 50
-        }
-    },
-    {
-        drinkName: "Caramel Macchiato",
-        isDrinkPopular: false,
-        isPurchasedByUserEarlier: true,
-        imagePath: "images/stock/caramel-macchiato.png",
-        price: {
-            small: 38,
-            medium: 42,
-            large: 46
-        }
-    },
-    {
-        drinkName: "Cortado",
-        isDrinkPopular: false,
-        isPurchasedByUserEarlier: false,
-        imagePath: "images/stock/cortado.png",
+        imagePath: "images/stock/caffee-latte.png",
         price: {
             small: 38,
             medium: 44,
@@ -68,10 +24,32 @@ const drinkItems = [
         }
     },
     {
-        drinkName: "Espresso",
+        name: "Caffè Mocha",
+        isDrinkPopular: false,
+        isPurchasedByUserEarlier: false,
+        imagePath: "images/stock/caffee-mocha.png",
+        price: {
+            small: 38,
+            medium: 42,
+            large: 46
+        }
+    },
+    {
+        name: "Cappuccino",
         isDrinkPopular: true,
         isPurchasedByUserEarlier: false,
-        imagePath: "images/stock/espresso.png",
+        imagePath: "images/stock/cappuccino.png",
+        price: {
+            small: 38,
+            medium: 42,
+            large: 46
+        }
+    },
+    {
+        name: "Caramel Macchiato",
+        isDrinkPopular: false,
+        isPurchasedByUserEarlier: true,
+        imagePath: "images/stock/caramel-macchiato.png",
         price: {
             small: 45,
             medium: 48,
@@ -79,21 +57,10 @@ const drinkItems = [
         }
     },
     {
-        drinkName: "Filterkaffe",
-        isDrinkPopular: true,
-        isPurchasedByUserEarlier: true,
-        imagePath: "images/stock/filterkaffe.png",
-        price: {
-            small: 34,
-            medium: 38,
-            large: 42
-        }
-    },
-    {
-        drinkName: "Iskaffe",
-        isDrinkPopular: true,
-        isPurchasedByUserEarlier: true,
-        imagePath: "images/stock/iskaffe.png",
+        name: "Cortado",
+        isDrinkPopular: false,
+        isPurchasedByUserEarlier: false,
+        imagePath: "images/stock/cortado.png",
         price: {
             small: 36,
             medium: 40,
@@ -101,7 +68,40 @@ const drinkItems = [
         }
     },
     {
-        drinkName: "Iste",
+        name: "Espresso",
+        isDrinkPopular: true,
+        isPurchasedByUserEarlier: false,
+        imagePath: "images/stock/espresso.png",
+        price: {
+            small: 34,
+            medium: 38,
+            large: 42
+        }
+    },
+    {
+        name: "Filterkaffe",
+        isDrinkPopular: true,
+        isPurchasedByUserEarlier: true,
+        imagePath: "images/stock/filterkaffe.png",
+        price: {
+            small: 28,
+            medium: 32,
+            large: 36
+        }
+    },
+    {
+        name: "Iskaffe",
+        isDrinkPopular: true,
+        isPurchasedByUserEarlier: true,
+        imagePath: "images/stock/iskaffe.png",
+        price: {
+            small: 36,
+            medium: 42,
+            large: 50
+        }
+    },
+    {
+        name: "Iste",
         isDrinkPopular: false,
         isPurchasedByUserEarlier: false,
         imagePath: "images/stock/iste.png",
@@ -115,49 +115,49 @@ const drinkItems = [
 
 const dessertItems = [
     {
-        dessertName: "Brioche",
+        name: "Brioche",
         isDessertPopular: false,
         isPurchasedByUserEarlier: false,
         imagePath: "images/stock/brioche.png",
         price: 44,
     },
     {
-        dessertName: "Brownies",
+        name: "Brownies",
         isDessertPopular: true,
         isPurchasedByUserEarlier: false,
         imagePath: "images/stock/brownies.png",
-        price: 54,
+        price: 44,
     },
     {
-        dessertName: "Chiapudding",
+        name: "Chiapudding",
         isDessertPopular: false,
         isPurchasedByUserEarlier: false,
         imagePath: "images/stock/chiapudding.png",
-        price: 46,
+        price: 42,
     },
     {
-        dessertName: "Croissant",
+        name: "Croissant",
         isDessertPopular: true,
         isPurchasedByUserEarlier: true,
         imagePath: "images/stock/croissant.png",
         price: 38,
     },
     {
-        dessertName: "Kanelbolle",
+        name: "Kanelbolle",
         isDessertPopular: true,
         isPurchasedByUserEarlier: false,
         imagePath: "images/stock/kanelbolle.png",
-        price: 42,
+        price: 46,
     },
     {
-        dessertName: "Oreokake",
+        name: "Oreokake",
         isDessertPopular: true,
         isPurchasedByUserEarlier: true,
         imagePath: "images/stock/oreokake.png",
-        price: 44,
+        price: 54,
     },
     {
-        dessertName: "Scones",
+        name: "Scones",
         isDessertPopular: true,
         isPurchasedByUserEarlier: false,
         imagePath: "images/stock/scones.png",
@@ -198,6 +198,8 @@ const employees = [
     }
 ];
 
+let orderItems = [];
+
 const completedOrders = [
     {
         orderNr: 1,
@@ -207,7 +209,7 @@ const completedOrders = [
                 name: "Caffè Latte",
                 isDrink: true,
                 imagePath: "images/stock/caffee-latte.png",
-                size: "medium",
+                size: 2,
                 price: 48,
                 extras: [
                     {
@@ -224,7 +226,7 @@ const completedOrders = [
                 name: "Espresso",
                 isDrink: true,
                 imagePath: "images/stock/espresso.png",
-                size: "small",
+                size: 1,
                 price: 34,
                 extras: []
             }
@@ -238,7 +240,7 @@ const completedOrders = [
                 name: "Filterkaffe",
                 isDrink: true,
                 imagePath: "images/stock/filterkaffe.png",
-                size: "large",
+                size: 3,
                 price: 36,
                 extras: []
             },
@@ -246,7 +248,7 @@ const completedOrders = [
                 name: "Iste",
                 isDrink: true,
                 imagePath: "images/stock/iste.png",
-                size: "medium",
+                size: 2,
                 price: 47,
                 extras: []
             },
@@ -266,7 +268,7 @@ const completedOrders = [
                 name: "Filterkaffe",
                 isDrink: true,
                 imagePath: "images/stock/filterkaffe.png",
-                size: "small",
+                size: 1,
                 price: 34,
                 extras: [
                     {
@@ -285,7 +287,7 @@ const completedOrders = [
                 name: "Caramel Macchiato",
                 isDrink: true,
                 imagePath: "images/stock/caramel-macchiato.png",
-                size: "medium",
+                size: 2,
                 price: 55,
                 extras: [
                     {
@@ -302,7 +304,7 @@ const completedOrders = [
                 name: "Filterkaffe",
                 isDrink: true,
                 imagePath: "images/stock/filterkaffe.png",
-                size: "large",
+                size: 3,
                 price: 36,
                 extras: []
             },
@@ -310,7 +312,7 @@ const completedOrders = [
                 name: "Filterkaffe",
                 isDrink: true,
                 imagePath: "images/stock/filterkaffe.png",
-                size: "small",
+                size: 1,
                 price: 28,
                 extras: [
                     {
@@ -328,3 +330,35 @@ const completedOrders = [
         ]
     }
 ]
+const extraOptionsObj = [
+    {
+        name: "Espresso",       
+        price: 6,
+        image: "espresso.png"
+    }, 
+    {
+        name: "Kumelk",         
+        price: 0,
+        image: "kumelk.png"
+    },
+    {
+        name: "Soyamelk",       
+        price: 3,
+        image: "soyamelk.png"
+    },
+    {
+        name: "Vaniljesirup",   
+        price: 3,
+        image: "vaniljesirup.png"
+    },
+    {
+        name: "Sjokoladesirup", 
+        price: 3,
+        image: "sjokoladesirup.png"
+    },
+    {
+        name: "Krem",
+        price: 4,
+        image: "krem.png"
+    }
+];
