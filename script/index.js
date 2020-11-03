@@ -583,12 +583,12 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
         orderItems.push(item);
 
         orderItemCard.innerHTML = `
-            <div class="order-item-card-content">
+            <div class="order-item-card-content" style="background-color:var(--drinks-menu-color)">
                 <img src="${imagePath}" alt="${name}" width="40px" height="40px">
                 <h4>${name.toUpperCase()}</h4>
                 <h2>${price}</h2>
             </div>
-            <button>
+            <button id="delete-item-button" style="background-color:var(--drinks-menu-color)">
                 <i class="fa fa-trash fa-2x"></i>
             </button>
         `;
@@ -602,12 +602,12 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
         orderItems.push(item);
 
         orderItemCard.innerHTML = `
-            <div class="order-item-card-content">
+            <div class="order-item-card-content" style="background-color:var(--desserts-menu-color)">
                 <img src="${imagePath}" alt="${name}" width="40px" height="40px">
                 <h4>${name.toUpperCase()}</h4>
                 <h2>${price}</h2>
             </div>
-            <button>
+            <button id="delete-item-button" style="background-color:var(--desserts-menu-color)">
                 <i class="fa fa-trash fa-2x"></i>
             </button>
         `;
