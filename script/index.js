@@ -626,25 +626,28 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
         `;
     }
 
+    const orderSectionList = document.getElementById("order-section-list");
+    orderSectionList.appendChild(orderItemCard);
+    updateTotalPriceInOrder();
+
+    if (paymentSection.querySelector('.pay-button') === null) {
+        revealOrderSection(orderSectionContainer, paymentSection);
+    }
+
+    back();
+};
+
+const updateTotalPriceInOrder = () => {
     const orderSectionTotalPrice = document.getElementById("order-section-total-price");
     let orderTotalPrice = 0;
+
     for (let i = 0; i < orderItems.length; i++) {
         orderTotalPrice += orderItems[i].price;
     }
     orderSectionTotalPrice.innerHTML = `
         KR ${orderTotalPrice},00
     `;
-
-    const orderSectionList = document.getElementById("order-section-list");
-    orderSectionList.appendChild(orderItemCard);
-
-    if (paymentSection.querySelector('.pay-button') === null) {
-        revealOrderSection(orderSectionContainer, paymentSection);
-    }
-    console.log(id);
-    console.log(orderItems);
-    back();
-};
+}
 
 const revealOrderSection = (orderSectionContainer, paymentSection) => {
     orderSectionContainer.style.backgroundColor = "var(--lighter-gray-color)";
@@ -756,7 +759,7 @@ const deleteItemFromOrder = (orderItemCard, id) => {
         }
     }
     orderSectionList.removeChild(orderItemCard);
-    console.log(orderItems);
+    updateTotalPriceInOrder();
 };
 
 if (!mediaQuery.matches) {
