@@ -8,13 +8,13 @@ const body = document.getElementsByTagName("body")[0];
 const html = document.getElementsByTagName("html")[0];
 const main = document.getElementsByTagName("main");
 const totalPriceContainer = document.createElement("div");
-const totalPrice = document.createElement("h2");
+const totalPriceOutput = document.createElement("h2");
 const mediaQuery = window.matchMedia("(max-width: 600px)")
 
 mediaQuery.addEventListener("change", (e) => {
     if (e.matches) {
         location.reload();
-    }
+    };
 });
 
 const handleMenu = (menuButton) => {
@@ -38,17 +38,23 @@ const handleMenu = (menuButton) => {
             </button>
             <h3>${headerName}</h3;
         `;
-    }
+    };
+
+    if (menuSection.querySelector('.item-img-and-name') !== null) {
+        back();
+    };
+
     if (menuSection.querySelector('#order-history-container') !== null) {
         removeChildNodes(menuSection);
         menuSection.appendChild(popularItemsMenuContainer);
         menuSection.appendChild(mainMenuContainer);
-    }
+    };
+
     if (!mainMenuContainer.hasChildNodes()) {
         createMenu(menuButton);
     } else {
         updateMenu(menuButton);
-    }
+    };
 };
 
 const createMenu = (buttonClicked) => {
@@ -64,7 +70,7 @@ const createMenu = (buttonClicked) => {
         popularItemsMenuHeader.innerHTML = `
             <h3>HURTIGKJØP</h3>
         `;
-    }
+    };
     popularItemsMenuContainer.appendChild(popularItemsMenuHeader);
 
     const popularItemsMenu = document.createElement("div");
@@ -79,7 +85,7 @@ const createMenu = (buttonClicked) => {
         renderDrinks();
     } else {
         renderDesserts();
-    }
+    };
 };
 
 const updateMenu = (buttonClicked) => {
@@ -97,8 +103,8 @@ const updateMenu = (buttonClicked) => {
             renderDrinks()
         } else {
             renderDesserts()
-        }
-    }
+        };
+    };
 };
 
 // CREATES DRINK ITEMS
@@ -121,7 +127,7 @@ const createDrinkItem = (drinkItem, id) => {
             <h4>${drinkItem.name.toUpperCase()}</h4>
             <p>${drinkItem.price.small}, ${drinkItem.price.medium}, ${drinkItem.price.large}</p>
         `;
-    }
+    };
 
     return drinkItemCard;
 };
@@ -148,7 +154,7 @@ const renderDrinks = () => {
             const drinkMenu = createDrinkItem(drinkItem, i2);
             if (drinkItem.isDrinkPopular === true) {
                 popularItemsMenu.appendChild(drinkMenu);
-            }
+            };
         });
     } else {
         let i3 = 0;
@@ -157,9 +163,9 @@ const renderDrinks = () => {
             const drinkMenu = createDrinkItem(drinkItem, i3);
             if (drinkItem.isPurchasedByUserEarlier === true) {
                 popularItemsMenu.appendChild(drinkMenu);
-            }
+            };
         });
-    }
+    };
     styleMenu("drink");
 };
 
@@ -200,7 +206,7 @@ const renderDesserts = () => {
             const dessertMenu = createDessertItem(dessertItem, i2);
             if (dessertItem.isDessertPopular === true) {
                 popularItemsMenu.appendChild(dessertMenu);
-            }
+            };
         });
     } else {
         let i3 = 0;
@@ -209,9 +215,9 @@ const renderDesserts = () => {
             const dessertMenu = createDessertItem(dessertItem, i3);
             if (dessertItem.isPurchasedByUserEarlier === true) {
                 popularItemsMenu.appendChild(dessertMenu);
-            }
+            };
         });
-    }
+    };
 
     styleMenu("dessert");
 };
@@ -219,7 +225,7 @@ const renderDesserts = () => {
 const removeChildNodes = (container) => {
     while (container.firstChild) {
         container.removeChild(container.lastChild);
-    }
+    };
 };
 
 const styleMenu = (menu) => {
@@ -238,7 +244,7 @@ const styleMenu = (menu) => {
         } else if (menu === "dessert") {
             menuHeader.style.backgroundColor = "var(--desserts-menu-color)";
         }
-    }
+    };
 
     if (menu === "drink") {
         popularItemsMenuHeader.style.backgroundColor = "var(--drinks-menu-color)";
@@ -248,12 +254,16 @@ const styleMenu = (menu) => {
         popularItemsMenuHeader.style.backgroundColor = "var(--desserts-menu-color)";
         popularItemsMenu.style.backgroundColor = "var(--desserts-menu-color)";
         mainMenu.style.backgroundColor = "var(--desserts-menu-color)";
-    }
+    };
 };
 
 const revealOrderHistorySection = () => {
     const orderHistoryContainer = document.createElement("div");
     const orderContainer = document.createElement("div");
+
+    if (menuSection.querySelector('.item-img-and-name') !== null) {
+        back();
+    };
 
     if (menuSection.querySelector('#order-history-container') === null) {
         menuSection.removeChild(popularItemsMenuContainer);
@@ -277,7 +287,7 @@ const revealOrderHistorySection = () => {
         removeChildNodes(menuSection);
         menuSection.appendChild(popularItemsMenuContainer);
         menuSection.appendChild(mainMenuContainer);
-    }
+    };
 };
 
 const renderOrderHistory = () => {
@@ -292,7 +302,7 @@ const renderOrderHistory = () => {
             item = `${completedOrders[i].items[0].name}`;
         } else {
             item = `${completedOrders[i].items[0].name} ++`;
-        }
+        };
 
         listedOrder.innerHTML = `
             <div class="ordernr-container">
@@ -364,12 +374,12 @@ const renderOrder = (orderElement, orderNr) => {
                     <i class="fa fa-coffee fa-2x" alt="Medium kaffekopp"></i>
                     <i class="chosenSize fa fa-coffee fa-3x" alt="Stor kaffekopp"></i>
                 `;
-            }
+            };
             completedOrderItemCard.appendChild(sizeImagesContainer);
             const extrasList = document.createElement("ul");
             for (let i2 = 0; i2 < completedOrders[orderIndex].items[i].extras.length; i2++) {
                 extrasList.innerHTML += `<li>+ ${completedOrders[orderIndex].items[i].extras[i2].name.toUpperCase()}</li>`
-            }
+            };
             completedOrderItemCard.appendChild(extrasList);
 
             completedOrderItemCardImgContainer.style.backgroundColor = "var(--drinks-menu-color)";
@@ -379,10 +389,10 @@ const renderOrder = (orderElement, orderNr) => {
             const img = completedOrderItemCardImgContainer.childNodes[1];
             img.style.marginTop = "0";
             img.style.marginBottom = "1.5em";
-        }
+        };
         completedOrderItemCardContainer.appendChild(completedOrderItemCard);
         orderDetails.appendChild(completedOrderItemCardContainer);
-    }
+    };
 };
 
 
@@ -395,11 +405,11 @@ const styleListedOrders = (orderElement) => {
     for (let i = 0; i < listedOrders.length; i++) {
         listedOrders[i].children[0].style.backgroundColor = "var(--standard-gray-color)";
         listedOrders[i].children[1].style.backgroundColor = "var(--standard-gray-color)";
-    }
+    };
 
     for (let i = 0; i < orderPointers.length; i++) {
         orderPointers[i].style.display = "none";
-    }
+    };
 
     orderContainer.style.backgroundColor = "var(--lighter-gray-color)";
     orderElementChildren[0].style.backgroundColor = "var(--darker-gray-color)";
@@ -451,7 +461,7 @@ const renderOptions = (index) => {
                 <h1>${drinkItems[index].name.toUpperCase()}</h1> 
                 <img id="drinkImg"src=${drinkItems[index].imagePath} alt=${drinkItems[index].name}>
             </div>
-            <div class="drink-size small-drink" id=${drinkPriceSmall} onclick="selectSize(this, ${index}, ${drinkPriceSmall}, 1)">
+            <div class="drink-size small-drink" onclick="selectSize(this, ${index}, ${drinkPriceSmall}, 1)">
                 <h3>LITEN</h3>
                 <i class="fa fa-coffee fa-2x" alt="Liten kaffekopp"></i>
                 <h4>KR ${drinkPriceSmall}</h4>
@@ -496,7 +506,7 @@ const selectSize = (sizeElement, index, price, size) => {
     for (element of drinkSizeElements) {
         element.style.backgroundColor = "var(--drinks-menu-color)";
         element.style.color = "#ffffff";
-    }
+    };
     sizeElement.style.backgroundColor = "#ffffff";
     sizeElement.style.color = "var(--drinks-menu-color)";
 };
@@ -527,32 +537,34 @@ const renderExtraOptionsCard = (index, price) => {
     };
 };
 
-const updatePrice = (oldPrice, extraPrice, extrasElement) => {
+const updatePrice = (sizePrice, extraPrice, extrasElement) => {
     totalPriceContainer.id = "total-price-container";
-    totalPrice.id = "total-price";
+    totalPriceOutput.id = "total-price";
+
     totalPriceContainer.innerHTML = `
         <h3>TOTALT KR </h3>
     `;
 
-    totalPrice.innerHTML = oldPrice;
-    totalPriceContainer.appendChild(totalPrice);
-    menuSection.appendChild(totalPriceContainer);
-
-    if (extrasElement !== null) {
-        let updatedPrice = oldPrice + extraPrice;
-
+    let totalPrice = sizePrice;
+    if (extraPrice !== null) {
+        
+        totalPrice = sizePrice + extraPrice;
+        console.log(sizePrice);
         if (extrasElement.style.backgroundColor === "") {
 
             extrasElement.style.backgroundColor = "#ffffff";
             extrasElement.style.color = "var(--drinks-menu-color)";
         } else {
-            updatedPrice = updatedPrice - extraPrice
+            totalPrice = sizePrice - extraPrice
 
             extrasElement.style.backgroundColor = "";
             extrasElement.style.color = "#ffffff";
         }
-        totalPrice.innerHTML = updatedPrice;
-    }
+    };
+
+    totalPriceOutput.innerHTML = totalPrice;
+    totalPriceContainer.appendChild(totalPriceOutput);
+    menuSection.appendChild(totalPriceContainer);
 };
 
 const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
@@ -573,7 +585,7 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
                 <p id="order-section-total-price"><p>
             </div>
         `;
-    }
+    };
 
     let id = orderItems.length + 1;
     if (orderItems.length > 0) {
@@ -582,14 +594,14 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
                 id = orderItems[i].id + 1;
             }
         }
-    }
+    };
 
     if (isTheItemADrink === true) {
         const name = drinkItems[index].name;
         const isDrink = true;
         const imagePath = drinkItems[index].imagePath;
         const size = sizeNr;
-        const price = parseInt(totalPrice.innerHTML);
+        const price = parseInt(totalPriceOutput.innerHTML);
         const extras = [];
 
         const item = { id, name, isDrink, imagePath, size, price, extras };
@@ -624,7 +636,7 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
                 <i class="fa fa-trash fa-2x"></i>
             </button>
         `;
-    }
+    };
 
     const orderSectionList = document.getElementById("order-section-list");
     orderSectionList.appendChild(orderItemCard);
@@ -632,7 +644,7 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
 
     if (paymentSection.querySelector('.pay-button') === null) {
         revealOrderSection(orderSectionContainer, paymentSection);
-    }
+    };
 
     back();
 };
@@ -643,11 +655,11 @@ const updateTotalPriceInOrder = () => {
 
     for (let i = 0; i < orderItems.length; i++) {
         orderTotalPrice += orderItems[i].price;
-    }
+    };
     orderSectionTotalPrice.innerHTML = `
         KR ${orderTotalPrice},00
     `;
-}
+};
 
 const revealOrderSection = (orderSectionContainer, paymentSection) => {
     orderSectionContainer.style.backgroundColor = "var(--lighter-gray-color)";
@@ -688,17 +700,17 @@ const completeOrder = () => {
     let totalPrice = 0;
     for (let i = 0; i < items.length; i++) {
         totalPrice += items[i].price;
-    }
+    };
     const order = { orderNr, totalPrice, items };
     orderItems = [];
 
     if (order.items.length > 0) {
         completedOrders.push(order);
-    }
+    };
 
     while (paymentSection.lastChild.id !== "order-section") {
         paymentSection.removeChild(paymentSection.lastChild);
-    }
+    };
     removeChildNodes(orderSection);
     removeChildNodes(popularItemsMenuContainer)
     removeChildNodes(mainMenuContainer);
@@ -721,7 +733,7 @@ const renderDeletionOptions = (orderItemCardButton, id) => {
         if (orderItems[i].id === id) {
             item = orderItems[i].name;
         }
-    }
+    };
 
     const deletionCard = document.createElement("div");
     deletionCard.innerHTML = `

@@ -4,8 +4,8 @@
     --lighter-gray-color: rgb(179, 179, 179);
     --confirm-btn-color: rgb(36, 224, 133);
     --confirm-btn-active-color: rgb(61, 255, 161);
-    --drinks-menu-color:   #4569fc;
-    --desserts-menu-color:#ff9900;
+    --drinks-menu-color: #4569fc;
+    --desserts-menu-color: #ff9900;
 }
 
 html, body {
@@ -135,7 +135,7 @@ ul::-webkit-scrollbar {
 }
 
 .orders-button:active {
-    background: #e5e5e5;
+    background-color: #cccaca;
     -webkit-box-shadow: inset 0px 0px 10px #c1c1c1;
     -moz-box-shadow: inset 0px 0px 10px #c1c1c1;
     box-shadow: inset 0px 0px 10px #c1c1c1;
@@ -445,8 +445,12 @@ ul::-webkit-scrollbar {
     margin: 0px 0px 0px 5px;
 }
 
-.chosenSize {
+.size-images-container {
     color: var(--standard-gray-color);
+}
+
+.chosenSize {
+    color: #ffffff;
 }
 
 .completed-order-item-card-container {
@@ -666,6 +670,9 @@ ul::-webkit-scrollbar {
 
 .pay-button:active {
     background-color: var(--confirm-btn-active-color);
+    -webkit-box-shadow: inset 0px 0px 10px #c1c1c1;
+    -moz-box-shadow: inset 0px 0px 10px #c1c1c1;
+    box-shadow: inset 0px 0px 10px #c1c1c1;
 }
 
 #card-pay-button i {
@@ -793,28 +800,3 @@ ul::-webkit-scrollbar {
     -moz-box-shadow: inset 0px 0px 10px #c1c1c1;
     box-shadow: inset 0px 0px 10px #c1c1c1;
 }
-
-/*
-.listed-order p {
-    padding-top: 0.7em;
-    font-size: 13px;
-}
-
-
-.ordernr-container {
-    height: 100%;
-    background-color: var(--standard-gray-color);
-}
-
-.ordernr-container h3{
-    padding-left: 1em;
-}
-
-.listed-order-content h5 {
-    position: absolute;
-    right: 1em;
-    margin-top: 1.3em;
-    font-size: 16px;
-    top: 0;
-}
-*/
