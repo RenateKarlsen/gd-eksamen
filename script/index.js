@@ -428,14 +428,15 @@ const renderActiveUserAccount = () => {
             }
 
             for (i = 0; i < len; i++) {
-                const activeUserAccountDisplay = document.createElement("div");
+                const activeUserAccountDisplay = document.createElement("a");
+                activeUserAccountDisplay.href = "desktop-login.html";
                 activeUserAccountDisplay.id = "active-user-account-display";
                 activeUserAccountDisplay.innerHTML = `
                     <img src="images/employees/${results.rows.item(i).image}" alt="${results.rows.item(i).firstName} ${results.rows.item(i).lastName} (ansatt)">
                     <h2>${results.rows.item(i).firstName} ${results.rows.item(i).lastName}</h2>
                 `;
 
-                userAccountHeader.appendChild(activeUserAccountDisplay);
+                userAccountHeader.insertBefore(activeUserAccountDisplay, userAccountHeader.firstChild);
             }
         })
     })
@@ -530,7 +531,7 @@ const renderExtraOptionsCards = (price) => {
             extraOptionCardContainer.className = "extra-options-card-container";
             extraOptionCard.className = "extra-option-card";
             extraOptionCard.id = `${extraOptions[i].id}`;
-            extraOptionCard.setAttribute("onclick", `addExtraToItem(this, extraOptions[id - 1], sizePrice)`);
+            extraOptionCard.setAttribute("onclick", `addExtraToItem(this, extraOptions[id], sizePrice)`);
 
             extraOptionCard.innerHTML = `
                 <img src="images/icons/${extraOptions[i].image}" alt="${extraOptions[i].name}" width="30px" height="30px">
