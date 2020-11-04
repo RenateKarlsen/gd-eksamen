@@ -90,12 +90,12 @@ ul::-webkit-scrollbar {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #d4d4d4;      
-    border: 2px solid #ffffff;  
+    background-color: var(--standard-gray-color);      
+    border: 2px solid var(--standard-gray-color);  
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--darker-gray-color); 
+  background: var(--darker-gray-color);
 }
 
 /* MENY */
@@ -347,10 +347,10 @@ ul::-webkit-scrollbar {
 #order-list {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(auto-fill, 1em);
+    grid-template-rows: repeat(auto-fill, 1.8em);
     grid-auto-flow: row;
     padding: 20px;
-    grid-gap: 3em;
+    grid-gap: 2.1em;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -387,10 +387,7 @@ ul::-webkit-scrollbar {
 .ordernr-container {
     height: 100%;
     background-color: var(--standard-gray-color);
-}
-
-.ordernr-container h3{
-    padding-left: 1em;
+    text-align: center;
 }
 
 .listed-order-content h5 {
