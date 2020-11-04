@@ -44,6 +44,7 @@ ul::-webkit-scrollbar {
 }
 
 #user-account-header {
+    position: relative;
     display: grid;
     border-bottom: 1px solid var(--darker-gray-color);
     grid-column: 1 / 10;
@@ -52,15 +53,22 @@ ul::-webkit-scrollbar {
 
 #active-user-account-display {
     display: grid;
-    margin-bottom: 5px;
+    position: absolute;
+    margin-bottom: 20px;
     grid-template-columns: 50px 1fr;
-    align-items: end
+    align-self: center;
+    background-color: var(--lighter-gray-color);
+    margin: 0;
+    border-radius: 50px;
+    padding: 0px 40px 0px 0px;
+    
 }
 
 #active-user-account-display img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
+    border: 5px solid var(--lighter-gray-color);
 }
 
 #active-user-account-display h2 {
