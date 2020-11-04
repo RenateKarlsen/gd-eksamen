@@ -285,6 +285,9 @@ ul::-webkit-scrollbar {
 }
 
 .item-card {
+    display: grid;
+    justify-items: center;
+    grid-template-rows: 55% 25% 20%;
     border: 1px solid white;
     text-align: center;
     padding: 10px;
@@ -293,6 +296,11 @@ ul::-webkit-scrollbar {
     color: var(--darker-gray-color);
     cursor: pointer;
 }
+
+.item-card h4 {
+    margin: 0;
+}
+
 
 .drink-item-card {
     background-color: var(--drinks-menu-color);
@@ -538,12 +546,14 @@ ul::-webkit-scrollbar {
     color: #ffffff;
     text-align: center;
     height: 5em;
+    margin-top: 1em;
 }
 
-#order-item-total-price h3{
+#order-item-total-price-container p{
     display: inline;
     font-size: 28px;
     font-weight: lighter;
+    line-height: 2.7em;
 }
 
 #total-price {
@@ -596,26 +606,38 @@ ul::-webkit-scrollbar {
 }
 
 .extra-options-card-container {
-    display: flex;
-    column-gap: 1em;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
+    column-gap: 0.7em;
     grid-row: 3;
     grid-column: 3 / 5;
     background-color: var(--drinks-menu-color);
 }
 
 .extra-option-card {
+    display: grid;
+    grid-template-rows: 30px 1fr 35px;
+    justify-items: center;
     border-radius: 5px;
     text-align: center;
     font-size: 12px;
-    padding: 10px;
+    padding: 5px;
     font-size: 10px;
-    height: 9em;
-    width: 6em;
+    height: 10em;
+    width: 6.5em;
     cursor: pointer;
     border: 1px solid #ffffff;
     color: #ffffff;
     box-shadow: 0 5px 10px #38383873;
+}
+
+.extra-option-card h4 {
+    margin: 10px 0px 0px 0px;
+}
+
+.extra-option-card p {
+    font-size: 15px;
 }
 
 .confirm-order-btn {
@@ -630,6 +652,9 @@ ul::-webkit-scrollbar {
 
 .confirm-order-btn:active {
     background-color: var(--confirm-btn-active-color);
+    -webkit-box-shadow: inset 0px 0px 30px #c1c1c1;
+    -moz-box-shadow: inset 0px 0px 30px #c1c1c1;
+    box-shadow: inset 0px 0px 30px #c1c1c1;
 }
 
 .drink-size{

@@ -495,10 +495,10 @@ const selectSize = (sizeElement, index, price, size) => {
         const orderItemTotalPriceContainer = document.createElement("div");
         orderItemTotalPriceContainer.id = "order-item-total-price-container";
         orderItemTotalPriceContainer.innerHTML = `
-            <h2>TOTALT KR </h2>
+            <p>TOTALT KR </p>
         `;
 
-        const orderItemTotalPrice = document.createElement("h2");
+        const orderItemTotalPrice = document.createElement("p");
         orderItemTotalPrice.id = "order-item-total-price";
         orderItemTotalPriceContainer.appendChild(orderItemTotalPrice);
         menuSection.appendChild(orderItemTotalPriceContainer);
@@ -535,7 +535,7 @@ const renderExtraOptionsCards = (price) => {
             extraOptionCard.innerHTML = `
                 <img src="images/icons/${extraOptions[i].image}" alt="${extraOptions[i].name}" width="30px" height="30px">
                 <h4 id="extra-option-name-h4">${extraOptions[i].name.toUpperCase()}</h4>
-                <h4 id="extra-option-price-h4">KR ${extraOptions[i].price}</h4>
+                <p id="extra-option-price">+ kr ${extraOptions[i].price}</p>
             `;
             extraOptionCardContainer.appendChild(extraOptionCard);
             menuSection.appendChild(extraOptionCardContainer);
@@ -569,9 +569,7 @@ const updateTotalPriceInOrder = () => {
     for (let i = 0; i < orderItems.length; i++) {
         orderTotalPrice += orderItems[i].price;
     };
-    orderSectionTotalPrice.innerHTML = `
-        KR ${orderTotalPrice},00
-    `;
+    orderSectionTotalPrice.innerHTML = `KR ${orderTotalPrice},00`;
 };
 
 const updateTotalPriceInItem = (sizePrice) => {
@@ -581,9 +579,7 @@ const updateTotalPriceInItem = (sizePrice) => {
     for (let i = 0; i < addedExtras.length; i++) {
         itemTotalPrice += addedExtras[i].price;
     };
-    orderItemTotalPrice.innerHTML = `
-        ${itemTotalPrice},00
-    `;
+    orderItemTotalPrice.innerHTML = `${itemTotalPrice},00`;
 };
 
 const addItemToOrder = (index, isTheItemADrink, sizeNr) => {

@@ -352,13 +352,13 @@ const extraOptions = [
     },
     {
         id: 4,
-        name: "Vaniljesirup",   
+        name: "Vanilje-sirup",   
         price: 3,
         image: "vaniljesirup.png"
     },
     {
         id: 5,
-        name: "Sjokoladesirup", 
+        name: "Sjokolade-sirup", 
         price: 3,
         image: "sjokoladesirup.png"
     },
