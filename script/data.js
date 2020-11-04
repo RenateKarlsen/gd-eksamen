@@ -194,7 +194,7 @@ const employees = [
         id: 4,
         firstName: "Vibeke",
         lastName: "Opgård",
-        image: "5.png"
+        image: "5.jpg"
     }
 ];
 
