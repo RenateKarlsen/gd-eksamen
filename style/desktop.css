@@ -1,9 +1,9 @@
 :root {
     --standard-gray-color: #969696;
     --darker-gray-color: #666666;
-    --lighter-gray-color: rgb(179, 179, 179);
-    --confirm-btn-color: rgb(36, 224, 133);
-    --confirm-btn-active-color: rgb(61, 255, 161);
+    --lighter-gray-color: #b3b3b3;
+    --confirm-btn-color: #24e085;
+    --confirm-btn-active-color: #3dffa1;
     --drinks-menu-color: #4569fc;
     --desserts-menu-color: #ff9900;
 }
@@ -45,37 +45,52 @@ ul::-webkit-scrollbar {
 
 #user-account-header {
     position: relative;
-    display: grid;
     border-bottom: 1px solid var(--darker-gray-color);
     grid-column: 1 / 10;
     grid-row: 1;
 }
 
+#logo {
+    position: absolute;
+    grid-column: 2 / 3;
+    width: 150px;
+    right: 0;
+    bottom: 0.8em;
+}
+
 #active-user-account-display {
     display: grid;
     position: absolute;
-    margin-bottom: 20px;
     grid-template-columns: 50px 1fr;
     align-self: center;
-    background-color: var(--lighter-gray-color);
-    margin: 0;
     border-radius: 50px;
-    padding: 0px 40px 0px 0px;
-    
+    background-color: #e6e6e6;
+    padding: 0px 20px 0px 0px;
+    font-size: 12px;  
+    height: 3.8em;  
+    margin-bottom: 1em;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#active-user-account-display:active {
+    background-color: var(--lighter-gray-color)
 }
 
 #active-user-account-display img {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
-    border: 5px solid var(--lighter-gray-color);
+    border: 5px solid transparent;
+    grid-column: 1 / 2;
 }
 
 #active-user-account-display h2 {
     color: var(--darker-gray-color);
     margin-bottom: 5px;
-    margin-left: 10px;
-    align-self: end;
+    align-self: center;
+    margin: 0;
+    grid-column: 2 / 3;
 }
 
 #main-navigation-section {

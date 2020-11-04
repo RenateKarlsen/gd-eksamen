@@ -165,36 +165,42 @@ const dessertItems = [
     },
 ];
 
-const employees = [
-    {   
+const extraOptions = [
+    {
         id: 0,
-        firstName: "Eirik",
-        lastName: "Lundanes",
-        image: "1.jpg"
-    },
+        name: "Espresso",       
+        price: 6,
+        image: "espresso.png"
+    }, 
     {
         id: 1,
-        firstName: "Karoline",
-        lastName: "Andersen",
-        image: "2.jpg"
+        name: "Kumelk",         
+        price: 0,
+        image: "kumelk.png"
     },
     {
         id: 2,
-        firstName: "Pål Anders",
-        lastName: "Byenstuen",
-        image: "3.jpg"
+        name: "Soyamelk",       
+        price: 3,
+        image: "soyamelk.png"
     },
     {
         id: 3,
-        firstName: "Renate",
-        lastName: "Karlsen",
-        image: "4.jpg"
+        name: "Vanilje-sirup",   
+        price: 3,
+        image: "vaniljesirup.png"
     },
     {
         id: 4,
-        firstName: "Vibeke",
-        lastName: "Opgård",
-        image: "5.png"
+        name: "Sjokolade-sirup", 
+        price: 3,
+        image: "sjokoladesirup.png"
+    },
+    {
+        id: 5,
+        name: "Krem",
+        price: 4,
+        image: "krem.png"
     }
 ];
 
@@ -330,42 +336,37 @@ const completedOrders = [
             }
         ]
     }
-]
-const extraOptions = [
+];
+
+const employees = [
+    {   
+        id: 0,
+        firstName: "Eirik",
+        lastName: "Lundanes",
+        image: "eirik-lundanes.jpg"
+    },
     {
         id: 1,
-        name: "Espresso",       
-        price: 6,
-        image: "espresso.png"
-    }, 
+        firstName: "Karoline",
+        lastName: "Andersen",
+        image: "karoline-andersen.jpg"
+    },
     {
         id: 2,
-        name: "Kumelk",         
-        price: 0,
-        image: "kumelk.png"
+        firstName: "Pål Anders",
+        lastName: "Byenstuen",
+        image: "paal-anders-byenstuen.jpg"
     },
     {
         id: 3,
-        name: "Soyamelk",       
-        price: 3,
-        image: "soyamelk.png"
+        firstName: "Renate",
+        lastName: "Karlsen",
+        image: "renate-karlsen.jpg"
     },
     {
         id: 4,
-        name: "Vanilje-sirup",   
-        price: 3,
-        image: "vaniljesirup.png"
-    },
-    {
-        id: 5,
-        name: "Sjokolade-sirup", 
-        price: 3,
-        image: "sjokoladesirup.png"
-    },
-    {
-        id: 6,
-        name: "Krem",
-        price: 4,
-        image: "krem.png"
+        firstName: "Vibeke",
+        lastName: "Opgård",
+        image: "vibeke-opgaard.jpg"
     }
 ];
