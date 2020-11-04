@@ -290,7 +290,7 @@ const revealOrderHistorySection = () => {
 
 const renderOrderHistory = () => {
     const orderList = document.getElementById("order-list");
-    for (let i = 0; i < completedOrders.length; i++) {
+    for (let i = completedOrders.length - 1; i >= 0; i--) {
         const listedOrder = document.createElement("div");
         listedOrder.className = "listed-order";
         listedOrder.setAttribute("onclick", `renderOrder(this, ${completedOrders[i].orderNr})`);
