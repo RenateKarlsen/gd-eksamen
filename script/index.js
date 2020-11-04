@@ -435,7 +435,7 @@ const renderActiveUserAccount = () => {
                     <img src="images/employees/${results.rows.item(i).image}" alt="${results.rows.item(i).firstName} ${results.rows.item(i).lastName} (ansatt)">
                     <h2>${results.rows.item(i).firstName} ${results.rows.item(i).lastName}</h2>
                 `;
-                
+
                 userAccountHeader.insertBefore(activeUserAccountDisplay, userAccountHeader.firstChild);
             }
         })
