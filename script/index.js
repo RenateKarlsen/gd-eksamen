@@ -7,8 +7,6 @@ const mainNavigationSection = document.getElementById("main-navigation-section")
 const body = document.getElementsByTagName("body")[0];
 const html = document.getElementsByTagName("html")[0];
 const main = document.getElementsByTagName("main");
-const totalPriceContainer = document.createElement("div");
-const totalPriceOutput = document.createElement("h2");
 const mediaQuery = window.matchMedia("(max-width: 600px)")
 
 mediaQuery.addEventListener("change", (e) => {
@@ -396,7 +394,6 @@ const renderOrder = (orderElement, orderNr) => {
     };
 };
 
-
 const styleListedOrders = (orderElement) => {
     const orderContainer = document.getElementById("order-container");
     const listedOrders = document.getElementsByClassName("listed-order");
@@ -493,15 +490,27 @@ const back = () => {
 };
 
 const selectSize = (sizeElement, index, price, size) => {
-    renderExtraOptionsCard(index, price);
-    updatePrice(price, null, null);
+    renderExtraOptionsCards(price);
+    if (menuSection.querySelector('#order-item-total-price-container') === null) {
+        const orderItemTotalPriceContainer = document.createElement("div");
+        orderItemTotalPriceContainer.id = "order-item-total-price-container";
+        orderItemTotalPriceContainer.innerHTML = `
+            <h2>TOTALT KR </h2>
+        `;
 
-    //RENDERS CONFIRM ORDER BTN
-    const confirmOrderBtn = document.createElement("button");
-    confirmOrderBtn.className = "confirm-order-btn";
-    confirmOrderBtn.innerHTML = "LEGG TIL I BESTILLING";
-    confirmOrderBtn.setAttribute("onclick", `addItemToOrder(${index}, true, ${size})`);
-    menuSection.appendChild(confirmOrderBtn);
+        const orderItemTotalPrice = document.createElement("h2");
+        orderItemTotalPrice.id = "order-item-total-price";
+        orderItemTotalPriceContainer.appendChild(orderItemTotalPrice);
+        menuSection.appendChild(orderItemTotalPriceContainer);
+
+        const confirmOrderBtn = document.createElement("button");
+        confirmOrderBtn.className = "confirm-order-btn";
+        confirmOrderBtn.innerHTML = "LEGG TIL I BESTILLING";
+        confirmOrderBtn.setAttribute("onclick", `addItemToOrder(${index}, true, ${size})`);
+        menuSection.appendChild(confirmOrderBtn);
+    }
+
+    updateTotalPriceInItem(price);
 
     const drinkSizeElements = document.getElementsByClassName("drink-size");
     for (element of drinkSizeElements) {
@@ -512,68 +521,77 @@ const selectSize = (sizeElement, index, price, size) => {
     sizeElement.style.color = "var(--drinks-menu-color)";
 };
 
-const renderExtraOptionsCard = (index, price) => {
+const renderExtraOptionsCards = (price) => {
     const extraOptionCardContainer = document.createElement("div");
-    // RENDERS EXTRA-OPTIONS-CARD FROM extraOptionsObj (data.js)
-
-    let i = 0;
+    sizePrice = price;
     if (menuSection.childNodes.length < 12) {
-        Object.keys(extraOptionsObj, extraOptionCardContainer).forEach(key => {
-            i++;
-            const extraPrice = extraOptionsObj[key].price;
+        for (let i = 0; i < extraOptions.length; i++) {
             const extraOptionCard = document.createElement("div");
             extraOptionCardContainer.className = "extra-options-card-container";
             extraOptionCard.className = "extra-option-card";
-            extraOptionCard.id = `extra-option-card-${extraOptionsObj[key].name}`;
-            extraOptionCard.setAttribute("onclick", `updatePrice(${price}, ${extraPrice}, this)`);
+            extraOptionCard.id = `${extraOptions[i].id}`;
+            extraOptionCard.setAttribute("onclick", `addExtraToItem(this, extraOptions[id - 1], sizePrice)`);
 
             extraOptionCard.innerHTML = `
-                <img src="images/icons/${extraOptionsObj[key].image}" alt="${extraOptionsObj[key].name}" width="30px" height="30px">
-                <h4 id="extra-option-name-h4">${extraOptionsObj[key].name.toUpperCase()}</h4>
-                <h4 id="extra-option-price-h4">KR ${extraOptionsObj[key].price}</h4>
+                <img src="images/icons/${extraOptions[i].image}" alt="${extraOptions[i].name}" width="30px" height="30px">
+                <h4 id="extra-option-name-h4">${extraOptions[i].name.toUpperCase()}</h4>
+                <h4 id="extra-option-price-h4">KR ${extraOptions[i].price}</h4>
             `;
             extraOptionCardContainer.appendChild(extraOptionCard);
             menuSection.appendChild(extraOptionCardContainer);
-        });
+        };
     };
 };
 
-const updatePrice = (sizePrice, extraPrice, extrasElement) => {
-    totalPriceContainer.id = "total-price-container";
-    totalPriceOutput.id = "total-price";
+const addExtraToItem = (extraElement, chosenExtra, sizePrice) => {
+    if (!addedExtras.includes(chosenExtra)) {
+        addedExtras.push(chosenExtra);
 
-    totalPriceContainer.innerHTML = `
-        <h3>TOTALT KR </h3>
-    `;
-
-    let totalPrice = sizePrice;
-    if (extraPrice !== null) {
-        
-        totalPrice = sizePrice + extraPrice;
-        console.log(sizePrice);
-        if (extrasElement.style.backgroundColor === "") {
-
-            extrasElement.style.backgroundColor = "#ffffff";
-            extrasElement.style.color = "var(--drinks-menu-color)";
-        } else {
-            totalPrice = sizePrice - extraPrice
-
-            extrasElement.style.backgroundColor = "";
-            extrasElement.style.color = "#ffffff";
+        extraElement.style.backgroundColor = "#ffffff";
+        extraElement.style.color = "var(--drinks-menu-color)";
+    } else {
+        for (let i = 0; i < addedExtras.length; i++) {
+            if (addedExtras[i].id === chosenExtra.id) {
+                addedExtras.splice(i, 1);
+            }
         }
-    };
 
-    totalPriceOutput.innerHTML = totalPrice;
-    totalPriceContainer.appendChild(totalPriceOutput);
-    menuSection.appendChild(totalPriceContainer);
+        extraElement.style.backgroundColor = "";
+        extraElement.style.color = "#ffffff";
+    }
+    updateTotalPriceInItem(sizePrice);
+};
+
+const updateTotalPriceInOrder = () => {
+    const orderSectionTotalPrice = document.getElementById("order-section-total-price");
+    let orderTotalPrice = 0;
+
+    for (let i = 0; i < orderItems.length; i++) {
+        orderTotalPrice += orderItems[i].price;
+    };
+    orderSectionTotalPrice.innerHTML = `
+        KR ${orderTotalPrice},00
+    `;
+};
+
+const updateTotalPriceInItem = (sizePrice) => {
+    const orderItemTotalPrice = document.getElementById("order-item-total-price");
+    let itemTotalPrice = sizePrice;
+
+    for (let i = 0; i < addedExtras.length; i++) {
+        itemTotalPrice += addedExtras[i].price;
+    };
+    orderItemTotalPrice.innerHTML = `
+        ${itemTotalPrice},00
+    `;
 };
 
 const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
+    const orderItemTotalPrice = document.getElementById("order-item-total-price");
     const paymentSection = document.getElementById("payment-section");
     const orderSectionContainer = document.getElementById("order-section");
     const orderItemCard = document.createElement("div");
     orderItemCard.className = "order-item-card";
-
     if (orderSectionContainer.querySelector('#order-section-list') === null) {
         orderSectionContainer.innerHTML = `
             <div id="order-section-header">
@@ -602,8 +620,9 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
         const isDrink = true;
         const imagePath = drinkItems[index].imagePath;
         const size = sizeNr;
-        const price = parseInt(totalPriceOutput.innerHTML);
-        const extras = [];
+        const price = parseInt(orderItemTotalPrice.innerHTML);
+        const extras = addedExtras;
+        addedExtras = [];
 
         const item = { id, name, isDrink, imagePath, size, price, extras };
         orderItems.push(item);
@@ -648,18 +667,6 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
     };
 
     back();
-};
-
-const updateTotalPriceInOrder = () => {
-    const orderSectionTotalPrice = document.getElementById("order-section-total-price");
-    let orderTotalPrice = 0;
-
-    for (let i = 0; i < orderItems.length; i++) {
-        orderTotalPrice += orderItems[i].price;
-    };
-    orderSectionTotalPrice.innerHTML = `
-        KR ${orderTotalPrice},00
-    `;
 };
 
 const revealOrderSection = (orderSectionContainer, paymentSection) => {

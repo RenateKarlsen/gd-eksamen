@@ -198,6 +198,7 @@ const employees = [
     }
 ];
 
+let addedExtras = [];
 let orderItems = [];
 
 const completedOrders = [
@@ -330,33 +331,39 @@ const completedOrders = [
         ]
     }
 ]
-const extraOptionsObj = [
+const extraOptions = [
     {
+        id: 1,
         name: "Espresso",       
         price: 6,
         image: "espresso.png"
     }, 
     {
+        id: 2,
         name: "Kumelk",         
         price: 0,
         image: "kumelk.png"
     },
     {
+        id: 3,
         name: "Soyamelk",       
         price: 3,
         image: "soyamelk.png"
     },
     {
+        id: 4,
         name: "Vaniljesirup",   
         price: 3,
         image: "vaniljesirup.png"
     },
     {
+        id: 5,
         name: "Sjokoladesirup", 
         price: 3,
         image: "sjokoladesirup.png"
     },
     {
+        id: 6,
         name: "Krem",
         price: 4,
         image: "krem.png"

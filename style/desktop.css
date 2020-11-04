@@ -79,7 +79,6 @@ ul::-webkit-scrollbar {
     grid-row: 2 / 11;
 }
 
-
 /* STYLE SCROLLBAR */
 ::-webkit-scrollbar {
     width: 15px;
@@ -98,7 +97,6 @@ ul::-webkit-scrollbar {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--darker-gray-color); 
 }
-
 
 /* MENY */
 .menu-button {
@@ -532,7 +530,7 @@ ul::-webkit-scrollbar {
 
 /*FIX APPEND*/
 
-#total-price-container{
+#order-item-total-price-container{
     grid-row: 4;
     grid-column: 3 / 6;
     border-top: 1px solid #ffffff;
@@ -542,7 +540,7 @@ ul::-webkit-scrollbar {
     height: 5em;
 }
 
-#total-price-container h3{
+#order-item-total-price h3{
     display: inline;
     font-size: 28px;
     font-weight: lighter;
