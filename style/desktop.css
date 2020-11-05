@@ -592,6 +592,14 @@ ul::-webkit-scrollbar {
     background-image: linear-gradient(rgb(221, 220, 220), rgb(241, 241, 241));
 }
 
+#edit-product-header {
+    grid-row: 1;
+    grid-column: 3 / 6;
+    color: #ffffff;
+    justify-self: center;
+    font-weight: lighter;
+}
+
 .item-img-and-name {
     grid-row: 1;
     grid-column: 3 / 6;
@@ -610,17 +618,17 @@ ul::-webkit-scrollbar {
     margin-top: 1em;
 }
 
-.small-drink {
+#small-drink {
     grid-row: 2;
     grid-column: 3;
 }
     
-.medium-drink {
+#medium-drink {
     grid-row: 2;
     grid-column: 4;
 }
     
-.large-drink {
+#large-drink {
     grid-row: 2;
     grid-column: 5;
 }
@@ -702,12 +710,20 @@ ul::-webkit-scrollbar {
     align-self: start;
 }
 
-#back-btn{
-    position: absolute;
+.back-btn{
     align-self: start;
-    justify-self: start;
     background-color: var(--drinks-menu-color);
     outline: none;
+}
+
+#back-btn-arrow{
+    position: absolute;
+    justify-self: start;
+}
+
+#back-btn-cross{
+    grid-row: 1;
+    grid-column: 7 / 8;
 }
 
 #back-btn:active {
@@ -805,11 +821,18 @@ ul::-webkit-scrollbar {
     border-radius: 5px;
     padding-top: 8px;
     padding-bottom: 8px;
+}
+
+.drinks-order-item-card-content {
+    background-color: var(--drinks-menu-color);
     cursor: pointer;
 }
 
-.order-item-card-content:active{
-    background: #e5e5e5;
+.desserts-order-item-card-content {
+    background-color: var(--desserts-menu-color);
+}
+
+.drinks-order-item-card-content:active{
     -webkit-box-shadow: inset 0px 0px 10px #c1c1c1;
     -moz-box-shadow: inset 0px 0px 10px #c1c1c1;
     box-shadow: inset 0px 0px 10px #c1c1c1;
