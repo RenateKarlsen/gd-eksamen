@@ -475,7 +475,7 @@ const renderOptions = (index) => {
                 <i class="fa fa-coffee fa-4x" alt="Stor kaffekopp"></i>
                 <h4>KR ${drinkPriceLarge}</h4>
             </div>
-            <button id="back-btn" onclick="back()"><i class="fa fa-arrow-left fa-4x" alt="Pil venstre"></i></button>
+            <button id="back-btn" onclick="back()"><i class="fa fa-angle-left fa-5x" alt="Pil venstre"></i></button>
        `;
 };
 

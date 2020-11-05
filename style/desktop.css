@@ -128,10 +128,8 @@ ul::-webkit-scrollbar {
 }
 
 .menu-button:active {
-    background: #e5e5e5;
-    -webkit-box-shadow: inset 0px 0px 50px #c1c1c1;
-    -moz-box-shadow: inset 0px 0px 50px #c1c1c1;
-    box-shadow: inset 0px 0px 50px #c1c1c1;
+    transform: scale(0.98);
+    opacity: 0.8;
 }
 
 #drinks-menu-button {
@@ -160,6 +158,8 @@ ul::-webkit-scrollbar {
 }
 
 .orders-button:active {
+    transform: scale(0.98);
+    opacity: 0.9;
     background-color: #cccaca;
     -webkit-box-shadow: inset 0px 0px 10px #c1c1c1;
     -moz-box-shadow: inset 0px 0px 10px #c1c1c1;
@@ -340,6 +340,7 @@ ul::-webkit-scrollbar {
 }
 
 .item-card:active {
+    transform: scale(0.98);
     background: #e5e5e5;
     -webkit-box-shadow: inset 0px 0px 30px #c1c1c1;
     -moz-box-shadow: inset 0px 0px 30px #c1c1c1;
@@ -671,6 +672,8 @@ ul::-webkit-scrollbar {
 }
 
 .confirm-order-btn:active {
+    transform: scale(0.98);
+    opacity: 0.9;
     background-color: var(--confirm-btn-active-color);
     -webkit-box-shadow: inset 0px 0px 30px #c1c1c1;
     -moz-box-shadow: inset 0px 0px 30px #c1c1c1;
@@ -711,6 +714,7 @@ ul::-webkit-scrollbar {
 }
 
 #back-btn:active {
+    transform: scale(0.98);
     color: var(--standard-gray-color);
 }
 
@@ -721,6 +725,7 @@ ul::-webkit-scrollbar {
 }
 
 .pay-button:active {
+    transform: scale(0.98);
     background-color: var(--confirm-btn-active-color);
     -webkit-box-shadow: inset 0px 0px 10px #c1c1c1;
     -moz-box-shadow: inset 0px 0px 10px #c1c1c1;
@@ -772,6 +777,7 @@ ul::-webkit-scrollbar {
 }
 
 .confirm-deletion-button:active {
+    transform: scale(0.98);
     background-color: var(--confirm-btn-active-color);
     -webkit-box-shadow: inset 0px 0px 10px #c1c1c1;
     -moz-box-shadow: inset 0px 0px 10px #c1c1c1;
@@ -786,6 +792,7 @@ ul::-webkit-scrollbar {
 }
 
 .cancel-deletion-button:active {
+    transform: scale(0.98);
     background-color: #f78b8b;
     -webkit-box-shadow: inset 0px 0px 10px #c1c1c1;
     -moz-box-shadow: inset 0px 0px 10px #c1c1c1;
@@ -809,6 +816,7 @@ ul::-webkit-scrollbar {
 }
 
 .order-item-card-content:active{
+    transform: scale(0.98);
     background: #e5e5e5;
     -webkit-box-shadow: inset 0px 0px 10px #c1c1c1;
     -moz-box-shadow: inset 0px 0px 10px #c1c1c1;
