@@ -549,7 +549,7 @@ const addExtraToItem = (extraElement, chosenExtra, sizePrice) => {
         addedExtras.push(chosenExtra);
 
         extraElement.style.backgroundColor = "#ffffff";
-        extraElement.style.color = "var(--drinks-menu-color)";
+        extraElement.style.color = "#000000";
     } else {
         for (let i = 0; i < addedExtras.length; i++) {
             if (addedExtras[i].id === chosenExtra.id) {
