@@ -205,7 +205,6 @@ const extraOptions = [
 ];
 
 let addedExtras = [];
-let extrasInUpdate = [];
 let orderItems = [];
 
 const completedOrders = [

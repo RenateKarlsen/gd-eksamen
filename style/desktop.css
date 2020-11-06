@@ -855,9 +855,8 @@ ul::-webkit-scrollbar {
     background-color: var(--desserts-menu-color);
 }
 
-.order-item-card-content:active{
+.drinks-order-item-card-content:active{
     transform: scale(0.98);
-    background: #e5e5e5;
     -webkit-box-shadow: inset 0px 0px 10px #c1c1c1;
     -moz-box-shadow: inset 0px 0px 10px #c1c1c1;
     box-shadow: inset 0px 0px 10px #c1c1c1;
@@ -895,7 +894,7 @@ ul::-webkit-scrollbar {
 }
 
 .delete-item-button:active{
-    background: #e5e5e5;
+    transform: scale(0.98);
     -webkit-box-shadow: inset 0px 0px 10px #c1c1c1;
     -moz-box-shadow: inset 0px 0px 10px #c1c1c1;
     box-shadow: inset 0px 0px 10px #c1c1c1;
