@@ -594,7 +594,6 @@ const updateItemInOrder = (index, id) => {
 
 const selectSize = (sizeElement, index, price, size) => {
     renderExtraOptionsCards(price, null, false);
-    sizeNr = size;
     if (menuSection.querySelector('#order-item-total-price-container') === null) {
         const orderItemTotalPriceContainer = document.createElement("div");
         orderItemTotalPriceContainer.id = "order-item-total-price-container";
@@ -610,7 +609,7 @@ const selectSize = (sizeElement, index, price, size) => {
         const confirmOrderBtn = document.createElement("button");
         confirmOrderBtn.className = "confirm-order-btn";
         confirmOrderBtn.innerHTML = "LEGG TIL I BESTILLING";
-        confirmOrderBtn.setAttribute("onclick", `addItemToOrder(${index}, true, ${sizeNr})`);
+        confirmOrderBtn.setAttribute("onclick", `addItemToOrder(${index}, true, ${size})`);
         menuSection.appendChild(confirmOrderBtn);
     }
 
@@ -686,7 +685,6 @@ const updateExtrasInItem = (extraElement, chosenExtra, orderIndex, sizePrice) =>
         extraElement.style.backgroundColor = "";
         extraElement.style.color = "#ffffff";
     }
-    console.log("edit: " + orderItems);
     updateTotalPriceInItem(sizePrice, orderIndex, true);
 };
 
@@ -717,7 +715,6 @@ const updateTotalPriceInItem = (sizePrice, orderIndex, editItemInOrder) => {
 };
 
 const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
-    console.log("add item to order:" + sizeNr);
     const orderItemTotalPrice = document.getElementById("order-item-total-price");
     const paymentSection = document.getElementById("payment-section");
     const orderSectionContainer = document.getElementById("order-section");
@@ -813,7 +810,6 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
     };
 
     closeOptionsMenu();
-    console.log("add: " + orderItems);
 };
 
 const revealOrderSection = (orderSectionContainer, paymentSection) => {
