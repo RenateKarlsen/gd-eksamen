@@ -39,7 +39,7 @@ const handleMenu = (menuButton) => {
     };
 
     if (menuSection.querySelector('.item-img-and-name') !== null) {
-        back();
+        closeOptionsMenu();
     };
 
     if (menuSection.querySelector('#order-history-container') !== null) {
@@ -111,7 +111,7 @@ const createDrinkItem = (drinkItem, id) => {
     const drinkItemCard = document.createElement("div");
     drinkItemCard.className = "item-card drink-item-card";
     drinkItemCard.id = `item-card-${drinkItem.name}`;
-    drinkItemCard.setAttribute("onclick", `renderOptions(${index})`);
+    drinkItemCard.setAttribute("onclick", `renderOptions(${index}, null, false)`);
 
     if (mediaQuery.matches) {
         drinkItemCard.innerHTML = `
@@ -260,7 +260,7 @@ const revealOrderHistorySection = () => {
     const orderContainer = document.createElement("div");
 
     if (menuSection.querySelector('.item-img-and-name') !== null) {
-        back();
+        closeOptionsMenu();
     };
 
     if (menuSection.querySelector('#order-history-container') === null) {
@@ -442,45 +442,117 @@ const renderActiveUserAccount = () => {
     })
 };
 
-const renderOptions = (index) => {
-    //Removes menus so the boxes disappears
-    menuSection.removeChild(popularItemsMenuContainer);
-    menuSection.removeChild(mainMenuContainer);
+const renderOptions = (menuIndex, orderIndex, editItemInOrder) => {
+    if (menuSection.querySelector('.item-img-and-name') !== null) {
+        closeOptionsMenu();
+    } else {
+        //Removes menus so the boxes disappears
+        menuSection.removeChild(popularItemsMenuContainer);
+        menuSection.removeChild(mainMenuContainer);
 
-    let drinkPriceSmall = drinkItems[index].price.small;
-    let drinkPriceMedium = drinkItems[index].price.medium;
-    let drinkPriceLarge = drinkItems[index].price.large;
+        menuSection.style.backgroundColor = "var(--drinks-menu-color)";
+        menuSection.style.padding = "2em";
+        menuSection.style.gridGap = "1em";
+        menuSection.style.gridTemplateColumns = "repeat(7, 1fr)";
 
-    menuSection.style.backgroundColor = "var(--drinks-menu-color)";
-    menuSection.style.padding = "2em";
-    menuSection.style.gridGap = "1em";
-    menuSection.style.gridTemplateColumns = "repeat(7, 1fr)";
-    menuSection.innerHTML = `
-            <div class ="item-img-and-name">
-                <h1>${drinkItems[index].name.toUpperCase()}</h1> 
-                <img id="drinkImg"src=${drinkItems[index].imagePath} alt=${drinkItems[index].name}>
+        let drinkPriceSmall = drinkItems[menuIndex].price.small;
+        let drinkPriceMedium = drinkItems[menuIndex].price.medium;
+        let drinkPriceLarge = drinkItems[menuIndex].price.large;
+
+        if (editItemInOrder !== true) {
+            menuSection.innerHTML = `
+            <div class="item-img-and-name">
+                <h1>${drinkItems[menuIndex].name.toUpperCase()}</h1> 
+                <img id="drinkImg"src=${drinkItems[menuIndex].imagePath} alt=${drinkItems[menuIndex].name}>
             </div>
-            <div class="drink-size small-drink" onclick="selectSize(this, ${index}, ${drinkPriceSmall}, 1)">
+            <div class="drink-size" id="small-drink" onclick="selectSize(this, ${menuIndex}, ${drinkPriceSmall}, 1)">
                 <h3>LITEN</h3>
                 <i class="fa fa-coffee fa-2x" alt="Liten kaffekopp"></i>
                 <h4>KR ${drinkPriceSmall}</h4>
             </div>
-            <div class="drink-size medium-drink" onclick="selectSize(this, ${index}, ${drinkPriceMedium}, 2)">
+            <div class="drink-size" id="medium-drink" onclick="selectSize(this, ${menuIndex}, ${drinkPriceMedium}, 2)">
                 <h3>MEDIUM</h3>
                 <i class="fa fa-coffee fa-3x" alt="Medium kaffekopp"></i>
                 <h4>KR ${drinkPriceMedium}</h4>
             </div>
-            <div class="drink-size large-drink" onclick="selectSize(this, ${index}, ${drinkPriceLarge}, 3)">
+            <div class="drink-size" id="large-drink" onclick="selectSize(this, ${menuIndex}, ${drinkPriceLarge}, 3)">
                 <h3>STOR</h3>
                 <i class="fa fa-coffee fa-4x" alt="Stor kaffekopp"></i>
                 <h4>KR ${drinkPriceLarge}</h4>
             </div>
-            <button id="back-btn" onclick="back()"><i class="fa fa-angle-left fa-5x" alt="Pil venstre"></i></button>
+            <button class="back-btn" id="back-btn-arrow" onclick="closeOptionsMenu()"><i class="fa fa-angle-left fa-5x" alt="Pil venstre"></i></button>
        `;
+        } else {
+            menuSection.style.gridTemplateRows = "120px 1fr 1fr 1fr 1fr";
+            menuSection.innerHTML = `
+            <div class="item-img-and-name" id="item-img-and-name-edit">
+                <h1 id="edit-product-header">ENDRE DRIKK</h1>
+                <h2>${orderItems[orderIndex].name.toUpperCase()}</h2> 
+                <img id="drinkImg"src=${orderItems[orderIndex].imagePath} alt=${orderItems[orderIndex].name}>
+            </div>
+            <div class="drink-size" id="small-drink" onclick="updateSize(this, ${orderIndex}, ${drinkPriceSmall}, 1)">
+                <h3>LITEN</h3>
+                <i class="fa fa-coffee fa-2x" alt="Liten kaffekopp"></i>
+                <h4>KR ${drinkPriceSmall}</h4>
+            </div>
+            <div class="drink-size" id="medium-drink" onclick="updateSize(this, ${orderIndex}, ${drinkPriceMedium}, 2)">
+                <h3>MEDIUM</h3>
+                <i class="fa fa-coffee fa-3x" alt="Medium kaffekopp"></i>
+                <h4>KR ${drinkPriceMedium}</h4>
+            </div>
+            <div class="drink-size" id="large-drink" onclick="updateSize(this, ${orderIndex}, ${drinkPriceLarge}, 3)">
+                <h3>STOR</h3>
+                <i class="fa fa-coffee fa-4x" alt="Stor kaffekopp"></i>
+                <h4>KR ${drinkPriceLarge}</h4>
+            </div>
+        `;
+            let drinkPrice = 0;
+            if (orderItems[orderIndex].size === 1) {
+                const smallDrink = document.getElementById("small-drink");
+                smallDrink.style.backgroundColor = "#ffffff";
+                smallDrink.style.color = "var(--drinks-menu-color)";
+                drinkPrice = drinkPriceSmall;
+            } else if (orderItems[orderIndex].size === 2) {
+                const mediumDrink = document.getElementById("medium-drink");
+                mediumDrink.style.backgroundColor = "#ffffff";
+                mediumDrink.style.color = "var(--drinks-menu-color)";
+                drinkPrice = drinkPriceMedium;
+            } else {
+                const largeDrink = document.getElementById("large-drink");
+                largeDrink.style.backgroundColor = "#ffffff";
+                largeDrink.style.color = "var(--drinks-menu-color)";
+                drinkPrice = drinkPriceLarge;
+            }
+
+            renderExtraOptionsCards(drinkPrice, orderIndex, true);
+            for (let i = 0; i < extraOptions.length; i++) {
+                if (orderItems[orderIndex].extras.includes(extraOptions[i])) {
+                    document.getElementById(i).style.backgroundColor = "#ffffff";
+                    document.getElementById(i).style.color = "var(--drinks-menu-color)";
+                }
+            }
+
+            const orderItemTotalPriceContainer = document.createElement("div");
+            orderItemTotalPriceContainer.id = "order-item-total-price-container";
+            orderItemTotalPriceContainer.innerHTML = `<p>TOTALT KR </p>`;
+
+            const orderItemTotalPrice = document.createElement("p");
+            orderItemTotalPrice.id = "order-item-total-price";
+            orderItemTotalPriceContainer.appendChild(orderItemTotalPrice);
+            menuSection.appendChild(orderItemTotalPriceContainer);
+
+            const confirmOrderBtn = document.createElement("button");
+            confirmOrderBtn.className = "confirm-order-btn";
+            confirmOrderBtn.innerHTML = "FULLFØR";
+            confirmOrderBtn.setAttribute("onclick", `updateItemInOrder(${orderIndex}, ${orderItems[orderIndex].id})`);
+            menuSection.appendChild(confirmOrderBtn);
+            updateTotalPriceInItem(drinkPrice, orderIndex, true);
+        }
+    }
 };
 
 // The back button on options menu
-const back = () => {
+const closeOptionsMenu = () => {
     menuSection.innerHTML = "";
     menuSection.appendChild(popularItemsMenuContainer);
     menuSection.appendChild(mainMenuContainer);
@@ -488,17 +560,47 @@ const back = () => {
     menuSection.style.padding = "0";
     menuSection.style.gridGap = "1rem";
     menuSection.style.gridTemplateColumns = "repeat(8, 1fr)";
+    menuSection.style.gridTemplateRows = "repeat(5, 1fr)";
+};
+
+const updateSize = (sizeElement, index, price, sizeNr) => {
+    orderItems[index].size = sizeNr;
+    sizePrice = price;
+    const drinkSizeElements = document.getElementsByClassName("drink-size");
+    for (element of drinkSizeElements) {
+        element.style.backgroundColor = "var(--drinks-menu-color)";
+        element.style.color = "#ffffff";
+    };
+    sizeElement.style.backgroundColor = "#ffffff";
+    sizeElement.style.color = "var(--drinks-menu-color)";
+
+    updateTotalPriceInItem(sizePrice, index, true);
+};
+
+const updateItemInOrder = (index, id) => {
+    const orderItemTotalPrice = document.getElementById("order-item-total-price");
+    orderItems[index].price = parseInt(orderItemTotalPrice.innerHTML);
+    //orderItems[index].extras = addedExtras;
+
+    const openItem = document.getElementById(`order-item-card-content-${id}`);
+    openItem.innerHTML = `
+        <img src="${orderItems[index].imagePath}" alt="${orderItems[index].name}" width="50px" height="50px">
+        <h4>${orderItems[index].name.toUpperCase()}</h4>
+        <h2>${orderItems[index].price},00</h2>
+    `;
+    updateTotalPriceInOrder();
+    closeOptionsMenu();
 };
 
 const selectSize = (sizeElement, index, price, size) => {
-    renderExtraOptionsCards(price);
+    renderExtraOptionsCards(price, null, false);
     if (menuSection.querySelector('#order-item-total-price-container') === null) {
         const orderItemTotalPriceContainer = document.createElement("div");
         orderItemTotalPriceContainer.id = "order-item-total-price-container";
         orderItemTotalPriceContainer.innerHTML = `
             <p>TOTALT KR </p>
         `;
-
+        
         const orderItemTotalPrice = document.createElement("p");
         orderItemTotalPrice.id = "order-item-total-price";
         orderItemTotalPriceContainer.appendChild(orderItemTotalPrice);
@@ -511,7 +613,7 @@ const selectSize = (sizeElement, index, price, size) => {
         menuSection.appendChild(confirmOrderBtn);
     }
 
-    updateTotalPriceInItem(price);
+    updateTotalPriceInItem(price, null, false);
 
     const drinkSizeElements = document.getElementsByClassName("drink-size");
     for (element of drinkSizeElements) {
@@ -522,17 +624,21 @@ const selectSize = (sizeElement, index, price, size) => {
     sizeElement.style.color = "var(--drinks-menu-color)";
 };
 
-const renderExtraOptionsCards = (price) => {
+const renderExtraOptionsCards = (price, orderIndex, editItemInOrder) => {
     const extraOptionCardContainer = document.createElement("div");
     sizePrice = price;
+
     if (menuSection.childNodes.length < 12) {
         for (let i = 0; i < extraOptions.length; i++) {
             const extraOptionCard = document.createElement("div");
             extraOptionCardContainer.className = "extra-options-card-container";
             extraOptionCard.className = "extra-option-card";
             extraOptionCard.id = `${extraOptions[i].id}`;
-            extraOptionCard.setAttribute("onclick", `addExtraToItem(this, extraOptions[id], sizePrice)`);
-
+            if (editItemInOrder) {
+                extraOptionCard.setAttribute("onclick", `updateExtrasInItem(this, extraOptions[id], ${orderIndex}, sizePrice)`);
+            } else {
+                extraOptionCard.setAttribute("onclick", `addExtraToItem(this, extraOptions[id], sizePrice)`);
+            }
             extraOptionCard.innerHTML = `
                 <img src="images/icons/${extraOptions[i].image}" alt="${extraOptions[i].name}" width="30px" height="30px">
                 <h4 id="extra-option-name-h4">${extraOptions[i].name.toUpperCase()}</h4>
@@ -560,7 +666,26 @@ const addExtraToItem = (extraElement, chosenExtra, sizePrice) => {
         extraElement.style.backgroundColor = "";
         extraElement.style.color = "#ffffff";
     }
-    updateTotalPriceInItem(sizePrice);
+    updateTotalPriceInItem(sizePrice, null, false);
+};
+
+const updateExtrasInItem = (extraElement, chosenExtra, orderIndex, sizePrice) => {
+    if (!orderItems[orderIndex].extras.includes(chosenExtra)) {
+        orderItems[orderIndex].extras.push(chosenExtra);
+
+        extraElement.style.backgroundColor = "#ffffff";
+        extraElement.style.color = "var(--drinks-menu-color)";
+    } else {
+        for (let i = 0; i < orderItems[orderIndex].extras.length; i++) {
+            if (orderItems[orderIndex].extras[i].id === chosenExtra.id) {
+                orderItems[orderIndex].extras.splice(i, 1);
+            }
+        }
+
+        extraElement.style.backgroundColor = "";
+        extraElement.style.color = "#ffffff";
+    }
+    updateTotalPriceInItem(sizePrice, orderIndex, true);
 };
 
 const updateTotalPriceInOrder = () => {
@@ -573,12 +698,18 @@ const updateTotalPriceInOrder = () => {
     orderSectionTotalPrice.innerHTML = `KR ${orderTotalPrice},00`;
 };
 
-const updateTotalPriceInItem = (sizePrice) => {
+const updateTotalPriceInItem = (sizePrice, orderIndex, editItemInOrder) => {
     const orderItemTotalPrice = document.getElementById("order-item-total-price");
     let itemTotalPrice = sizePrice;
 
-    for (let i = 0; i < addedExtras.length; i++) {
-        itemTotalPrice += addedExtras[i].price;
+    if (editItemInOrder) {
+        for (let i = 0; i < orderItems[orderIndex].extras.length; i++) {
+            itemTotalPrice += orderItems[orderIndex].extras[i].price;
+        }
+    } else {
+        for (let i = 0; i < addedExtras.length; i++) {
+            itemTotalPrice += addedExtras[i].price;
+        }
     };
     orderItemTotalPrice.innerHTML = `${itemTotalPrice},00`;
 };
@@ -588,6 +719,7 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
     const paymentSection = document.getElementById("payment-section");
     const orderSectionContainer = document.getElementById("order-section");
     const orderItemCard = document.createElement("div");
+    const orderItemCardContent = document.createElement("div");
     orderItemCard.className = "order-item-card";
     if (orderSectionContainer.querySelector('#order-section-list') === null) {
         orderSectionContainer.innerHTML = `
@@ -625,15 +757,23 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
         orderItems.push(item);
 
         orderItemCard.innerHTML = `
-            <div class="order-item-card-content" style="background-color:var(--drinks-menu-color)">
-                <img src="${imagePath}" alt="${name}" width="50px" height="50px">
-                <h4>${name.toUpperCase()}</h4>
-                <h2>${price},00</h2>
-            </div>
             <button class="delete-item-button" onclick="renderDeletionOptions(this, ${id})" style="background-color:var(--drinks-menu-color)">
                 <i class="fa fa-trash fa-2x"></i>
             </button>
         `;
+
+        orderItemCardContent.classList.add("drinks-order-item-card-content");
+        orderItemCardContent.classList.add("order-item-card-content");
+        orderItemCardContent.id = `order-item-card-content-${id}`;
+
+        orderItemCardContent.innerHTML = `
+            <img src="${imagePath}" alt="${name}" width="50px" height="50px">
+            <h4>${name.toUpperCase()}</h4>
+            <h2>${price},00</h2>
+        `;
+
+        orderItemCardContent.setAttribute("onclick", `renderOptions(${index}, ${id - 1}, true)`);
+        orderItemCard.insertBefore(orderItemCardContent, orderItemCard.firstChild);
     } else {
         const name = dessertItems[index].name;
         const isDrink = false;
@@ -644,16 +784,22 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
         orderItems.push(item);
 
         orderItemCard.innerHTML = `
-            <div class="order-item-card-content" style="background-color:var(--desserts-menu-color)">
-                <img src="${imagePath}" alt="${name}" width="50px" height="50px">
-                <h4>${name.toUpperCase()}</h4>
-                <h2>${price},00</h2>
-            </div>
             <button class="delete-item-button" onclick="renderDeletionOptions(this, ${id})" style="background-color:var(--desserts-menu-color)">
                 <i class="fa fa-trash fa-2x"></i>
             </button>
         `;
-    };
+
+        orderItemCardContent.classList.add("desserts-order-item-card-content");
+        orderItemCardContent.classList.add("order-item-card-content");
+
+        orderItemCardContent.innerHTML = `
+            <img src="${imagePath}" alt="${name}" width="50px" height="50px">
+            <h4>${name.toUpperCase()}</h4>
+            <h2>${price},00</h2>
+        `;
+    }
+
+    orderItemCard.insertBefore(orderItemCardContent, orderItemCard.firstChild);
 
     const orderSectionList = document.getElementById("order-section-list");
     orderSectionList.appendChild(orderItemCard);
@@ -663,7 +809,7 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
         revealOrderSection(orderSectionContainer, paymentSection);
     };
 
-    back();
+    closeOptionsMenu();
 };
 
 const revealOrderSection = (orderSectionContainer, paymentSection) => {
@@ -724,6 +870,10 @@ const completeOrder = () => {
     popularItemsMenuContainer.style.border = "1px solid var(--lighter-gray-color)";
     mainMenuContainer.style.border = "1px solid var(--lighter-gray-color)";
     orderSection.style.backgroundColor = "transparent";
+
+    if (menuSection.querySelector('.item-img-and-name') !== null) {
+        closeOptionsMenu();
+    }
 };
 
 const renderDeletionOptions = (orderItemCardButton, id) => {
@@ -750,14 +900,14 @@ const renderDeletionOptions = (orderItemCardButton, id) => {
 
     const confirmDeletionButton = document.createElement("button");
     confirmDeletionButton.className = "confirm-deletion-button";
-    confirmDeletionButton.innerHTML = `<i class="fa fa-check" alt="Kryss"></i> JA`;
+    confirmDeletionButton.innerHTML = `<i class="fa fa-check" alt="Hake-ikon"></i> JA`;
     confirmDeletionButton.addEventListener("click", () => {
         deleteItemFromOrder(orderItemCard, id)
     });
 
     const cancelDeletionButton = document.createElement("button");
     cancelDeletionButton.className = "cancel-deletion-button";
-    cancelDeletionButton.innerHTML = `<i class="fa fa-times" alt="Hake-ikon"></i> NEI`;
+    cancelDeletionButton.innerHTML = `<i class="fa fa-times" alt="Kryss"></i> NEI`;
     cancelDeletionButton.addEventListener("click", () => {
         removeChildNodes(orderItemCard);
         orderItemCard.innerHTML = stashedOrderItemCard;
@@ -777,6 +927,10 @@ const deleteItemFromOrder = (orderItemCard, id) => {
     }
     orderSectionList.removeChild(orderItemCard);
     updateTotalPriceInOrder();
+
+    if (menuSection.querySelector('.item-img-and-name') !== null) {
+        closeOptionsMenu();
+    }
 };
 
 if (!mediaQuery.matches) {
