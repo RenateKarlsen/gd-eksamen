@@ -480,7 +480,7 @@ const renderOptions = (menuIndex, orderIndex, editItemInOrder) => {
                 <i class="fa fa-coffee fa-4x" alt="Stor kaffekopp"></i>
                 <h4>KR ${drinkPriceLarge}</h4>
             </div>
-            <button class="back-btn" id="back-btn-arrow" onclick="closeOptionsMenu()"><i class="fa fa-arrow-left fa-4x" alt="Pil venstre"></i></button>
+            <button class="back-btn" id="back-btn-arrow" onclick="closeOptionsMenu()"><i class="fa fa-angle-left fa-5x" alt="Pil venstre"></i></button>
        `;
         } else {
             menuSection.style.gridTemplateRows = "120px 1fr 1fr 1fr 1fr";
@@ -655,7 +655,7 @@ const addExtraToItem = (extraElement, chosenExtra, sizePrice) => {
         addedExtras.push(chosenExtra);
 
         extraElement.style.backgroundColor = "#ffffff";
-        extraElement.style.color = "var(--drinks-menu-color)";
+        extraElement.style.color = "#000000";
     } else {
         for (let i = 0; i < addedExtras.length; i++) {
             if (addedExtras[i].id === chosenExtra.id) {
