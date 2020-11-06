@@ -597,7 +597,9 @@ ul::-webkit-scrollbar {
     grid-column: 3 / 6;
     color: #ffffff;
     justify-self: center;
+    margin: 0;
     font-weight: lighter;
+    font-size: 26px;
 }
 
 .item-img-and-name {
@@ -612,10 +614,24 @@ ul::-webkit-scrollbar {
     font-size: 25px;
 }
 
+.item-img-and-name h2 {
+    margin: 0;
+}
+
 .item-img-and-name > img {
     width: 60px;
     height: 60px;
     margin-top: 1em;
+}
+
+#item-img-and-name-edit img{
+    width: 50px;
+    height: 50px;
+    margin: 0;
+}
+
+#item-img-and-name-edit h2{
+    margin-top: 15px;
 }
 
 #small-drink {
