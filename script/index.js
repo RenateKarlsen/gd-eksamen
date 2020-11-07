@@ -415,33 +415,6 @@ const styleListedOrders = (orderElement) => {
     orderElementChildren[2].style.display = "block";
 };
 
-const renderActiveUserAccount = () => {
-    const userAccountHeader = document.getElementById("user-account-header");
-
-    db.transaction(function (tx) {
-        tx.executeSql('SELECT * FROM activeUserAccount LIMIT 1', [], function (tx, results) {
-            let len = results.rows.length, i;
-
-            // Check if no users is selected in the DB redirect to the login page
-            if (len === 0) {
-                window.location.href = 'desktop-login.html';
-            }
-
-            for (i = 0; i < len; i++) {
-                const activeUserAccountDisplay = document.createElement("a");
-                activeUserAccountDisplay.href = "desktop-login.html";
-                activeUserAccountDisplay.id = "active-user-account-display";
-                activeUserAccountDisplay.innerHTML = `
-                    <img src="images/employees/${results.rows.item(i).image}" alt="${results.rows.item(i).firstName} ${results.rows.item(i).lastName} (ansatt)">
-                    <h2>${results.rows.item(i).firstName} ${results.rows.item(i).lastName}</h2>
-                `;
-
-                userAccountHeader.insertBefore(activeUserAccountDisplay, userAccountHeader.firstChild);
-            }
-        })
-    })
-};
-
 const renderOptions = (menuIndex, orderIndex, editItemInOrder) => {
     if (menuSection.querySelector('.item-img-and-name') !== null) {
         closeOptionsMenu();
@@ -942,6 +915,27 @@ const deleteItemFromOrder = (orderItemCard, id) => {
         closeOptionsMenu();
     }
 };
+
+const renderActiveUserAccount = () => {
+    const userAccountHeader = document.getElementById("user-account-header");
+    const activeUserAccount = JSON.parse(window.localStorage.getItem("activeUserAccount")) || [];
+    if (activeUserAccount.length === 0) {
+        document.location = "desktop-login.html";
+    }
+
+    for (const userAccount of activeUserAccount) {
+        const { firstName, lastName, image } = userAccount;
+        const activeUserAccountDisplay = document.createElement("a");
+        activeUserAccountDisplay.href = "desktop-login.html";
+        activeUserAccountDisplay.id = "active-user-account-display";
+        activeUserAccountDisplay.innerHTML = `
+            <img src="images/employees/${userAccount.image}" alt="${userAccount.firstName} ${userAccount.lastName} (ansatt)">
+            <h2>${userAccount.firstName} ${userAccount.lastName}</h2>
+        `;
+
+        userAccountHeader.appendChild(activeUserAccountDisplay);
+    }
+}
 
 if (!mediaQuery.matches) {
     renderActiveUserAccount();
