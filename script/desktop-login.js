@@ -1,36 +1,8 @@
-if (window.matchMedia("(max-width: 600px)").matches) {
-    document.location = "index.html";
-}
-
 const rightScrollButton = document.getElementById("right-scroll-button");
 const leftScrollButton = document.getElementById("left-scroll-button");
 
-// Dropping table on every load to ensure no data is duplicated
-db.transaction(function (tx) {
-    tx.executeSql('DROP TABLE employees');
-    console.log("table succesfully removed");
-})
-
-db.transaction(function (tx) {
-    tx.executeSql('DROP TABLE activeUserAccount');
-    console.log("table succesfully removed");
-})
-
-// Creating tables for employees and selected employee
-db.transaction(function (tx) {
-    tx.executeSql('CREATE TABLE IF NOT EXISTS employees (id INTEGER PRIMARY KEY, firstName unique, lastName uniqie, image)');
-    console.log("table succesfully created");
-});
-
-db.transaction(function (tx) {
-    tx.executeSql('CREATE TABLE IF NOT EXISTS activeUserAccount (id INTEGER PRIMARY KEY, firstName unique, lastName uniqie, image)');
-    console.log("table succesfully created");
-});
-
-for (let i = 0; i < employees.length; i++) {
-    db.transaction(function (tx) {
-        tx.executeSql('INSERT INTO employees(firstName, lastName, image) VALUES(?,?,?)', [employees[i].firstName, employees[i].lastName, employees[i].image])
-    });
+if (window.matchMedia("(max-width: 600px)").matches) {
+    document.location = "index.html";
 }
 
 rightScrollButton.addEventListener('click', () => {
@@ -47,7 +19,7 @@ const createEmployeeButton = (employee) => {
     employeeButton.className = "employee-button";
     employeeButton.id = `employee-button-${employee.id}`
     employeeButton.innerHTML = `
-    <img src="images/employees/${employee.image}" alt="${employee.firstName} ${employee.lastName} (ansatt)">`;
+        <img src="images/employees/${employee.image}" alt="${employee.firstName} ${employee.lastName} (ansatt)">`;
     employeeButton.addEventListener('click', () => {
         chooseEmployee(employee)
     });
@@ -68,18 +40,11 @@ const createEmployeeSlots = () => {
 
 const renderEmployeeList = () => {
     const employeeSlots = document.getElementsByClassName("employee-slot");
-
-    db.transaction(function(tx) {
-        tx.executeSql('SELECT * FROM employees', [], function(tx, results) {
-            let len = results.rows.length, i;
-
-            for (i = 0; i < len; i++) {
-                const employeeButton = createEmployeeButton(results.rows.item(i));
-                employeeSlots[i].appendChild(employeeButton);
-            }
-        })
-    });
-};
+    for (let i = 0; i < employees.length; i++) {
+        const employeeButton = createEmployeeButton(employees[i]);
+        employeeSlots[i].appendChild(employeeButton);
+    }
+}
 
 const chooseEmployee = (employee) => {
     const nameHeader = document.getElementById("name-header");
@@ -119,12 +84,11 @@ const renderStartButton = () => {
     startButtonContainer.appendChild(form);
 };
 
-const setActiveUserAccount = (userAccount) => {    
-    db.transaction(function(tx) {
-        db.transaction(function (tx) {
-            tx.executeSql('INSERT INTO activeUserAccount(firstName, lastName, image) VALUES(?,?,?)', [userAccount.firstName, userAccount.lastName, userAccount.image])
-        });
-    })
-};
+const setActiveUserAccount = (userAccount) => {
+    localStorage.clear();
+    const activeUserAccount = JSON.parse(localStorage.getItem('activeUserAccount')) || [];
+    activeUserAccount.push(userAccount);
+    window.localStorage.setItem('activeUserAccount', JSON.stringify(activeUserAccount));
+}
 
 createEmployeeSlots();
