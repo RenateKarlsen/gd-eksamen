@@ -733,16 +733,8 @@ ul::-webkit-scrollbar {
     align-self: start;
     background-color: var(--drinks-menu-color);
     outline: none;
-}
-
-#back-btn-arrow{
     position: absolute;
     justify-self: start;
-}
-
-#back-btn-cross{
-    grid-row: 1;
-    grid-column: 7 / 8;
 }
 
 #back-btn:active {

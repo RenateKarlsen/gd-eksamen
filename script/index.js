@@ -451,9 +451,19 @@ const renderOptions = (menuIndex, orderIndex, editItemInOrder) => {
         menuSection.removeChild(mainMenuContainer);
 
         menuSection.style.backgroundColor = "var(--drinks-menu-color)";
-        menuSection.style.padding = "2em";
-        menuSection.style.gridGap = "1em";
-        menuSection.style.gridTemplateColumns = "repeat(7, 1fr)";
+
+        if (mediaQuery.matches) {
+            menuSection.style.gridTemplateColumns = "1fr";
+            menuSection.style.gridTemplateRows = "repeat(6, 1fr)";
+            
+
+        } else {
+            menuSection.style.padding = "2em";
+            menuSection.style.gridGap = "1em";
+            menuSection.style.gridTemplateColumns = "repeat(7, 1fr)";
+        }
+            
+        
 
         let drinkPriceSmall = drinkItems[menuIndex].price.small;
         let drinkPriceMedium = drinkItems[menuIndex].price.medium;
@@ -461,7 +471,7 @@ const renderOptions = (menuIndex, orderIndex, editItemInOrder) => {
 
         if (editItemInOrder !== true) {
             menuSection.innerHTML = `
-            <div class="item-img-and-name">
+            <div class="item-img-and-name" id="item-img-and-name-edit">
                 <h1>${drinkItems[menuIndex].name.toUpperCase()}</h1> 
                 <img id="drinkImg"src=${drinkItems[menuIndex].imagePath} alt=${drinkItems[menuIndex].name}>
             </div>
@@ -600,7 +610,7 @@ const selectSize = (sizeElement, index, price, size) => {
         orderItemTotalPriceContainer.innerHTML = `
             <p>TOTALT KR </p>
         `;
-        
+
         const orderItemTotalPrice = document.createElement("p");
         orderItemTotalPrice.id = "order-item-total-price";
         orderItemTotalPriceContainer.appendChild(orderItemTotalPrice);
