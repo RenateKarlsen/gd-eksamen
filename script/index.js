@@ -8,8 +8,15 @@ const body = document.getElementsByTagName("body")[0];
 const html = document.getElementsByTagName("html")[0];
 const main = document.getElementsByTagName("main");
 const mediaQuery = window.matchMedia("(max-width: 600px)")
+const mediaQueryMin = window.matchMedia("(min-width: 600px)")
 
 mediaQuery.addEventListener("change", (e) => {
+    if (e.matches) {
+        location.reload();
+    };
+});
+
+mediaQueryMin.addEventListener("change", (e) => {
     if (e.matches) {
         location.reload();
     };
@@ -29,12 +36,12 @@ const handleMenu = (menuButton) => {
             menuSection.insertBefore(menuHeader, menuSection.firstChild);
         }
         const menuHeader = document.getElementById("menu-header");
-        const headerName = menuButton === "drinks-menu-button" ? "DRIKKER" : "DESSERTER";
+        const headerName = menuButton === "drinks-menu-button" ? "DRIKKE" : "DESSERT";
         menuHeader.innerHTML = `
             <button type="button" class="mobile-back-button" id="menu-back-button" onclick="returnToPreviousPage(id)">
-                <i class="fa fa-angle-left fa-4x"></i>
+                <i class="fa fa-angle-left fa-4x" alt="Pil venstre"></i>
             </button>
-            <h3>${headerName}</h3;
+            <h3>${headerName}</h3>
         `;
     };
 
@@ -115,13 +122,13 @@ const createDrinkItem = (drinkItem, id) => {
 
     if (mediaQuery.matches) {
         drinkItemCard.innerHTML = `
-            <img src=${drinkItem.imagePath} alt=${drinkItem.name} width="70" height="70"> 
+            <img src=${drinkItem.imagePath} alt=${drinkItem.name}> 
             <h4>${drinkItem.name.toUpperCase()}</h4>
             <p>fra<br>kr ${drinkItem.price.small}</p>
         `;
     } else {
         drinkItemCard.innerHTML = `
-            <img src=${drinkItem.imagePath} alt=${drinkItem.name} width="70" height="70"> 
+            <img src=${drinkItem.imagePath} alt=${drinkItem.name}> 
             <h4>${drinkItem.name.toUpperCase()}</h4>
             <p>${drinkItem.price.small}, ${drinkItem.price.medium}, ${drinkItem.price.large}</p>
         `;
@@ -174,7 +181,7 @@ const createDessertItem = (dessertItem, id) => {
     dessertItemCard.className = "item-card dessert-item-card";
     dessertItemCard.setAttribute("onclick", `addItemToOrder(${index}, false, null)`);
     dessertItemCard.innerHTML = `
-        <img src=${dessertItem.imagePath} alt=${dessertItem.name} width="80" height="80"> 
+        <img src=${dessertItem.imagePath} alt=${dessertItem.name}> 
         <h4>${dessertItem.name.toUpperCase()}</h4>
         <p>kr ${dessertItem.price}</p>
     `;
@@ -426,17 +433,20 @@ const renderOptions = (menuIndex, orderIndex, editItemInOrder) => {
         menuSection.style.backgroundColor = "var(--drinks-menu-color)";
 
         if (mediaQuery.matches) {
-            menuSection.style.gridTemplateColumns = "1fr";
-            menuSection.style.gridTemplateRows = "repeat(6, 1fr)";
-            
+            menuSection.style.gridTemplateColumns = "repeat(3, 1fr)";
+            menuSection.style.gridTemplateRows = "repeat(12, 1fr)";
+            menuSection.style.justifyItems = "center";
+            menuSection.style.padding = "20px";
+            menuSection.style.gridGap = "0";
+
 
         } else {
             menuSection.style.padding = "2em";
             menuSection.style.gridGap = "1em";
             menuSection.style.gridTemplateColumns = "repeat(7, 1fr)";
         }
-            
-        
+
+
 
         let drinkPriceSmall = drinkItems[menuIndex].price.small;
         let drinkPriceMedium = drinkItems[menuIndex].price.medium;
@@ -444,7 +454,7 @@ const renderOptions = (menuIndex, orderIndex, editItemInOrder) => {
 
         if (editItemInOrder !== true) {
             menuSection.innerHTML = `
-            <div class="item-img-and-name" id="item-img-and-name-edit">
+            <div class="item-img-and-name" id="item-img-and-name-choose">
                 <h1>${drinkItems[menuIndex].name.toUpperCase()}</h1> 
                 <img id="drinkImg"src=${drinkItems[menuIndex].imagePath} alt=${drinkItems[menuIndex].name}>
             </div>
@@ -539,11 +549,17 @@ const closeOptionsMenu = () => {
     menuSection.innerHTML = "";
     menuSection.appendChild(popularItemsMenuContainer);
     menuSection.appendChild(mainMenuContainer);
-    menuSection.style.backgroundColor = "transparent";
-    menuSection.style.padding = "0";
-    menuSection.style.gridGap = "1rem";
-    menuSection.style.gridTemplateColumns = "repeat(8, 1fr)";
-    menuSection.style.gridTemplateRows = "repeat(5, 1fr)";
+
+    if (!mediaQuery.matches) {
+        menuSection.style.backgroundColor = "transparent";
+        menuSection.style.padding = "0";
+        menuSection.style.gridGap = "1rem";
+        menuSection.style.gridTemplateColumns = "repeat(8, 1fr)";
+        menuSection.style.gridTemplateRows = "repeat(5, 1fr)";
+    } else {
+        menuSection.style.gridTemplateColumns = "1fr";
+        menuSection.style.gridTemplateRows = "12% 25% 63%";
+    };
 };
 
 const updateSize = (sizeElement, index, price, sizeNr) => {
@@ -705,17 +721,36 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
     const orderItemCardContent = document.createElement("div");
     orderItemCard.className = "order-item-card";
     if (orderSectionContainer.querySelector('#order-section-list') === null) {
-        orderSectionContainer.innerHTML = `
-            <div id="order-section-header">
-                <i class="fa fa-shopping-cart fa-2x alt="Handlevogn"></i>
-                <h3>BESTILLING</h3>
-            </div>
-            <div id="order-section-list"></div>
-            <div id="order-section-total-price-container">
-                <h3>TOTALT Å BETALE:</h3>
-                <p id="order-section-total-price"><p>
-            </div>
-        `;
+        if (mediaQuery.matches) {
+            const paymentSection = document.getElementById("payment-section");
+            menuSection.style.display = "none";
+            paymentSection.style.display = "grid";
+            orderSectionContainer.innerHTML = `
+                <div id="order-section-header">
+                    <button type="button" class="mobile-back-button" id="order-back-button" onclick="returnToPreviousPage(id)">
+                    <i class="fa fa-angle-left fa-4x" alt="Pil venstre"></i>
+                </button>
+                    <h3>BESTILLING</h3>
+                </div>
+                <div id="order-section-list"></div>
+                <div id="order-section-total-price-container">
+                    <h3>TOTALT</h3>
+                    <p id="order-section-total-price"><p>
+                </div>
+            `;
+        } else {
+            orderSectionContainer.innerHTML = `
+                <div id="order-section-header">
+                    <i class="fa fa-shopping-cart fa-2x alt="Handlevogn"></i>
+                    <h3>BESTILLING</h3>
+                </div>
+                <div id="order-section-list"></div>
+                <div id="order-section-total-price-container">
+                    <h3>TOTALT Å BETALE:</h3>
+                    <p id="order-section-total-price"><p>
+                </div>
+            `;
+        }
     };
 
     let id = orderItems.length + 1;
@@ -796,7 +831,11 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
 };
 
 const revealOrderSection = (orderSectionContainer, paymentSection) => {
-    orderSectionContainer.style.backgroundColor = "var(--lighter-gray-color)";
+    if (!mediaQuery.matches) {
+        orderSectionContainer.style.backgroundColor = "var(--lighter-gray-color)";
+    } else {
+        orderSectionContainer.style.backgroundColor = "#ffffff";
+    }
     paymentSection.style.border = "0";
     paymentSection.style.gridTemplateRows = "repeat(5, 1fr)";
 
@@ -924,7 +963,6 @@ const renderActiveUserAccount = () => {
     }
 
     for (const userAccount of activeUserAccount) {
-        const { firstName, lastName, image } = userAccount;
         const activeUserAccountDisplay = document.createElement("a");
         activeUserAccountDisplay.href = "desktop-login.html";
         activeUserAccountDisplay.id = "active-user-account-display";
@@ -949,6 +987,13 @@ const returnToPreviousPage = (button) => {
         body.style.height = "98%";
         html.style.height = "98%";
         menuSection.style.display = "none";
+        mainNavigationSection.style.display = "grid";
+    } else if (button === "order-back-button") {
+        const paymentSection = document.getElementById("payment-section");
+        paymentSection.style.display = "none";
+        body.style.margin = "1rem";
+        body.style.height = "98%";
+        html.style.height = "98%";
         mainNavigationSection.style.display = "grid";
     }
 };

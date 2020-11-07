@@ -1,5 +1,3 @@
-const db = openDatabase('mydb', '1.0', 'GD-eksamen', 2 * 1024 * 1024);
-
 const drinkItems = [
     {
         name: "Americano",
