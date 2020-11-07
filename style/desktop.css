@@ -285,7 +285,7 @@ ul::-webkit-scrollbar {
     padding-top: 5px;
     grid-gap: 0.8em;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(auto-fill, 80px);
+    grid-template-rows: repeat(1000, 80px);
     grid-auto-flow: row;
 }
 
