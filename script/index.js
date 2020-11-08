@@ -837,12 +837,23 @@ const revealOrderSection = (orderSectionContainer, paymentSection) => {
         orderSectionContainer.style.backgroundColor = "#ffffff";
     }
     paymentSection.style.border = "0";
-    paymentSection.style.gridTemplateRows = "repeat(5, 1fr)";
+
+    if (!mediaQuery.matches) {
+        paymentSection.style.gridTemplateRows = "repeat(5, 1fr)";
+    } else {
+        paymentSection.style.gridTemplateRows = "repeat(10, 1fr)";
+    }
 
     const cashPayButton = document.createElement("button");
-    cashPayButton.addEventListener("click", () => {
-        completeOrder()
-    });
+    if (!mediaQuery.matches) {
+        cashPayButton.addEventListener("click", () => {
+            completeOrder()
+        });
+    } else {
+        cashPayButton.addEventListener("click", () => {
+            completeMobileOrder()
+        });
+    }
     cashPayButton.className = "pay-button";
     cashPayButton.id = "cash-pay-button";
 
@@ -853,17 +864,25 @@ const revealOrderSection = (orderSectionContainer, paymentSection) => {
     `;
     } else {
         cashPayButton.innerHTML = `
-        <img src="images/icons/vipps-logo.png" alt="Vipps logo" width="120px">
+        <img src="images/icons/vipps-logo.png" alt="Vipps logo" width="80px">
         <h4>VIPPS</h4>
     `;
     }
 
     const cardPayButton = document.createElement("button");
-    cardPayButton.addEventListener("click", () => {
-        completeOrder()
-    });
+    if (!mediaQuery.matches) {
+        cardPayButton.addEventListener("click", () => {
+            completeOrder()
+        });
+    } else {
+        cardPayButton.addEventListener("click", () => {
+            completeMobileOrder()
+        });
+    }
+
     cardPayButton.className = "pay-button";
     cardPayButton.id = "card-pay-button";
+
     cardPayButton.innerHTML = `
         <i class="fa fa-credit-card fa-3x" alt="Kredittkort"></i>
         <h4>KORT</h4>
@@ -989,6 +1008,26 @@ if (!mediaQuery.matches) {
 };
 
 // MOBILE
+
+const completeMobileOrder = () => {
+    const paymentSection = document.getElementById("payment-section");
+    paymentSection.style.backgroundColor = "#ffffff";
+    paymentSection.innerHTML = `
+        <div id="mobile-order-confirmation">
+            <h1>TAKK FOR DIN <br> BESTILLING!</h1> 
+            <h2>Vi kommer til bordet ditt så snart alt er klart.</h2>
+        </div>
+        `;
+
+    const reloadButton = document.createElement("button");
+    reloadButton.id = "reload-button";
+    reloadButton.innerText = "GÅ TILBAKE TIL MENYEN";
+    reloadButton.addEventListener("click", () => {
+        location.reload();
+    });
+    const mobileOrderConfirmation = document.getElementById("mobile-order-confirmation");
+    mobileOrderConfirmation.appendChild(reloadButton);
+};
 
 const returnToPreviousPage = (button) => {
     if (button === "menu-back-button") {
