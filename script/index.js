@@ -844,10 +844,19 @@ const revealOrderSection = (orderSectionContainer, paymentSection) => {
         completeOrder()
     });
     cashPayButton.className = "pay-button";
-    cashPayButton.innerHTML = `
+    cashPayButton.id = "cash-pay-button";
+
+    if (!mediaQuery.matches) {
+        cashPayButton.innerHTML = `
         <i class="fa fa-money fa-4x alt="Pengeseddel"></i>
         <h4>KONTANTER</h4>
     `;
+    } else {
+        cashPayButton.innerHTML = `
+        <img src="images/icons/vipps-logo.png" alt="Vipps logo" width="120px">
+        <h4>VIPPS</h4>
+    `;
+    }
 
     const cardPayButton = document.createElement("button");
     cardPayButton.addEventListener("click", () => {
