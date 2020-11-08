@@ -10,6 +10,13 @@ const main = document.getElementsByTagName("main");
 const mediaQuery = window.matchMedia("(max-width: 600px)")
 const mediaQueryMin = window.matchMedia("(min-width: 600px)")
 
+if (mediaQuery.matches) {
+    const menuHeaderFront = document.createElement("h1");
+    menuHeaderFront.id = "menu-header-front";
+    menuHeaderFront.innerHTML = "MENY";
+    mainNavigationSection.insertBefore(menuHeaderFront, mainNavigationSection.firstChild);
+}
+
 mediaQuery.addEventListener("change", (e) => {
     if (e.matches) {
         location.reload();
@@ -438,15 +445,11 @@ const renderOptions = (menuIndex, orderIndex, editItemInOrder) => {
             menuSection.style.justifyItems = "center";
             menuSection.style.padding = "20px";
             menuSection.style.gridGap = "0";
-
-
         } else {
             menuSection.style.padding = "2em";
             menuSection.style.gridGap = "1em";
             menuSection.style.gridTemplateColumns = "repeat(7, 1fr)";
         }
-
-
 
         let drinkPriceSmall = drinkItems[menuIndex].price.small;
         let drinkPriceMedium = drinkItems[menuIndex].price.medium;
