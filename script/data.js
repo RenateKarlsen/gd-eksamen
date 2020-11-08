@@ -341,32 +341,32 @@ const completedOrders = [
 const employees = [
     {   
         id: 0,
-        firstName: "Eirik",
-        lastName: "Lundanes",
-        image: "eirik-lundanes.jpg"
+        firstName: "Darth",
+        lastName: "Vader",
+        image: "vader.jpg"
     },
     {
         id: 1,
-        firstName: "Karoline",
-        lastName: "Andersen",
-        image: "karoline-andersen.jpg"
+        firstName: "Princess",
+        lastName: "Leia",
+        image: "leia.jpg"
     },
     {
         id: 2,
-        firstName: "Pål Anders",
-        lastName: "Byenstuen",
-        image: "paal-anders-byenstuen.jpg"
+        firstName: "Luke",
+        lastName: "Skywalker",
+        image: "luke.jpg"
     },
     {
         id: 3,
-        firstName: "Renate",
-        lastName: "Karlsen",
-        image: "renate-karlsen.jpg"
+        firstName: "Baby",
+        lastName: "Yoda",
+        image: "yoda.jpg"
     },
     {
         id: 4,
-        firstName: "Vibeke",
-        lastName: "Opgård",
-        image: "vibeke-opgaard.jpg"
+        firstName: "The",
+        lastName: "Mandalorian",
+        image: "mandalorian.jpg"
     }
 ];
