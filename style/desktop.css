@@ -332,11 +332,21 @@ ul::-webkit-scrollbar {
     box-shadow: 0 3px 10px #4e4e4e88;
 }
 
+.drink-item-card img {
+    width: 70px;
+    height: 70px;
+}
+
 .dessert-item-card {
     background-color: var(--desserts-menu-color);
     border-radius: 5px;
     background: radial-gradient(circle, #eeeeee 0%, #ffffff 100%);
     box-shadow: 0 5px 10px #38383873;
+}
+
+.dessert-item-card img {
+    width: 80px;
+    height: 80px;
 }
 
 .item-card:active {
