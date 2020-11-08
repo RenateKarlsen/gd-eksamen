@@ -29,6 +29,7 @@ mediaQueryMin.addEventListener("change", (e) => {
     };
 });
 
+// Renders menus based on which button is clicked. Checks if menu exists. If not: creates menue, else: updates menu
 const handleMenu = (menuButton) => {
     if (mediaQuery.matches) {
         menuSection.style.display = "grid";
@@ -119,7 +120,7 @@ const updateMenu = (buttonClicked) => {
     };
 };
 
-// CREATES DRINK ITEMS
+// Loops through drink item array and creates drink cards
 const createDrinkItem = (drinkItem, id) => {
     const index = id - 1;
     const drinkItemCard = document.createElement("div");
@@ -144,7 +145,7 @@ const createDrinkItem = (drinkItem, id) => {
     return drinkItemCard;
 };
 
-// RENDERS DRINKITEMS IN DRINK MENU
+// Renders drink cards
 const renderDrinks = () => {
     const popularItemsMenu = document.getElementById("popular-items-menu");
     const mainMenu = document.getElementById("main-menu");
@@ -181,7 +182,7 @@ const renderDrinks = () => {
     styleMenu("drink");
 };
 
-// CREATES DESSERT ITEMS
+// Loops through dessert item array and creates dessert cards
 const createDessertItem = (dessertItem, id) => {
     const index = id - 1;
     const dessertItemCard = document.createElement("div");
@@ -196,7 +197,7 @@ const createDessertItem = (dessertItem, id) => {
     return dessertItemCard;
 };
 
-// RENDERS DESSERT ITEMS IN DESERT MENU
+// Renders dessert card
 const renderDesserts = () => {
     const popularItemsMenu = document.getElementById("popular-items-menu");
     const mainMenu = document.getElementById("main-menu");
@@ -269,6 +270,7 @@ const styleMenu = (menu) => {
     };
 };
 
+// Opens up the order history section
 const revealOrderHistorySection = () => {
     const orderHistoryContainer = document.createElement("div");
     const orderContainer = document.createElement("div");
@@ -302,6 +304,7 @@ const revealOrderHistorySection = () => {
     };
 };
 
+// Renders all completed orders stored in the completedOrders array in order history section
 const renderOrderHistory = () => {
     const orderList = document.getElementById("order-list");
     for (let i = completedOrders.length - 1; i >= 0; i--) {
@@ -331,6 +334,7 @@ const renderOrderHistory = () => {
     }
 };
 
+// Renders selected order in order history section
 const renderOrder = (orderElement, orderNr) => {
     styleListedOrders(orderElement);
     const orderContainer = document.getElementById("order-container");
@@ -429,6 +433,8 @@ const styleListedOrders = (orderElement) => {
     orderElementChildren[2].style.display = "block";
 };
 
+// Renders the content inside the drink options menu. Functionality differs whether
+// function is called from the menu or from the order section
 const renderOptions = (menuIndex, orderIndex, editItemInOrder) => {
     if (menuSection.querySelector('.item-img-and-name') !== null) {
         closeOptionsMenu();
@@ -547,7 +553,7 @@ const renderOptions = (menuIndex, orderIndex, editItemInOrder) => {
     }
 };
 
-// The back button on options menu
+
 const closeOptionsMenu = () => {
     menuSection.innerHTML = "";
     menuSection.appendChild(popularItemsMenuContainer);
@@ -565,6 +571,7 @@ const closeOptionsMenu = () => {
     };
 };
 
+// Updates the drink size in the order item edit section
 const updateSize = (sizeElement, index, price, sizeNr) => {
     orderItems[index].size = sizeNr;
     sizePrice = price;
@@ -579,6 +586,7 @@ const updateSize = (sizeElement, index, price, sizeNr) => {
     updateTotalPriceInItem(sizePrice, index, true);
 };
 
+// Re-renders item in order section with updated data if user has updated the item in the edit section
 const updateItemInOrder = (index, id) => {
     const orderItemTotalPrice = document.getElementById("order-item-total-price");
     orderItems[index].price = parseInt(orderItemTotalPrice.innerHTML);
@@ -594,6 +602,7 @@ const updateItemInOrder = (index, id) => {
     closeOptionsMenu();
 };
 
+// Renders more content when size is chosen (extras options + add to order button)
 const selectSize = (sizeElement, index, price, size) => {
     renderExtraOptionsCards(price, null, false);
     if (menuSection.querySelector('#order-item-total-price-container') === null) {
@@ -626,6 +635,7 @@ const selectSize = (sizeElement, index, price, size) => {
     sizeElement.style.color = "var(--drinks-menu-color)";
 };
 
+
 const renderExtraOptionsCards = (price, orderIndex, editItemInOrder) => {
     const extraOptionCardContainer = document.createElement("div");
     sizePrice = price;
@@ -652,6 +662,7 @@ const renderExtraOptionsCards = (price, orderIndex, editItemInOrder) => {
     };
 };
 
+// Adds chosen extras to an array named addedExtras, which later gets applied to the item
 const addExtraToItem = (extraElement, chosenExtra, sizePrice) => {
     if (!addedExtras.includes(chosenExtra)) {
         addedExtras.push(chosenExtra);
@@ -671,6 +682,7 @@ const addExtraToItem = (extraElement, chosenExtra, sizePrice) => {
     updateTotalPriceInItem(sizePrice, null, false);
 };
 
+// Updates extras directly in item object if user chooses to change something
 const updateExtrasInItem = (extraElement, chosenExtra, orderIndex, sizePrice) => {
     if (!orderItems[orderIndex].extras.includes(chosenExtra)) {
         orderItems[orderIndex].extras.push(chosenExtra);
@@ -690,6 +702,7 @@ const updateExtrasInItem = (extraElement, chosenExtra, orderIndex, sizePrice) =>
     updateTotalPriceInItem(sizePrice, orderIndex, true);
 };
 
+// If an item is added or deleted from an order, the total price display updates
 const updateTotalPriceInOrder = () => {
     const orderSectionTotalPrice = document.getElementById("order-section-total-price");
     let orderTotalPrice = 0;
@@ -700,6 +713,7 @@ const updateTotalPriceInOrder = () => {
     orderSectionTotalPrice.innerHTML = `KR ${orderTotalPrice},00`;
 };
 
+// Updates the total price of chosen item when editing it in the edit section
 const updateTotalPriceInItem = (sizePrice, orderIndex, editItemInOrder) => {
     const orderItemTotalPrice = document.getElementById("order-item-total-price");
     let itemTotalPrice = sizePrice;
@@ -716,6 +730,8 @@ const updateTotalPriceInItem = (sizePrice, orderIndex, editItemInOrder) => {
     orderItemTotalPrice.innerHTML = `${itemTotalPrice},00`;
 };
 
+// Gathers information about the chosen item and creates an item object. Gets pushed into an order array
+// which renders inside the order section
 const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
     const orderItemTotalPrice = document.getElementById("order-item-total-price");
     const paymentSection = document.getElementById("payment-section");
@@ -833,6 +849,7 @@ const addItemToOrder = (index, isTheItemADrink, sizeNr) => {
     closeOptionsMenu();
 };
 
+// Displays the order section when an item is added to the order for the first time
 const revealOrderSection = (orderSectionContainer, paymentSection) => {
     if (!mediaQuery.matches) {
         orderSectionContainer.style.backgroundColor = "var(--lighter-gray-color)";
@@ -895,6 +912,8 @@ const revealOrderSection = (orderSectionContainer, paymentSection) => {
     paymentSection.appendChild(cardPayButton);
 };
 
+// When clicking on a paying button, the whole interface resets and the orders gets pushed into
+// an array of completed orders, which renders inside the order history section
 const completeOrder = () => {
     const paymentSection = document.getElementById("payment-section");
     const orderSection = document.getElementById("order-section");
@@ -929,6 +948,7 @@ const completeOrder = () => {
     }
 };
 
+// Displays the "safety net" where user has to confirm the deleteion of an item from the order
 const renderDeletionOptions = (orderItemCardButton, id) => {
     const orderItemCard = orderItemCardButton.parentElement;
     const backgroundColor = orderItemCardButton.style.backgroundColor;
@@ -971,6 +991,8 @@ const renderDeletionOptions = (orderItemCardButton, id) => {
     orderItemCard.appendChild(deletionCard);
 };
 
+// Deletes the item, which means that the item is removed from the order array
+// and it's belonging node is removed from the DOM
 const deleteItemFromOrder = (orderItemCard, id) => {
     const orderSectionList = document.getElementById("order-section-list");
     for (let i = 0; i < orderItems.length; i++) {
@@ -986,6 +1008,8 @@ const deleteItemFromOrder = (orderItemCard, id) => {
     }
 };
 
+// Gets the user account object from localStorage which was put there at the login page
+// Renders the object in the top bar
 const renderActiveUserAccount = () => {
     const userAccountHeader = document.getElementById("user-account-header");
     const activeUserAccount = JSON.parse(window.localStorage.getItem("activeUserAccount")) || [];

@@ -39,12 +39,6 @@
 
     /* MENU SCREEN */
 
-    /* INHERITS FROM DESKTOP.CSS:
-    #menu-section {
-        display: grid;
-        grid-gap: 1rem;
-    } */
-
     #menu-section {
         position: relative;
         grid-template-columns: 1fr;
@@ -64,27 +58,11 @@
         text-align: center;
     }
 
-    /* INHERITS FROM DESKTOP.CSS:
-    #popular-items-menu-container {
-        display: grid;
-        border: 1px solid var(--lighter-gray-color);
-        grid-template-rows: 40px 1fr;
-    } */
-    
     #popular-items-menu-container {
         grid-column: 1 / 2;
         grid-row: 2 / 3;
         overflow: hidden;
     }
-
-    /* INHERITS FROM DESKTOP.CSS:
-    #popular-items-menu {
-        display: grid;
-        justify-items: center;
-        padding: 20px;
-        grid-template-rows: 1fr;
-        grid-row: 2 / 3;
-    } */
 
     #popular-items-menu {
         grid-auto-flow: column;
@@ -130,13 +108,6 @@
         height: 10%;
     }
 
-    /* INHERITS FROM DESKTOP.CSS:
-    #main-menu-container {
-        display: grid;
-        border: 1px solid var(--lighter-gray-color);
-        overflow: scroll;
-    } */
-
     #main-menu-container {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
@@ -145,19 +116,6 @@
         grid-column: 1 / 2;
         overflow: hidden;
     }
-
-/*
-    #main-menu {
-        display: grid;
-        justify-items: center;
-        padding: 20px;
-        row-gap: 14px;
-        grid-template-rows: repeat(2, 1fr);
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-
-    */
     
     #main-menu {
         grid-template-columns: 1fr;
@@ -173,14 +131,6 @@
     #main-menu::-webkit-scrollbar {
         display: none;
     }
-
-    /* INHERITS FROM DESKTOP.CSS:
-    .item-card {
-        border: 1px solid white;
-        text-align: center;
-        height: 10em;
-        color: white;
-    } */
 
     .item-card {
         display: grid;
@@ -221,14 +171,6 @@
 
     /* OPTIONS SCREEN */
 
-    /*
-    .item-img-and-name {
-        grid-row: 1;
-        grid-column: 3 / 6;
-        text-align: center;
-        color: #ffffff;
-    }*/
-
     #item-img-and-name-choose {
         width: 100%;
         border-top: 1px solid white;
@@ -265,23 +207,6 @@
         grid-row: 3;
         grid-column: 3 / 4;
     }
-
-    /*
-    .drink-size{ 
-        display: grid;
-        grid-template-rows: 20% 50% 50%;
-        grid-template-columns: 1fr;
-        background-color: var(--drinks-menu-color);
-        border-radius: 5px;
-        text-align: center;
-        color: #ffffff;
-        border: 1px solid #ffffff;
-        width: 10em;
-        height: 10em;
-        cursor: pointer;
-        box-shadow: 0 5px 10px #38383873;
-    }
-        */
 
     .drink-size {
         font-size: 12px;
@@ -341,17 +266,6 @@
     }
 
     /* PAYMENT SECTION */
-
-    /*
-    #payment-section {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(4, 1fr);
-        border: 1px solid var(--lighter-gray-color);
-        grid-gap: 1rem;
-        grid-column: 8 / 10;
-        grid-row: 2 / 11;
-    } */
 
     #payment-section {
         background-color: var(--standard-gray-color);
